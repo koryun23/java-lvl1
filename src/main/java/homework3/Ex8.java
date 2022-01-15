@@ -18,7 +18,6 @@ public class Ex8 {
 
         }
     }
-
     public static boolean shoot(char[][] board){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write the x coordinates of the block you want to shoot");
