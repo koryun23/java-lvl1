@@ -33,7 +33,6 @@ public class Ex8 {
         return false;
     }
     public static int numOfAdjacentBlocks(char[][] board, int i, int j){
-        System.out.println(board[9][0]);
         int[][] directions = {
                 {i-1,j-1},
                 {i-1, j},
@@ -59,8 +58,8 @@ public class Ex8 {
     }
 
     public static void placeShips(char[][] board) {
-        int block1 = 3;
-        int block2 = 2;
+        int block1 = 4;
+        int block2 = 3;
         int block3 = 2;
         int block4 = 1;
         int startingX = -1, startingY = -1, endingX = -1, endingY = -1, temp=0;
@@ -82,7 +81,10 @@ public class Ex8 {
                             System.out.println("Invalid coordinates.");
                         } else if (numOfAdjacentBlocks(board, startingX, startingY) > 0) {
                             System.out.println("Can't place the ship. There is a ship adjacent to the entered coordinates.");
-                        } else {
+                        }else if(board[9-startingY][startingX] == '#'){
+                            System.out.println("Can't plaec the ship. The cell is not epmty.");
+                        }
+                        else {
                             board[9 - startingY][startingX] = '#'; // place a ship there
                             showBoard(board);
                             block1--;
@@ -121,10 +123,6 @@ public class Ex8 {
                             startingX = endingX;
                             endingX = temp;
                         }
-                        System.out.println("Start x: " + startingX);
-                        System.out.println("End x: " + endingX);
-                        System.out.println("Start y: " + startingY);
-                        System.out.println("End y: " + endingY);
                         if (startingX == endingX) {
                             if (Math.abs(startingY - endingY) != blocks - 1) {
                                 System.out.println("Invalid coordinates.");
@@ -185,6 +183,58 @@ public class Ex8 {
                 }
             }else if("*".equals(answer)){
                 showBoard(board);
+            }else if("--reset".equals(answer)){
+                System.out.println("Enter the x coordinate of the first block of your ship");
+                startingX = scanner.nextInt();
+                System.out.println("Enter the y coordinate of the first block of your ship");
+                startingY = scanner.nextInt();
+
+
+                //check if the coordinates are valid
+                if (startingX >= 0 && startingX <= 9 && startingY >= 0 && startingY <= 9){
+                    if (board[9-startingY][startingX] == '#'){
+                        int[][] directions = {
+                                {startingX-1, startingY},
+                                {startingX+1, startingY},
+                                {startingX, startingY-1},
+                                {startingX, startingY+1}
+                        };
+                        int numOfBlocks = 1;
+                        for(int[] dir : directions){
+                            int newX = dir[0];
+                            int newY = dir[1];
+
+                            if(validCoords(newX, newY)){
+                                // get direction(left, right, up, down)
+                                if(board[9-newY][newX] == '#') {
+                                    int dx = 0;
+                                    int dy = 0;
+                                    dx = Integer.compare(newX, startingX);
+                                    dy = Integer.compare(newY, startingY);
+                                    while (validCoords(newX, newY) && board[9-newY][newX]=='#'){
+                                        board[9-newY][newX] = '.';
+                                        newX += dx;
+                                        newY += dy;
+                                        numOfBlocks++;
+                                    }
+                                }
+
+
+                            }
+                            board[9-startingY][startingX] = '.';
+
+                        }
+                        if(numOfBlocks==1) block1++;
+                        else if(numOfBlocks==2) block2++;
+                        else if(numOfBlocks==3) block3++;
+                        else if(numOfBlocks==4) block4++;
+                    }else{
+                        System.out.println("There is no block of ship in the entered coordinates.");
+                    }
+                }else{
+                    System.out.println("The entered coordinates are out of the bounds of the board");
+                }
+                reset(board, startingX, endingX, startingY, endingY);
             }
             else {
                 System.out.println("Could not recognize the command");
@@ -192,7 +242,12 @@ public class Ex8 {
         }
 
     }
+    public static boolean validCoords(int x, int y){
+        return x >= 0 && x <= 9 && y >= 0 && y <= 9;
+    }
+    public static void reset(char[][] board, int startingX,int endingX,int startingY,int endingY){
 
+    }
     public static void showBoard(char[][] board) {
         System.out.print("  ");
         for (int i = 0; i < 10; i++){
