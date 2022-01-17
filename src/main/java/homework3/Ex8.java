@@ -193,37 +193,7 @@ public class Ex8 {
                 //check if the coordinates are valid
                 if (startingX >= 0 && startingX <= 9 && startingY >= 0 && startingY <= 9){
                     if (board[9-startingY][startingX] == '#'){
-                        int[][] directions = {
-                                {startingX-1, startingY},
-                                {startingX+1, startingY},
-                                {startingX, startingY-1},
-                                {startingX, startingY+1}
-                        };
-                        int numOfBlocks = 1;
-                        for(int[] dir : directions){
-                            int newX = dir[0];
-                            int newY = dir[1];
-
-                            if(validCoords(newX, newY)){
-                                // get direction(left, right, up, down)
-                                if(board[9-newY][newX] == '#') {
-                                    int dx = 0;
-                                    int dy = 0;
-                                    dx = Integer.compare(newX, startingX);
-                                    dy = Integer.compare(newY, startingY);
-                                    while (validCoords(newX, newY) && board[9-newY][newX]=='#'){
-                                        board[9-newY][newX] = '.';
-                                        newX += dx;
-                                        newY += dy;
-                                        numOfBlocks++;
-                                    }
-                                }
-
-
-                            }
-                            board[9-startingY][startingX] = '.';
-
-                        }
+                        int numOfBlocks = remove(board, startingX, startingY); // removing the ship and getting the number of blocks it had
                         if(numOfBlocks==1) block1++;
                         else if(numOfBlocks==2) block2++;
                         else if(numOfBlocks==3) block3++;
@@ -234,7 +204,6 @@ public class Ex8 {
                 }else{
                     System.out.println("The entered coordinates are out of the bounds of the board");
                 }
-                reset(board, startingX, endingX, startingY, endingY);
             }
             else {
                 System.out.println("Could not recognize the command");
@@ -245,8 +214,39 @@ public class Ex8 {
     public static boolean validCoords(int x, int y){
         return x >= 0 && x <= 9 && y >= 0 && y <= 9;
     }
-    public static void reset(char[][] board, int startingX,int endingX,int startingY,int endingY){
+    public static int remove(char[][] board, int startingX, int startingY){ // returns the number of blocks the removed ship has
+        int[][] directions = {
+                {startingX-1, startingY},
+                {startingX+1, startingY},
+                {startingX, startingY-1},
+                {startingX, startingY+1}
+        };
+        int numOfBlocks = 1;
+        for(int[] dir : directions){
+            int newX = dir[0];
+            int newY = dir[1];
 
+            if(validCoords(newX, newY)){
+                // get direction(left, right, up, down)
+                if(board[9-newY][newX] == '#') {
+                    int dx = 0;
+                    int dy = 0;
+                    dx = Integer.compare(newX, startingX);
+                    dy = Integer.compare(newY, startingY);
+                    while (validCoords(newX, newY) && board[9-newY][newX]=='#'){
+                        board[9-newY][newX] = '.';
+                        newX += dx;
+                        newY += dy;
+                        numOfBlocks++;
+                    }
+                }
+
+
+            }
+            board[9-startingY][startingX] = '.';
+
+        }
+        return numOfBlocks;
     }
     public static void showBoard(char[][] board) {
         System.out.print("  ");
