@@ -196,7 +196,7 @@ public class Ex8 {
 
 
                 //check if the coordinates are valid
-                if (validCoords(startingX, startingY) && validCoords(endingX, endingY)){
+                if (validCoords(startingX, startingY)){
                     if (board[9-startingY][startingX] == '#'){
                         int numOfBlocks = remove(board, startingX, startingY); // removing the ship and getting the number of blocks it had
                         if(numOfBlocks==1) block1++;
