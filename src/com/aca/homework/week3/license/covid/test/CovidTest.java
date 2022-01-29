@@ -18,4 +18,7 @@ public class CovidTest {
             currentMillis = System.currentTimeMillis();
         }
     }
+    public String getResult(){
+        return this.result;
+    }
 }
