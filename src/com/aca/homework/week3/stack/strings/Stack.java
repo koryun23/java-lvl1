@@ -7,8 +7,8 @@ public class Stack {
         stack[numOfElements++] = s;
     }
 
-    public void pop(){
+    public String pop(){
         stack[numOfElements--] = null;
-        System.out.println(stack[numOfElements]);
+        return stack[numOfElements];
     }
 }

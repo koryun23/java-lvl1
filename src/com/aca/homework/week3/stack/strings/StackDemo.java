@@ -15,7 +15,8 @@ public class StackDemo {
         stack.push("push");
         stack.push("push");
         for(int i  =0; i < 4; i++){
-            stack.pop();
+            String poppedElement = stack.pop();
+            System.out.println(poppedElement);
         }
     }
 }
