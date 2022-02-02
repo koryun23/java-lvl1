@@ -1,7 +1,7 @@
 package com.aca.homework.week4.gun;
 
 public class Gun {
-    int cartridges = 0;
+    private int cartridges = 0;
     public static void main(String[] args) {
         Gun gun = new Gun();
         gun.fire();
