@@ -7,9 +7,14 @@ public class StringProcessor {
     }
 
     public String getValue(String key){
-        int lastIndexOfKey = this.json.indexOf('"'+key)+key.length();
+        int lastIndexOfKey = this.json.indexOf('"'+key);
         if (lastIndexOfKey < 0) return null; // if the key does not belong to the json string, return null
-        int firstIndexOfValue = lastIndexOfKey+5; // added 5 to the index to skip the :, ", and spaces
+        lastIndexOfKey+=key.length();
+        int firstIndexOfValue = lastIndexOfKey+2; // added 2 to ignore the closing "
+        while(firstIndexOfValue < this.json.length() && this.json.charAt(firstIndexOfValue)!='"'){
+            firstIndexOfValue++;
+        }
+        firstIndexOfValue++; // we increment the first index of value because the value it has now is the index of "
         int lastIndexOfValue = firstIndexOfValue;
         for(int i = firstIndexOfValue; i<this.json.length()&&this.json.charAt(i)!='"'; i++){
             lastIndexOfValue = i;

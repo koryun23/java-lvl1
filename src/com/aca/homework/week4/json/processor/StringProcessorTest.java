@@ -9,7 +9,7 @@ public class StringProcessorTest {
         System.out.println(json.getValue("name"));
         System.out.println(json.getValue("surname"));
         System.out.println(json.getValue("age"));
-        System.out.println(json.getValue("agee"));
+        System.out.println(json.getValue("uhfids"));
 
     }
 }
