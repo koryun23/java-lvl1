@@ -23,7 +23,6 @@ public class Snake {
     public String getMove(){
         Scanner scanner = new Scanner(System.in);
         String move = scanner.nextLine();
-
         return move;
     }
     public void move(){
@@ -39,7 +38,42 @@ public class Snake {
             dirX = 1;
         }
 
-        this.updateSnake(dirY, dirX);
+        if(this.snake[0][0]+dirY == this.appleRow && this.snake[0][1]+dirX == this.appleCol){
+            this.updateSnake(dirY, dirX);
+            this.generateApple();
+            this.updateSnakeOnBoard();
+            this.show();
+            this.snakeSize++;
+
+        }
+
+        else if (this.snake[0][0] == this.appleRow && this.snake[0][1] == this.appleCol){ // generate a new apple
+            int[] snakeHead = this.snake[0];
+            this.board[snakeHead[0]+dirY][snakeHead[1]+dirX] = '*';
+
+            this.updateSnake(dirY, dirX);
+            this.updateSnakeOnBoard();
+            this.show();
+        }
+        else{
+            this.updateSnake(dirY, dirX);
+            this.updateSnakeOnBoard();
+            this.show();
+        }
+    }
+    public void generateApple(){
+        System.out.println("Generating apples");
+        int newAppleRow = -1, newAppleCol = -1;
+        boolean placedApple = false;
+        while(!cellIsEmpty(newAppleRow, newAppleCol) && !placedApple){
+            Random generator = new Random();
+            newAppleRow = generator.nextInt(this.board.length);
+            newAppleCol = generator.nextInt(this.board[0].length);
+            this.board[newAppleRow][newAppleCol] = '=';
+            this.appleRow = newAppleRow;
+            this.appleCol = newAppleCol;
+            placedApple = true;
+        }
     }
     public void updateSnake(int dirRow, int dirCol){
         for(int i = snakeSize; i>0; i--){
@@ -48,8 +82,7 @@ public class Snake {
         }
         snake[0][0] += dirRow;
         snake[0][1] += dirCol;
-        this.updateSnakeOnBoard();
-        this.show();
+
     }
 
     public void updateSnakeOnBoard(){
@@ -77,6 +110,12 @@ public class Snake {
         }
     }
 
+    public boolean cellIsEmpty(int row, int col){
+        return !isOutOfBounds(row, col) && this.board[row][col] == '0';
+    }
+    public boolean isOutOfBounds(int row, int col){
+        return row < 0 || row > this.board.length || col < 0 || row > this.board[0].length;
+    }
 
 
 }
