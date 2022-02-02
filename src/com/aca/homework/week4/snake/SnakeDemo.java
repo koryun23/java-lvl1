@@ -5,8 +5,8 @@ public class SnakeDemo {
         char[][] board = new char[8][8];
         fillWithZeroes(board);
         Snake snake = new Snake(board, 0, 0, 2, 1);
-        printMatrix(board);
-        while(true){
+        snake.show();
+        while(snake.isGameRunning()){
             snake.move();
         }
     }
@@ -15,14 +15,6 @@ public class SnakeDemo {
             for (int j = 0; j < 8; j++) {
                 board[i][j] = '0';
             }
-        }
-    }
-    public static void printMatrix(char[][] matrix){
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix.length; j++){
-                System.out.print(matrix[i][j]+" ");
-            }
-            System.out.println();
         }
     }
 }
