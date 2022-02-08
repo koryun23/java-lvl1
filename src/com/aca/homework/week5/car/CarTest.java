@@ -4,17 +4,18 @@ import java.util.Scanner;
 
 public class CarTest {
     public static void main(String[] args) {
-        Car[] cars = new Car[5];
-        createMultipleCars(cars);
+        Car[] cars = createMultipleCars();
         printAll(cars);
     }
-    public static void createMultipleCars(Car[] cars){
+    public static Car[] createMultipleCars(){
+        Car[] cars = new Car[5];
         for(int i = 0; i < cars.length; i++){
             Car car = createCar();
             if (car != null){
                 cars[i] = car;
             }
         }
+        return cars;
     }
     public static void printAll(Car[] cars){
         int carsCreated = 0;
@@ -31,7 +32,10 @@ public class CarTest {
         String brand = getBrandInput();
         boolean carBrandValidated = validateCarName(brand);
         if(!carBrandValidated) return null;
-        return new Car(color, weight, width, brand);
+        if("bmw".equals(brand)){
+            return new Bmw(color, weight, width);
+        }
+        return new Hyundai(color, weight, width);
     }
 
     public static String getColorInput(){
