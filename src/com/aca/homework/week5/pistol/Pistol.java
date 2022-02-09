@@ -5,6 +5,10 @@ public abstract class Pistol {
     public Pistol(String name){
         this.name = name;
     }
+
+    public String getName(){
+        return name;
+    }
     public abstract void shoot();
     // I declared the method shoot as abstract because it doesn't make sense for it to have default implementation,
     // as all the subclasses implement it in their own way.
