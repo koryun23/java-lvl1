@@ -1,7 +1,7 @@
 package com.aca.homework.week5.pistol;
 
 public abstract class Pistol {
-    String name;
+    private String name;
     public Pistol(String name){
         this.name = name;
     }

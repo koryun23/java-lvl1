@@ -10,15 +10,19 @@ public class Demo {
 
     public static Pistol[] getMultiplePistols(){
         Pistol[] pistols = new Pistol[4];
+        int pistolIndex = 0;
         for(int i = 0; i < 4; i++){
             Pistol newPistol = getPistol();
-            pistols[i] = newPistol;
+            if (newPistol!=null){
+                pistols[pistolIndex++] = newPistol;
+            }
         }
         return pistols;
     }
     public static void shootAllPistols(Pistol[] pistols){
         for(Pistol pistol : pistols){
             if(pistol != null) pistol.shoot();
+            else break;
         }
     }
     public static Pistol getPistol(){
