@@ -7,6 +7,7 @@ public class Main {
         ProgrammerLevel mid = ProgrammerLevel.MID;
         ProgrammerLevel senior = ProgrammerLevel.SENIOR;
 
+
         System.out.println(junior);
         System.out.println(mid);
         System.out.println(senior);

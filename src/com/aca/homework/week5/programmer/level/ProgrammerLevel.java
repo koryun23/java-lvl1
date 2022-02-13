@@ -5,6 +5,7 @@ public enum ProgrammerLevel {
     MID,
     SENIOR;
 
+    @Override
     public String toString() {
         return this.name().toLowerCase() + " programmer";
     }
