@@ -1,0 +1,7 @@
+Create a List interface that has following methods.
+void add(String element);
+String get(int index);
+Create an ArrayList implementation of the List interface that initially holds an empty 10 sized array of Strings.
+When the add method invoked, the first element should be added at array[0], the second one at array[1] and so on.
+if the get(0) method is invoked then the array[0] should be returned if it exists otherwise the RuntimeException should be thrown.
+If the user invoked add method N times and we run out of an array empty spaces, the new array should be created with double size (2xN) and the old content should be copied to new one.
