@@ -17,6 +17,7 @@ public class BufferImpl implements Buffer {
     public Object get() {
         if (isBufferEmpty()) {
             System.out.println("The buffer is empty");
+            return null;
         }
         Object valueToReturn = value;
         deleteContentFromBuffer();
