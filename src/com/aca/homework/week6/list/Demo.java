@@ -7,6 +7,9 @@ public class Demo {
             arrayList.add(String.format("text %d", i));
             System.out.println(arrayList.get(i));
         }
-        // System.out.println(arrayList.get(73)); throws RuntimeException
+        arrayList.add(null);
+        arrayList.add(null);
+        System.out.println(arrayList.get(74)); // prints null
+        //System.out.println(arrayList.get(75)); throws RuntimeException
     }
 }

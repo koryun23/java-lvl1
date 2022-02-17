@@ -12,7 +12,7 @@ public class ArrayList implements List {
     }
 
     public String get(int index) {
-        if (accessedElementExists(index)) {
+        if (isIndexInRange(index)) {
             return values[index];
         }
         throw new RuntimeException();
@@ -22,8 +22,8 @@ public class ArrayList implements List {
         return length == values.length;
     }
 
-    public boolean accessedElementExists(int index) {
-        return index >= 0 && index < values.length && values[index] != null;
+    public boolean isIndexInRange(int index) {
+        return index >= 0 && index < length;
     }
 
     public void assignToDoubleSizedArray() {
