@@ -1,0 +1,1 @@
+Create the SingletonUserService class that has a private constructor. Create a static factory getInstance() method that returns an object of the SingletonUserService if it is already created, otherwise creates and returns it.
