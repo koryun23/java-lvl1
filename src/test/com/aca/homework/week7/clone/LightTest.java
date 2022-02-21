@@ -2,8 +2,8 @@ package com.aca.homework.week7.clone;
 
 class LightTest {
     public static void main(String[] args) throws CloneNotSupportedException{
-        Light lightOn = Light.lightOf(true);
-        Light lightOff = Light.lightOf(false);
+        Light lightOn = Light.onLight();
+        Light lightOff = Light.offLight();
 
         Light lightOnClone = (Light) lightOn.clone();
         Light lightOffClone = (Light) lightOff.clone();
