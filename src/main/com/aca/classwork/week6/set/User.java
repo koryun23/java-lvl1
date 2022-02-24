@@ -25,6 +25,7 @@ public class User {
         return lastName;
     }
 
+    /*
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -35,7 +36,7 @@ public class User {
             return anotherUser.firstName.equals(this.firstName) && anotherUser.lastName.equals(this.lastName);
         }
         return false;
-    }
+    }*/
 
     @Override
     public String toString(){

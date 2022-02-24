@@ -1,15 +1,37 @@
 package com.aca.classwork.week6.set;
 
 
-class ArraySetTest {
-    public static void main(String[] args) {
-        ArraySet set = new ArraySet();
-        set.add(new User("firstName1", "lastName1"));
-        set.add(new User("firstName2", "lastName2"));
-        set.add(new User("firstName3", "lastName3"));
-        set.add(new User("firstName4", "lastName4"));
-        set.add(new User("firstName5", "lastName5"));
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-        assert set.size() == 5 : "FAIL";
+public class ArraySetTest {
+    private Set testSubject;
+
+    @BeforeEach
+    public void setUp(){
+        testSubject = new ArraySet();
+    }
+
+    @Test
+    public void testSizeWhenIsEmpty(){
+        Assertions.assertEquals(0, testSubject.size());
+    }
+
+    @Test
+    public void testSizeWhenContainsOnlyOneUser(){
+        testSubject.add(new User("f","l"));
+        Assertions.assertEquals(1, testSubject.size());
+    }
+
+    @Test
+    public void testSizeWhen5SameUsersWereAdded(){
+        testSubject.add(new User("f", "l"));
+        testSubject.add(new User("f", "l"));
+        testSubject.add(new User("f", "l"));
+        testSubject.add(new User("f", "l"));
+        testSubject.add(new User("f", "l"));
+
+        Assertions.assertEquals(5, testSubject.size());
     }
 }
