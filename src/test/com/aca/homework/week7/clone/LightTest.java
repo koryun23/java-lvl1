@@ -5,8 +5,8 @@ class LightTest {
         Light lightOn = Light.onLight();
         Light lightOff = Light.offLight();
 
-        Light lightOnClone = (Light) lightOn.clone();
-        Light lightOffClone = (Light) lightOff.clone();
+        Light lightOnClone = lightOn.clone();
+        Light lightOffClone = lightOff.clone();
 
         System.out.println(lightOn.getState());
         System.out.println(lightOnClone.getState());

@@ -18,7 +18,7 @@ public class Light implements Cloneable{
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    protected Light clone() throws CloneNotSupportedException {
+        return (Light) super.clone();
     }
 }
