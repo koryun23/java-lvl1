@@ -1,0 +1,5 @@
+There are 2 type of cars: ELECTRIC and HYBRID.
+
+The annual vehicle tax is 5$ regardless of the year if the car type is electric and 5$ x carAge if the car type is hybrid.
+
+Create CarType enum class and implement the annualTex method.
