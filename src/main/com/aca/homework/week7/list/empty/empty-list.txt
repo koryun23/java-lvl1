@@ -1,0 +1,9 @@
+Create a List interface that has following methods:
+int size()
+void add(Object o)
+boolean isEmpty()
+Object get(int index)
+Create a FixedSizeList implementation that encapsulates a 10 sized array. When a user adds an 11th element ignore the operation and print 'The list is full' in the error stream.
+Create static facttory methods in List interface named ofFixedSize() and ofEmpty().
+ofEmpty static factory should return an anonymous implementation of the empty List interface.
+note: if user added 2 items only he can not get the object for the given 2,3,4... indexes
