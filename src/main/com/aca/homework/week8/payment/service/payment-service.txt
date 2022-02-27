@@ -1,0 +1,4 @@
+Create a PaymentService class that has pay(int money) method. When a user invoked the pay method, randomly wait for some milliseconds (from 200 to 800) and print that the payment is done. The pay method should return paid amount and method processing time in milliseconds.
+Create a Service annotation and annotate the PaymentService class.
+Create a PaymentServiceTest test class, write a test named testServiceAnnotation() that checks the presence of Service annotation on testSubject PaymentService object, also testPaymentAmount() that asserts that pay method returned a result containing paymentAmount equal to 100 when pay argument is 100.
+Also, create a test testDuration() that asserts that the method processing time is greater than 200 and less than 800.

@@ -1,15 +1,15 @@
 package com.aca.homework.week8.payment.service;
 
 public class Result {
-    private int waitingTime;
-    private int paymentAmount;
+    private final int waitingTime;
+    private final int paymentAmount;
 
-    public Result(int time, int pay){
+    public Result(int time, int pay) {
         waitingTime = time;
         paymentAmount = pay;
     }
 
-    public static Result resultOf(int time, int pay){
+    public static Result resultOf(int time, int pay) {
         return new Result(time, pay);
     }
 
