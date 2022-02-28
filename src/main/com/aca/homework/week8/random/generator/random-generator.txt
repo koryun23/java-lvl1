@@ -1,0 +1,13 @@
+Create a Randomizer class that contains
+public static String randomString();
+method that returns 3 sized random String out of the 'a', 'b', '7', '1', '9', '-' characters.
+Create a RandomStringGenerator interface and 2 implementations:
+HighPerformanceRandomStringGenerator and LowPerformanceRandomString generator.
+The interface has only one method
+Result randomString(int length);
+The Result encapsulates the resulting text and the method execution duration in milliseconds.
+Both HighPerformanceRandomStringGenerator and LowPerformanceRandomString must check if the length is not an x3 number (3, 6, 9, 12 ... is allowed only) then should return 'error' string in the Result object.
+Create 2 test classes HighPerformanceRandomStringGeneratorTest and LowPerformanceRandomStringTest
+create testWrongNumber() and pass an invalid number and assert that the result contains 'error' string, also, the execution duration is 0.
+create test30000() and assert that the result text length is 30000 and the execution duration is greater than 0.
+note: use a StringBuilder in HighPerformanceRandomStringGenerator class.
