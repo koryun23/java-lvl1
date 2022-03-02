@@ -2,22 +2,18 @@ package com.aca.homework.week8.random.generator;
 
 public class Result {
     private final String text;
-    private final double duration;
+    private final long duration;
 
-    private Result(String text, double duration) {
+    public Result(String text, long duration) {
         this.text = text;
         this.duration = duration;
-    }
-
-    public static Result resultOf(String text, double duration) {
-        return new Result(text, duration);
     }
 
     public String getText() {
         return text;
     }
 
-    public double getDuration() {
+    public long getDuration() {
         return duration;
     }
 }

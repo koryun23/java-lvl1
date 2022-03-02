@@ -9,22 +9,21 @@ class LowPerformanceRandomStringGeneratorTest {
     private LowPerformanceRandomStringGenerator testSubject;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testSubject = new LowPerformanceRandomStringGenerator();
-    }
-    @Test
-    public void testWrongNumber(){
-        Result result = testSubject.randomString(4);
-        boolean containsErrorString = "error".equals(result.getText());
-        boolean durationIs0 = result.getDuration() == 0;
-        assertTrue(containsErrorString && durationIs0);
     }
 
     @Test
-    public void test30000(){
+    public void testWrongNumber() {
+        Result result = testSubject.randomString(4);
+        assertEquals("error", result.getText());
+        assertEquals(0, result.getDuration());
+    }
+
+    @Test
+    public void test30000() {
         Result result = testSubject.randomString(30000);
-        boolean durationGT0 = result.getDuration() > 0;
-        boolean textLengthEq30000 = result.getText().length() == 30000;
-        assertTrue(durationGT0 && textLengthEq30000);
+        assertTrue(result.getDuration() > 0);
+        assertEquals(30000, result.getText().length());
     }
 }

@@ -4,16 +4,15 @@ public class HighPerformanceRandomStringGenerator implements RandomStringGenerat
     @Override
     public Result randomString(int length) {
         long startMillis = System.currentTimeMillis();
-        if (!isLengthValid(length)) return Result.resultOf("error", (double) System.currentTimeMillis() - startMillis);
+        if (!isLengthValid(length)) return new Result("error", 0);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i += 3) {
             sb.append(Randomizer.randomString());
         }
-        return Result.resultOf(sb.toString(), (double) System.currentTimeMillis() - startMillis);
+        return new Result(sb.toString(), System.currentTimeMillis() - startMillis);
     }
 
-    @Override
-    public boolean isLengthValid(int length) {
+    private boolean isLengthValid(int length) {
         return length % 3 == 0;
     }
 }

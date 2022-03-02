@@ -2,29 +2,31 @@ package com.aca.homework.week8.random.generator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.ls.LSOutput;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HighPerformanceRandomStringGeneratorTest {
     private HighPerformanceRandomStringGenerator testSubject;
+
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testSubject = new HighPerformanceRandomStringGenerator();
     }
 
     @Test
-    public void testWrongNumber(){
+    public void testWrongNumber() {
         Result result = testSubject.randomString(4);
-        boolean containsErrorString = "error".equals(result.getText());
-        boolean durationIs0 = result.getDuration() == 0;
-        assertTrue(containsErrorString && durationIs0);
+        System.out.println(result.getDuration());
+        assertEquals(0, result.getDuration());
+        assertEquals("error", result.getText());
     }
 
     @Test
-    public void test30000(){
+    public void test30000() {
         Result result = testSubject.randomString(30000);
-        boolean durationGT0 = result.getDuration() > 0;
-        boolean textLengthEq30000 = result.getText().length() == 30000;
-        assertTrue(durationGT0 && textLengthEq30000);
+        assertTrue(result.getDuration() > 0);
+        assertEquals(30000, result.getText().length());
+        System.out.println(result.getDuration());
     }
 }

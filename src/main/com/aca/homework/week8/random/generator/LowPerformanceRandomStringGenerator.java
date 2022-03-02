@@ -5,16 +5,15 @@ public class LowPerformanceRandomStringGenerator implements RandomStringGenerato
     @Override
     public Result randomString(int length) {
         long startMillis = System.currentTimeMillis();
-        if (!isLengthValid(length)) return Result.resultOf("error", (double) System.currentTimeMillis() - startMillis);
+        if (!isLengthValid(length)) return new Result("error", 0);
         String text = "";
         for (int i = 0; i < length; i += 3) {
             text += Randomizer.randomString();
         }
-        return Result.resultOf(text, (double) System.currentTimeMillis() - startMillis);
+        return new Result(text, System.currentTimeMillis() - startMillis);
     }
 
-    @Override
-    public boolean isLengthValid(int length) {
+    private boolean isLengthValid(int length) {
         return length % 3 == 0;
     }
 }
