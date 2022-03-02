@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 class PaymentServiceTest {
-    PaymentService testSubject;
+    private PaymentService testSubject;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testSubject = new PaymentService();
     }
 
     @Test
-    public void testWhenBalanceIs100AndAmountIs150(){
+    public void testWhenBalanceIs100AndAmountIs150() {
         CreditCard creditCard = new CreditCard(100, 1);
         Assertions.assertThrows(InsufficientBalanceException.class, new Executable() {
             @Override
@@ -25,14 +25,11 @@ class PaymentServiceTest {
     }
 
     @Test
-    public void testWhenBalanceIs100AmountIs30Call4Times(){
+    public void testWhenBalanceIs100AmountIs30Call4Times() {
         CreditCard creditCard = new CreditCard(100, 1);
-        int countOfPayments = 0;
-        while(countOfPayments < 3){
-            countOfPayments++;
-            testSubject.pay(creditCard, 30);
-        }
-        countOfPayments++; // = 4
+        testSubject.pay(creditCard, 30);
+        testSubject.pay(creditCard, 30);
+        testSubject.pay(creditCard, 30);
         Assertions.assertThrows(InsufficientBalanceException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -40,6 +37,5 @@ class PaymentServiceTest {
             }
         });
         Assertions.assertEquals(10, creditCard.getBalance());
-        Assertions.assertEquals(4, countOfPayments);
     }
 }
