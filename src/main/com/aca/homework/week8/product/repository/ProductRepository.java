@@ -1,6 +1,6 @@
 package com.aca.homework.week8.product.repository;
 
-@Respository
+@Repository
 public interface ProductRepository {
     void save(Product product);
 
@@ -9,5 +9,4 @@ public interface ProductRepository {
 
     @NotNull
     Product getById(long id);
-
 }

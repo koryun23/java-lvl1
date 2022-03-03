@@ -11,12 +11,12 @@ class InMemoryProductRepositoryTest {
     private InMemoryProductRepository testSubject;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testSubject = new InMemoryProductRepository();
     }
 
     @Test
-    public void testSaveWhenProductIsNull(){
+    public void testSaveWhenProductIsNull() {
         Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -26,13 +26,13 @@ class InMemoryProductRepositoryTest {
     }
 
     @Test
-    public void testSaveWhenProductDoesNotExist(){
+    public void testSaveWhenProductDoesNotExist() {
         testSubject.save(new Product(0, "pen"));
         assertEquals(1, testSubject.getNumOfProducts());
     }
 
     @Test
-    public void testSaveWhenProductAlreadyExist(){
+    public void testSaveWhenProductAlreadyExist() {
         testSubject.save(new Product(0, "pen"));
 
         assertThrows(ProductAlreadyExistsException.class, new Executable() {
@@ -44,18 +44,18 @@ class InMemoryProductRepositoryTest {
     }
 
     @Test
-    public void testFindByIdWhenProductDoesNotExist(){
+    public void testFindByIdWhenProductDoesNotExist() {
         assertNull(testSubject.findById(0));
     }
 
     @Test
-    public void testFindByIdWhenProductExists(){
+    public void testFindByIdWhenProductExists() {
         testSubject.save(new Product(0, "pen"));
         assertEquals(new Product(0, "pen"), testSubject.findById(0));
     }
 
     @Test
-    public void testGetByIdWhenProductDoesNotExist(){
+    public void testGetByIdWhenProductDoesNotExist() {
         assertThrows(ProductNotFoundException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -65,7 +65,7 @@ class InMemoryProductRepositoryTest {
     }
 
     @Test
-    public void testGetByIdWhenProductExists(){
+    public void testGetByIdWhenProductExists() {
         Product product = new Product(0, "pen");
         testSubject.save(product);
         assertEquals(new Product(0, "pen"), testSubject.getById(0));

@@ -1,8 +1,8 @@
 package com.aca.homework.week8.product.repository;
 
-public class Product{
-    private long id;
-    private String name;
+public class Product {
+    private final long id;
+    private final String name;
 
     public Product(long id, String name) {
         this.id = id;
@@ -18,9 +18,9 @@ public class Product{
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj) return true;
-        if(obj instanceof Product){
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Product) {
             Product other = (Product) obj;
             return this.id == other.id && this.name.equals(other.name);
         }
@@ -28,7 +28,7 @@ public class Product{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("Product id: %d, name: %s", this.id, this.name);
     }
 }
