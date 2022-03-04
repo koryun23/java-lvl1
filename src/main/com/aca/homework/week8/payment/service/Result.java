@@ -9,10 +9,6 @@ public class Result {
         paymentAmount = pay;
     }
 
-    public static Result resultOf(int time, int pay) {
-        return new Result(time, pay);
-    }
-
     public int getWaitingTime() {
         return waitingTime;
     }
