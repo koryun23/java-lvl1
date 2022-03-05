@@ -19,18 +19,7 @@ public class SimpleCalculator {
         int firstDigit = getDigitFromChar(expression.charAt(0));
         int secondDigit = getDigitFromChar(expression.charAt(2));
         char operation = expression.charAt(1);
-        switch (operation) {
-            case '+':
-                return String.valueOf(firstDigit + secondDigit);
-            case '-':
-                return String.valueOf(firstDigit - secondDigit);
-            case '*':
-                return String.valueOf(firstDigit * secondDigit);
-            case '/':
-                return String.valueOf((double) firstDigit / secondDigit);
-            default:
-                return "error";
-        }
+        return Operation.charToOperation(operation).performOperation(firstDigit, secondDigit);
     }
 
     public boolean isValidExpression(String expression) {
