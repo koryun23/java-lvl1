@@ -1,0 +1,4 @@
+Create a Tuple2<T1, T2> generic class. The class encapsulates 2 t1 and t2 variables and require them in the constructor.
+The class has 2 getters.
+1) Create a Tuple2<String, Integer> object in the Tuple2Test class, pass it the "text" and 45 values and test the getters in one method.
+2) Create a Tuple2<Long, Integer> object in the Tuple2Test class, pass it the 100 and 45 values and test the getters in one method.
