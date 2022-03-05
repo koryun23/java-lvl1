@@ -6,8 +6,8 @@ import org.junit.jupiter.api.function.Executable;
 
 class StringUtilsTest {
     @Test
-    public void testReverseWhenArgumentIsNull(){
-        Assertions.assertThrows(IllegalArgumentException.class, new Executable(){
+    public void testReverseWhenArgumentIsNull() {
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 StringUtils.reverse(null);
@@ -16,12 +16,12 @@ class StringUtilsTest {
     }
 
     @Test
-    public void testReverseWhenLengthIs1(){
+    public void testReverseWhenLengthIs1() {
         Assertions.assertEquals("a", StringUtils.reverse("a"));
     }
 
     @Test
-    public void testReverse(){
+    public void testReverse() {
         Assertions.assertEquals("qwerty", StringUtils.reverse("ytrewq"));
     }
 }
