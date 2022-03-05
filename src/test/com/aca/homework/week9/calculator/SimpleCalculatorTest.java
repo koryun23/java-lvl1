@@ -8,7 +8,7 @@ class SimpleCalculatorTest {
     private SimpleCalculator testSubject;
 
     @Test
-    public void testWhenInputStringLengthIs1(){
+    public void testWhenInputStringLengthIs1() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -19,7 +19,7 @@ class SimpleCalculatorTest {
     }
 
     @Test
-    public void testWhenInputStringLengthIs2(){
+    public void testWhenInputStringLengthIs2() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -28,8 +28,9 @@ class SimpleCalculatorTest {
         });
         Assertions.assertEquals("error", testSubject.askAndCalculate());
     }
+
     @Test
-    public void testWhenInputStringLengthIs4(){
+    public void testWhenInputStringLengthIs4() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -40,7 +41,7 @@ class SimpleCalculatorTest {
     }
 
     @Test
-    public void testWhenOperationIsSum(){
+    public void testWhenOperationIsSum() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -51,7 +52,7 @@ class SimpleCalculatorTest {
     }
 
     @Test
-    public void testWhenOperationIsDivision(){
+    public void testWhenOperationIsDivision() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -62,7 +63,7 @@ class SimpleCalculatorTest {
     }
 
     @Test
-    public void testWhenOperationIsSubtraction(){
+    public void testWhenOperationIsSubtraction() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
@@ -71,8 +72,9 @@ class SimpleCalculatorTest {
         });
         Assertions.assertEquals("2", testSubject.askAndCalculate());
     }
+
     @Test
-    public void testWhenOperationIsMultiplication(){
+    public void testWhenOperationIsMultiplication() {
         testSubject = new SimpleCalculator(new StringSupplier() {
             @Override
             public String get() {
