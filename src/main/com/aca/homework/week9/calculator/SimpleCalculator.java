@@ -19,16 +19,13 @@ public class SimpleCalculator {
         int firstDigit = getDigitFromChar(expression.charAt(0));
         int secondDigit = getDigitFromChar(expression.charAt(2));
         char operation = expression.charAt(1);
-        return Operation.charToOperation(operation).performOperation(firstDigit, secondDigit);
+        return Operation.of(operation).performOperation(firstDigit, secondDigit);
     }
 
     public boolean isValidExpression(String expression) {
-        return expression.length() == 3 && isDigit(expression.charAt(0)) && isDigit(expression.charAt(2)) && isDigit(expression.charAt(1));
+        return expression.length() == 3 && isDigit(expression.charAt(0)) && isDigit(expression.charAt(2)) && Operation.isOperation(expression.charAt(1));
     }
 
-    public boolean isOperation(char ch) {
-        return ch == '/' || ch == '+' || ch == '-' || ch == '*';
-    }
 
     public boolean isDigit(char ch) {
         return ch - 48 <= 9;

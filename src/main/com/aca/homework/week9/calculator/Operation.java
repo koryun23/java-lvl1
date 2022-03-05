@@ -29,7 +29,7 @@ public enum Operation {
 
     public abstract String performOperation(int num1, int num2);
 
-    public static Operation charToOperation(char ch) {
+    public static Operation of(char ch) {
         switch (ch) {
             case '+':
                 return Operation.ADDITION;
@@ -43,5 +43,9 @@ public enum Operation {
                 return null;
         }
     }
+    public static boolean isOperation(char ch) {
+        return ch == '/' || ch == '+' || ch == '-' || ch == '*';
+    }
+
 
 }
