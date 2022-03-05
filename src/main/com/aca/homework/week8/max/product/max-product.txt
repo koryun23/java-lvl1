@@ -1,0 +1,13 @@
+Given an array of N numbers. Print the maximum possible product obtained using each of the array numbers at most once
+e.g
+1 4 5 -5
+20
+1 0 -5 -5 -1
+25
+Create a calculateMaxProduct(int[] array) method and write test for the following cases
+case 1: 5 5 0 0 -9
+case 2: 5 -5 -5 -9 -1
+case 3: 0 0 0 1 0
+case 4: 0 0 0 -1 0
+case 5: 9 8 7 7
+note: throw an IllegalArgumentException if the provided array is null or empty.
