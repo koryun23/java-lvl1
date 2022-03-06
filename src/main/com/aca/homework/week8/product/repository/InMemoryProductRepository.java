@@ -10,17 +10,17 @@ public class InMemoryProductRepository implements ProductRepository {
             throw new IllegalArgumentException("Provided product is null.");
         }
         if (findById(product.getId()) != null) {
-            throw new ProductAlreadyExistsException("Product with id = " + product.getId() + " already exists.");
+            throw new ProductAlreadyExistsException(product.getId());
         }
         products[numOfProducts++] = product;
     }
 
     @Override
     public Product findById(long id) {
-        for (Product product : products) {
-            if (product == null) break;
-            if (product.getId() == id) {
-                return product;
+        for (int i = 0; i < numOfProducts; i++) {
+            if (products[i] == null) break;
+            if (products[i].getId() == id) {
+                return products[i];
             }
         }
         return null;
