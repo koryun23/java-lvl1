@@ -5,10 +5,6 @@ public class Image extends AbstractClickable implements Clickable {
         super(name, action);
     }
 
-    @Override
-    public String name() {
-        return getName();
-    }
 
     @Override
     public String toString() {

@@ -14,7 +14,8 @@ public abstract class AbstractClickable implements Clickable {
         action.doAction(this);
     }
 
-    public String getName() {
+    @Override
+    public String name() {
         return name;
     }
 }

@@ -6,12 +6,8 @@ public class Button extends AbstractClickable implements Clickable {
     }
 
     @Override
-    public String name() {
-        return getName();
-    }
-
-    @Override
     public String toString() {
         return "button";
     }
+
 }
