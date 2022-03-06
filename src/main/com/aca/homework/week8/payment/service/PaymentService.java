@@ -4,6 +4,7 @@ import java.util.Random;
 
 @Service
 public class PaymentService {
+
     private static int sleep() {
         int millisecondsToWait = new Random().nextInt(600) + 200;
         long startTime = System.currentTimeMillis();
@@ -16,4 +17,5 @@ public class PaymentService {
         System.out.printf("Payment is done($%d)", money);
         return new Result(milliseconds, money);
     }
+
 }
