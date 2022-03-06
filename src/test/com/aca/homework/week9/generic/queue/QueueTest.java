@@ -40,7 +40,7 @@ class QueueTest {
     }
 
     @Test
-    public void testConsume2TimesWhenQueueContians2Items(){
+    public void testConsume2TimesWhenQueueContians2Items() {
         testSubject.produce("test1");
         testSubject.produce("test2");
         Assertions.assertEquals("test1", testSubject.consume());
@@ -49,7 +49,7 @@ class QueueTest {
     }
 
     @Test
-    public void testConsume2TimesWhenQueueContains3Items(){
+    public void testConsume2TimesWhenQueueContains3Items() {
         testSubject.produce("test1");
         testSubject.produce("test2");
         testSubject.produce("test3");
