@@ -5,21 +5,18 @@ import org.junit.jupiter.api.Test;
 
 class CarTest {
     @Test
-    public void testWhenReferenceIsSame(){
+    public void testWhenReferenceIsSame() {
         Car car = new Car("abcd1234", 2007, 3);
         Assertions.assertEquals(car, car);
     }
 
     @Test
-    public void testWhenCarsHaveSameFieldValues(){
-        Car car1 = new Car("abcd1234", 2007, 3);
-        Car car2 = new Car("abcd1234", 2007, 3);
-        Assertions.assertEquals(car1, car2);
+    public void testWhenCarsHaveSameFieldValues() {
+        Assertions.assertEquals(new Car("abcd1234", 2007, 3), new Car("abcd1234", 2007, 3));
     }
 
     @Test
-    public void testCarEqualsString(){
-        Car car = new Car("abcd1234", 2007, 3);
-        Assertions.assertNotEquals(car, "");
+    public void testCarEqualsString() {
+        Assertions.assertNotEquals(new Car("abcd1234", 2007, 3), "");
     }
 }

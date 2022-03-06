@@ -9,62 +9,53 @@ class CarRepositoryTest {
     CarRepository testSubject;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testSubject = new CarRepository();
     }
 
     @Test
-    public void testSave(){
-        Car car = new Car("abcd1234", 2007, 3);
-        testSubject.save(car);
+    public void testSave() {
+        testSubject.save(new Car("abcd1234", 2007, 3));
         Assertions.assertEquals(1, testSubject.getTotalCount());
     }
 
     @Test
-    public void testSaveSameCar2Times(){
-        Car car = new Car("abcd1234", 2007, 3);
-        testSubject.save(car);
-        testSubject.save(car);
+    public void testSaveSameCar2Times() {
+        testSubject.save(new Car("abcd1234", 2007, 3));
+        testSubject.save(new Car("abcd1234", 2007, 3));
         Assertions.assertEquals(1, testSubject.getTotalCount());
     }
 
     @Test
-    public void testSave2DifferentCars(){
-        Car car1 = new Car("abcd1234", 2008, 1);
-        Car car2 = new Car("1234abcd", 2007, 3);
-        testSubject.save(car1);
-        testSubject.save(car2);
+    public void testSave2DifferentCars() {
+        testSubject.save(new Car("abcd1234", 2008, 1));
+        testSubject.save(new Car("1234abcd", 2007, 3));
         Assertions.assertEquals(2, testSubject.getTotalCount());
     }
 
     @Test
-    public void testSave2DifferentCars2Times(){
-        Car car1 = new Car("abcd1234", 2008, 1);
-        Car car2 = new Car("1234abcd", 2007, 3);
-        Car car3 = new Car("abcd1234", 2008, 1);
-        Car car4 = new Car("1234abcd", 2007, 3);
-        testSubject.save(car1);
-        testSubject.save(car2);
-        testSubject.save(car3);
-        testSubject.save(car4);
+    public void testSave2DifferentCars2Times() {
+        testSubject.save(new Car("abcd1234", 2008, 1));
+        testSubject.save(new Car("1234abcd", 2007, 3));
+        testSubject.save(new Car("abcd1234", 2008, 1));
+        testSubject.save(new Car("1234abcd", 2007, 3));
         Assertions.assertEquals(2, testSubject.getTotalCount());
     }
 
     @Test
-    public void findByVinWhenTotalCountIs0(){
+    public void findByVinWhenTotalCountIs0() {
         Car car = testSubject.findByVin("aw57q");
         Assertions.assertNull(car);
     }
 
     @Test
-    public void findByVinWhenCarExists(){
-        Car car1 = new Car("abcd1234", 2008, 1);
-        testSubject.save(car1);
-        Assertions.assertEquals(car1, testSubject.findByVin("abcd1234"));
+    public void findByVinWhenCarExists() {
+        testSubject.save(new Car("abcd1234", 2008, 1));
+        Assertions.assertEquals(new Car("abcd1234", 2008, 1), testSubject.findByVin("abcd1234"));
     }
 
     @Test
-    public void testGetTotalCountWhenThereIsNoSavedCar(){
+    public void testGetTotalCountWhenThereIsNoSavedCar() {
         Assertions.assertEquals(0, testSubject.getTotalCount());
     }
 
