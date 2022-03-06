@@ -18,6 +18,7 @@ public class Queue<T> {
         if (isEmpty()) throw new QueueEmptyException();
         T elementToReturn = (T) elements[consumeIndex];
         elements[consumeIndex++] = null;
+        leftShift(); // as the first element of the queue is consumed, we need to shift all the elements to the left
         return elementToReturn;
     }
 
@@ -27,5 +28,15 @@ public class Queue<T> {
 
     public int size() {
         return produceIndex - consumeIndex;
+    }
+
+    public void leftShift(){
+        if(consumeIndex == 0) return;
+        for(int i = 1; i < produceIndex;i++){
+            elements[i-1] = elements[i];
+        }
+        elements[produceIndex-1] = null;
+        consumeIndex--;
+        produceIndex--;
     }
 }
