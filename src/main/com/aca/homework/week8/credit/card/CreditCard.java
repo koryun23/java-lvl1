@@ -2,7 +2,7 @@ package com.aca.homework.week8.credit.card;
 
 public class CreditCard {
     private double balance;
-    private int number;
+    private final int number;
 
     public CreditCard(double balance, int number) {
         this.balance = balance;
@@ -13,16 +13,12 @@ public class CreditCard {
         return balance;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -31,9 +27,9 @@ public class CreditCard {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj) return true;
-        if(obj instanceof CreditCard){
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof CreditCard) {
             CreditCard other = (CreditCard) obj;
             return other.balance == this.balance && other.number == this.number;
         }
