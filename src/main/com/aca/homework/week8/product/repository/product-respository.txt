@@ -1,0 +1,21 @@
+Create a Repository annotation and annotate the interface ProductRepository with it.
+The ProductRepository interface has a save(Product product) method that saves the provided product if it does not exist, otherwise throws a ProductAlreadyExistsException runtime exception. If the product is null then throw an IllegalArgumentException.
+The Product has id and name fields.
+The ProductRepository also has the following methods.
+Product findById(Long id)
+Product getById(Long Id)
+Create Nullable and NotNull annotations and annotate the findById and getById methods correspondingly.
+The findById should return the Product that has the provided id. If it does not exist then the method should return null.
+The getById should return the Product that has the provided id. If it does not exist then the method should throw ProductNotFoundException runtime exception.
+Create InMemoryProductRepository implementation of the ProductRepository interface that saves the provided Products in a 10000 sized array.
+Create ProductTest and write tests for equals and toString methods.
+Create InMemoryProductRepositoryTest and create the following tests:
+testSaveWhenProductIsNull()
+testSaveWhenProductDoesNotExist()
+testSaveWhenProductAlreadyExist()
+testFindByIdWhenProductDoesNotExist()
+testFindByIdWhenProductExists()
+testGetByIdWhenProductDoesNotExist()
+testGetByIdWhenProductExists()
+Create NotImplementedProductRepository implementation of the ProductRepository interface that will throw NotImplementedException runtime exception for each method invocation and write tests for each method.
+
