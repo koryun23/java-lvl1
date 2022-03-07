@@ -1,7 +1,7 @@
 package com.aca.homework.week9.generic.queue;
 
 public class Queue<T> {
-    final Object[] elements = new Object[10_000];
+    private final Object[] elements = new Object[10_000];
     private int produceIndex = 0;
 
     public void produce(T object) {
