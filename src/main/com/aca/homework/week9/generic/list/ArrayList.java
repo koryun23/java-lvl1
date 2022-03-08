@@ -12,7 +12,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E get(int index) {
-        if (index >= numberOfElements) throw new ArrayListIndexOutOfBoundsException(index, numberOfElements);
+        if (index >= numberOfElements || index < 0) throw new ArrayListIndexOutOfBoundsException(index, numberOfElements);
         return (E) elements[index];
     }
 
