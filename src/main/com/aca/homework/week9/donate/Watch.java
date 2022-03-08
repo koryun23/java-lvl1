@@ -1,19 +1,12 @@
 package com.aca.homework.week9.donate;
 
-public class Watch implements Donatable {
-    public double price;
-
+public class Watch extends DonatableProduct implements Donatable {
     public Watch(double price) {
-        this.price = price;
-    }
-
-    @Override
-    public double donationAmount() {
-        return price * 5 / 100;
+        super(price);
     }
 
     @Override
     public String toString() {
-        return "Watch with price $" + price;
+        return "Watch with price $" + getPrice();
     }
 }

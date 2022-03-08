@@ -1,18 +1,12 @@
 package com.aca.homework.week9.donate;
 
-public class Smartphone implements Donatable {
-    private final double price;
-
+public class Smartphone extends DonatableProduct implements Donatable {
     public Smartphone(double price) {
-        this.price = price;
-    }
-
-    public double donationAmount() {
-        return price * 5 / 100;
+        super(price);
     }
 
     @Override
     public String toString() {
-        return "Smartphone with price $" + price;
+        return "Smartphone with price $" + getPrice();
     }
 }
