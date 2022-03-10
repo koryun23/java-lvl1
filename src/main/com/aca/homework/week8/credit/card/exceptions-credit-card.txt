@@ -1,0 +1,5 @@
+Create a CreditCard class that has balance and number fields. (Implement toString and equals methods, write tests)
+Create a PaymentService class that has a void pay method. The pay method should take a creaditCard and amountToBePaid fields.
+Check if the provided credit card balance is not enough to perform a payment throw an InsufficentBalanceException. Pass as much as possible information when throwing an exception.
+Write tests to check pay method when the credit card has balance of 100 but the amount to be paid is 150.
+Also check the case when the balance is 100, amount to be paid is 30. Pay 4 times and be sure that 4th call fails.
