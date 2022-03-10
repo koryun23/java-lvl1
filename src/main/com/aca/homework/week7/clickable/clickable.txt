@@ -1,0 +1,23 @@
+Create a Clickable interface that has click() and name() methods.
+Create Button and Image classes that are Clickables.
+Ask the user to create 5 clickable objects by typing the clickable name.
+If the user typed a text that starts with 'button' then creates a Button that has the provided name.
+If the user typed a text that starts with 'image' then creates an Image object that has the provided name.
+e.g
+Please type a clickable object name.
+button1
+The button object created having a name button1
+Please type a clickable object name.
+imageForBanner
+The image object created having a name imageForBanner
+..
+..
+After creating 5 clickable objects ask a user to type a clickable name to invoke click() method on it
+e.g
+Please enter a clickable name to invoke the click method.
+imageForBanner
+The click method is invoked on the Image object having a name imageForBanner
+note:
+Create an Action interface that has doAction(Clickable clickable) method.
+Create an AbstractClickable class that implements the Clickable and in the constructor takes the Action object.
+Both the Button and Image click method implementations should be forwarded to an Action object doAction(Clickable clickable) method.
