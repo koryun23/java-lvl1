@@ -14,6 +14,8 @@ public class CreditCard {
     }
 
     public void setBalance(double balance) {
+        if(balance < 0)
+            throw new IllegalArgumentException("The balance must be >= 0.");
         this.balance = balance;
     }
 

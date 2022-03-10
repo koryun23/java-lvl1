@@ -38,4 +38,15 @@ class PaymentServiceTest {
         });
         Assertions.assertEquals(10, creditCard.getBalance());
     }
+
+    @Test
+    public void testSetNegativeBalance(){
+        CreditCard creditCard = new CreditCard(100, 1);
+        Assertions.assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                creditCard.setBalance(-5);
+            }
+        });
+    }
 }
