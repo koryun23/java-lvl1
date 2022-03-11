@@ -1,0 +1,14 @@
+Create a Queue generic class that will encapsulate an array of type Object[].
+The Queue class has the following methods
+void produce(T object);
+T consume();
+When the produce method is invoked, the object should be added to an Object[] array.
+When the consume is invoked, the latest added object should be casted to T type and returned.
+The encapsulated array should have 10_000 size.
+When the array is empty and consume method is invoked, the QueueEmptyException should be thrown.
+Write the following unit tests in QueueTest class:
+the testSubject should have type of Queue<String>
+testWhenProduceIsNull() //Illegal argument exception should be thrown
+testConsumeWhenContains1Item() // produce a string "test", consume it and assert that is equal to "test"
+testConsumeWhenQueueIsEmpty()
+testConsume2TimesWhenQueueContains2Items()
