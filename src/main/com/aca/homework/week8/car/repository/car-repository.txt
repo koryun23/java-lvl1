@@ -1,0 +1,19 @@
+Create a Car class that has vin, year and ownersCount fields. Implement the equals method.
+Create a CarTest class that will have the following methods:
+testWhenReferenceIsSame() //compare the car with itself
+testWhenCarsHaveSameFieldValues() //compare a car object with another car having the same field values
+testCarEqualString()  // compare the car object with "string" string and assert that the result is false.
+Do not use testSubject object and @BeforeEach annotated method. Instead, create a car object in every test method.
+Create a CarRepository class that has a
+Car save(Car car)
+Car findByVin(String vin) and
+int getTotalCount() methods.
+The save method should add the car in the fixed size array (set the size to 1000 and do not handle the 1001th car save error) if it does not exist or update the existing one. Check the existence using vin field only.
+Create CarRepositoryTest class, testSubject object in @BeforEach annotated method and the following methods:
+testSave() // assert that the total count is 1
+testSaveSameCar2Times() //assert that the toatl count is 1
+testSave2DifferentCars() //assert that the total count is 2
+testSave2DifferentCarsTwice() //save 2 different cars 2 times and assert that the total count is 2
+testFindByVinWhenTotalCountIs0() // assert that the return result is null
+testFindByVinWhenCarExists() //create a car then find it by vin and assert that the result is equal to created car
+testGetTotalCountWhenThereIsNoSavedCar() //assert that the result is 0
