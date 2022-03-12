@@ -7,8 +7,8 @@ public class Car {
 
     public Car(String vin, int year, int ownersCount) {
         this.vin = vin;
-        this.year = year;
-        this.ownersCount = ownersCount;
+        setYear(year);
+        setOwnersCount(ownersCount);
     }
 
     public String getVin() {
@@ -20,6 +20,8 @@ public class Car {
     }
 
     public void setYear(int year) {
+        if(year < 0)
+            throw new IllegalArgumentException("Year must be positive");
         this.year = year;
     }
 
@@ -28,6 +30,8 @@ public class Car {
     }
 
     public void setOwnersCount(int ownersCount) {
+        if(ownersCount < 1)
+            throw new IllegalArgumentException("Owner's count must be >= 1");
         this.ownersCount = ownersCount;
     }
 
