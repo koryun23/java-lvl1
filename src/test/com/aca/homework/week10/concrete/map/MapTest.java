@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 class MapTest {
-    Map map;
+    private Map map;
 
     @BeforeEach
     public void setUp(){
