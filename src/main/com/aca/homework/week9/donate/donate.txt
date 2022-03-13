@@ -1,0 +1,11 @@
+There are some kinds of goods for each of which if the user purchased, 5% of the purchase will be donated to charity.
+The goods types are Smartphone, Watch, SmartWatch. They all have a double price field.
+Create a Donatable interface that has double donationAmount() method and implement it in the above classes.
+Create an AcaSmile generic class that has buyWithDonation method and takes a generic object, prints that the provided good is bought, and accumulates the donated amount to the total donated amount. AcaSmile also has a method to get the total donated amount.
+Create AcaSmileTest and write the following methods:
+testWhenNothingIsBought() // assert that the total donated amount is 0
+testWhenOneSmartphoneIsBought() // buy a Smartphone that has 100 price and assert that the total donated amount is 5
+testWhenOneSmartphoneAndOneWatchIsBought() // buy a Smartphone that has 100 price, a Watch having a 200 price and assert that the total donated amount is 15
+testWhenOneSmartphoneOneWatchAndOneSmartWatchIsBought() // buy a Smartphone that has 100 price, a Watch having a 200, a SmartWatch having a 1000 price and assert that the total donated amount is 65
+subproblem:
+keep a list of purchased goods' string representations in AcaSmile class and provide a method to get the list (array) of it. Write a test and assert that the list is correct.
