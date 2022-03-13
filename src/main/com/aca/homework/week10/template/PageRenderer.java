@@ -22,7 +22,6 @@ public class PageRenderer {
         System.out.println("Page");
         if (printDownPageNumber)
             System.out.println("Page number");
-
     }
 
     public void printFooter() {
