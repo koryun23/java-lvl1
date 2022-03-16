@@ -7,14 +7,14 @@ class ArrayObservableListTest {
 
     @Test
     public void testAddWhenThereIsNoAddedListeners() {
-        ArrayObservableList<String> arrayObservableList = new ArrayObservableList<>();
+        ObservableList<String> arrayObservableList = new ArrayObservableList<>();
         arrayObservableList.add("item");
         Assertions.assertEquals("item", arrayObservableList.get(0));
     }
 
     @Test
     public void testAddWhenThereIsOneAddedListener() {
-        ArrayObservableList<Integer> arrayObservableList = new ArrayObservableList<>();
+        ObservableList<Integer> arrayObservableList = new ArrayObservableList<>();
         final Integer[] argument = {0};
         arrayObservableList.addListener(new ListChangeListener<Integer>() {
             @Override
@@ -28,7 +28,7 @@ class ArrayObservableListTest {
 
     @Test
     public void testAddWhenThereAreTwoAddedListener() {
-        ArrayObservableList<Integer> arrayObservableList = new ArrayObservableList<>();
+        ObservableList<Integer> arrayObservableList = new ArrayObservableList<>();
         final Integer[] argumentForFirstListener = {0};
         final Integer[] argumentForSecondListener = {0};
         arrayObservableList.addListener(new ListChangeListener<Integer>() {
