@@ -1,0 +1,26 @@
+Create a User class that has the following fields
+Long id
+String username
+int age
+Create a CrudRepository generic interface that has the following methods:
+T save(T entity)
+void delete(T entity)
+T findById()
+long count()
+void deleteAll()
+List<T> findAll()
+Create a UserRepository that implements CrudRepository for User type. Implement CrudRepository methods with the help of encapsulated List<User> object.
+The save method must have create or update behavior (if the user was created with the same id, it should be substituted with the new one)
+Create the following unit tests in UserRepositoryTest class:
+testSaveWhenUserIsNull() // illegal argument exception should be thrown
+testSaveWhenUserDoesNotExist() // assert that the findById returns the same entity and the count is 1
+testSaveWhenUserExist() // assert that the findById returns the same entity and the count is 1
+testDeleteWhenEntityNotFound() // entity not found exception should be thrown
+testDelete() // save an entity, delete it and assert that the count is 0
+testFindByIdWhenDoesNotFound() // assert that the result is null
+testCountWhenRepositoryIsEmpty() // assert that the size is 0
+testCountWhenRepositoryContains2Entities() // save 2 different entities and assert that the size is equal to 2
+testDeleteAllWhenIsEmpty() // assert that the size is 0
+testDeleteAllWhenContains2Entities() // save 2 entities, delete all and assert that the size is 0
+testFindAllWhenEmpty() // assert that the list is empty
+testFindAllWhenContains3Entities() // save 3 entities, assert that the result contains all saved items
