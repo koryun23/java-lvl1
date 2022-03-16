@@ -1,8 +1,7 @@
 package com.aca.homework.week9.observable.list;
 
 public class Human {
-    private final String firstName;
-    private final String lastName;
+    private String firstName, lastName;
 
     public Human(String firstName, String lastName) {
         this.firstName = firstName;

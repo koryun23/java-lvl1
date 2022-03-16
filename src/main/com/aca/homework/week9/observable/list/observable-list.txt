@@ -1,0 +1,16 @@
+The city major decided to track the population in a city and ordered to write every new joiner's name on the screen located at the city center. Also, turn on the short applause sound for each of the new joiners.
+Create a ListChangeListener generic interface that has
+void onAdded(T item);
+Create an ObservableList generic interface that has the following methods:
+void add(T object);
+T get(int index);
+int size();
+void addListener(ListChangeListener<T> listener);
+Create a Human class that has firstName and lastName.
+Once a user added a new item to the ArrayObservableList class (encapsulates 100_000 sized array of objects), all added listeners' onAdded method should be invoked.
+Create a City class that contains an ObservableList of Humans. Add two anonymous ListChangeListeners of User type to ArrayObservableList object: one that will print "A new joiner is: " + human#toString() for each added new human and second one: that will print "applause", will pause 500ms and again will print "applause".
+make the City class default constructor private, create a static factory method that after City class object creation will add anonymous listeners to arrayObservableList object.
+Create an ArrayObservableListTest class and the following unit tests:
+testAddWhenThereIsNoAddedListeners() // create an ArrayObservableList of Strings, add one string and assert that the size is changed and get(0) is equal to the added string
+testAddWhenThereIsOneAddedListener() // create an ArrayObservableList of Integers, add an anonymous ListChangeListener, add Integer.valueOf(98) and assert that the onAdded method is invoked with an argument of Integer.valueOf(98).
+testAddWhenThereAreTwoAddedListener() // create an ArrayObservableList of Integers, add two anonymous ListChangeListener, add Integer.valueOf(98) and assert that the onAdded methods are invoked with an argument of Integer.valueOf(98).

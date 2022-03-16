@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArrayObservableList<T> implements ObservableList<T> {
-    private final Object[] observableList = new Object[100_000];
-    private final List<ListChangeListener<T>> listChangeListeners = new ArrayList<>();
+    private Object[] observableList = new Object[100_000];
+    private List<ListChangeListener<T>> listChangeListeners = new ArrayList<>();
     private int numberOfObservables = 0;
 
     @Override

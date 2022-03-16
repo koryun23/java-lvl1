@@ -1,6 +1,6 @@
 package com.aca.homework.week9.observable.list;
 
-public interface ObservableList<T> {
+public interface ObservableList<T>{
     void add(T item);
 
     T get(int index);

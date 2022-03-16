@@ -34,4 +34,8 @@ public class City {
         while (System.currentTimeMillis() - startMillis < 500) ;
     }
 
+    public void addNewHuman(Human human){
+        observableList.add(human);
+    }
+
 }
