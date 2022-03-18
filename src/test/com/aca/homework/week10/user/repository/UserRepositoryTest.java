@@ -10,7 +10,7 @@ class UserRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        crud = new UserRepository<>();
+        crud = new UserRepository();
     }
 
     @Test
