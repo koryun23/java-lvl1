@@ -2,7 +2,7 @@ Create an PhoneModel enum that has the following values:
 NOKIA_1100
 NOKIA_3110
 GALAXY_S2
-The nokia 1100 does not have a camera, nokia 3110 has only one back camera and galaxy s2 has both front and back cameras.
+The nokia 1100 does not have a camera, nokia 3110 has only one back camera and galaxy s2 has both front and back getCameraList.
 Create a mechanism to get PhoneModel camera's descriptions list (e.g GALAXY_S2 camera description list contains "back camera" and "front camera" string items)
 Create the following test methods:
 testNokia3110CameraDescriptionList()

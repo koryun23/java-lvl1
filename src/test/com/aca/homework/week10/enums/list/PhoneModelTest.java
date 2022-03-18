@@ -7,19 +7,19 @@ class PhoneModelTest {
     @Test
     public void testNokia1100() {
         PhoneModel nokia1100 = PhoneModel.NOKIA_1100;
-        Assertions.assertEquals(0, nokia1100.cameras().size());
+        Assertions.assertEquals(0, nokia1100.getCameraList().size());
     }
 
     @Test
     public void testNokia3110() {
         PhoneModel nokia3110 = PhoneModel.NOKIA_3110;
-        Assertions.assertEquals("back camera", nokia3110.cameras().get(0));
+        Assertions.assertEquals("back camera", nokia3110.getCameraList().get(0));
     }
 
     @Test
     public void testGalaxy() {
         PhoneModel galaxy = PhoneModel.GALAXY_S2;
-        Assertions.assertEquals("back camera", galaxy.cameras().get(0));
-        Assertions.assertEquals("front camera", galaxy.cameras().get(1));
+        Assertions.assertEquals("back camera", galaxy.getCameraList().get(0));
+        Assertions.assertEquals("front camera", galaxy.getCameraList().get(1));
     }
 }
