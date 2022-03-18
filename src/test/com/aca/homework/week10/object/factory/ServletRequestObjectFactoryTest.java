@@ -5,11 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ServletRequestObjectFactoryTest {
-    private ServletRequestObjectFactory<ServletRequestImpl> testSubject;
+    private ServletRequestObjectFactory testSubject;
 
     @BeforeEach
     public void setUp(){
-        testSubject = new ServletRequestObjectFactory<>();
+        testSubject = new ServletRequestObjectFactory();
     }
 
     @Test
