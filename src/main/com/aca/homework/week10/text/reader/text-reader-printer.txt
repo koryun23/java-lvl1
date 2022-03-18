@@ -1,0 +1,3 @@
+Create a static readLines() method that reads lines from the provided doc-numbers.txt file and returns the list.
+Create a print static method that takes a list of strings and prints for each item index number and the item itself.
+There is no need to create unit tests.
