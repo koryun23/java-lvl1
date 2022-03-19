@@ -1,0 +1,5 @@
+Create a ListUtils class that has one private default constructor and
+List<T> copy(List<T> list) static method.
+The copy method should create a new copy of the provided list.
+Create ListUtilsTest class and testCopy() method that invokes copy method and pass list of strings that contains "a", "b" and "c" items.
+Assert that the result does not equal to the provided initial list but contains the same items.
