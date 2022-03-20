@@ -1,0 +1,13 @@
+Create a User class that has the following fields
+Long id
+String username
+String firstName
+Create a UserModel class that has the following fields
+String username
+String firstName
+Create a UserMapper interface that has the following method:
+UserModel map(User user);
+Create a DefaultUserMapper implementation that creates a new UserModel object with the same field values as the User object.
+Create a DefaultUserMapperTest class and single testMap() method.
+The testMap should create a User with the folloowing fields: id=1, username="student", firstName="Lord"
+assert that the map method invocation result's username is equal to "student", firstName is equal to "Lord"
