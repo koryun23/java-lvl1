@@ -1,6 +1,5 @@
 package com.aca.homework.week10.text.reader;
 
-import java.io.File;
 import java.io.IOException;
 
 public class TextReaderDemo {
