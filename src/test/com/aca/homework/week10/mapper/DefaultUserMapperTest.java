@@ -5,14 +5,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DefaultUserMapperTest {
-    private UserModel testSubject;
+    private UserMapper testSubject;
+
     @BeforeEach
-    public void setUp(){
-        testSubject = new DefaultUserMapper().map(new User(1, "student", "Lord"));
+    public void setUp() {
+        testSubject = new DefaultUserMapper();
     }
+
     @Test
-    public void testMap(){
-        Assertions.assertEquals("Lord", testSubject.getFirstName());
-        Assertions.assertEquals("student", testSubject.getUsername());
+    public void testMap() {
+        UserModel userModel = testSubject.map(new User(1, "student", "Lord"));
+        Assertions.assertEquals("Lord", userModel.getFirstName());
+        Assertions.assertEquals("student", userModel.getUsername());
     }
 }
