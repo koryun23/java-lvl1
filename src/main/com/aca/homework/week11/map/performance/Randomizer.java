@@ -6,7 +6,8 @@ public class Randomizer {
     private static final char[] chars = {'a', 'b', 'c', 'd', 'e'};
     private static final int size = 8;
 
-    private Randomizer(){}
+    private Randomizer() {
+    }
 
     public static String generate() {
         StringBuilder sb = new StringBuilder();

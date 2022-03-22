@@ -3,16 +3,19 @@ package com.aca.homework.week11.map.performance;
 import java.util.Map;
 
 public class MaxMinStatistics {
-    private Map<String, Integer> map;
+    private final Map<String, Integer> map;
 
     private MaxMinStatistics(Map<String, Integer> map) {
         this.map = map;
     }
 
+    public static MaxMinStatistics of(Map<String, Integer> map){
+        return new MaxMinStatistics(map);
+    }
     public String getMaxOccurredString() {
         int maxOccurredCount = getMaxOccurredCount();
-        for(String string : map.keySet()) {
-            if(map.get(string) == maxOccurredCount){
+        for (String string : map.keySet()) {
+            if (map.get(string) == maxOccurredCount) {
                 return string;
             }
         }
@@ -22,8 +25,8 @@ public class MaxMinStatistics {
 
     public String getMinOccurredString() {
         int minOccurredCount = getMinOccurredCount();
-        for(String string : map.keySet()){
-            if(map.get(string) == minOccurredCount){
+        for (String string : map.keySet()) {
+            if (map.get(string) == minOccurredCount) {
                 return string;
             }
         }
@@ -32,8 +35,8 @@ public class MaxMinStatistics {
 
     public int getMaxOccurredCount() {
         int maxOccurredCount = 0;
-        for(String string : map.keySet()){
-            if(map.get(string) > maxOccurredCount){
+        for (String string : map.keySet()) {
+            if (map.get(string) > maxOccurredCount) {
                 maxOccurredCount = map.get(string);
             }
         }
@@ -41,9 +44,9 @@ public class MaxMinStatistics {
     }
 
     public int getMinOccurredCount() {
-        int minOccurredCount = 0;
-        for(String string : map.keySet()) {
-            if(map.get(string) < minOccurredCount){
+        int minOccurredCount = Integer.MAX_VALUE;
+        for (String string : map.keySet()) {
+            if (map.get(string) < minOccurredCount) {
                 minOccurredCount = map.get(string);
             }
         }
@@ -51,7 +54,7 @@ public class MaxMinStatistics {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format(
                 "Max occurred string: %s(%o times)\nMin occurred string: %s(%o times)",
                 getMaxOccurredString(), getMaxOccurredCount(), getMinOccurredString(), getMinOccurredCount()

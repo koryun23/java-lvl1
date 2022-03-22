@@ -13,7 +13,7 @@ public class LowPerformanceMapValueCountCalculator implements MapValueCountCalcu
             String str = Randomizer.generate();
             modifyHashMap(str);
         }
-        return null;
+        return MaxMinStatistics.of(map);
     }
 
     public void modifyHashMap(String str) {
