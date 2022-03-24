@@ -2,9 +2,9 @@ GHELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**
+!**/src/uniqueCars/**
 !**/src/test/**
-src/main/resources/application-local.properties
+src/uniqueCars/resources/application-local.properties
 ### STS ###
 .apt_generated
 .classpath
