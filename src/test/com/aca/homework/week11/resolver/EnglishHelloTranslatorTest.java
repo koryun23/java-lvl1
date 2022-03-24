@@ -16,4 +16,10 @@ class EnglishHelloTranslatorTest {
     public void testResolveWithHelloMethodWhenLanguageIsEnglish() {
         Assertions.assertEquals("Hello", translator.hello());
     }
+
+    @Test
+    public void testType() {
+        Assertions.assertEquals(LanguageType.ENGLISH, translator.type());
+    }
+
 }

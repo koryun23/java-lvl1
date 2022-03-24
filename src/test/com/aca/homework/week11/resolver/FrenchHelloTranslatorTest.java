@@ -16,4 +16,9 @@ class FrenchHelloTranslatorTest {
     public void testResolveWithHelloMethodWhenLanguageIsFrench() {
         Assertions.assertEquals("Salut", translator.hello());
     }
+
+    @Test
+    public void testType() {
+        Assertions.assertEquals(LanguageType.FRENCH, translator.type());
+    }
 }

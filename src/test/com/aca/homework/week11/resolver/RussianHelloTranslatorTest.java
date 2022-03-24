@@ -16,4 +16,9 @@ class RussianHelloTranslatorTest {
     public void testResolveWithHelloMethodWhenLanguageIsRussian() {
         Assertions.assertEquals("Привет", translator.hello());
     }
+
+    @Test
+    public void testType() {
+        Assertions.assertEquals(LanguageType.RUSSIAN, translator.type());
+    }
 }
