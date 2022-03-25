@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WaitSecondsAndMillisTest {
-    private WaitingStrategy testSubject;
+    private ElapsedTimeStrategy testSubject;
 
     @BeforeEach
     public void setUp() {

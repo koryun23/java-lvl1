@@ -1,10 +1,10 @@
 package com.aca.homework.week11.stopwatch;
 
 public class StopWatch {
-    private final WaitingStrategy waitingStrategy;
+    private final ElapsedTimeStrategy elapsedTimeStrategy;
 
     public StopWatch(DisplayType type) {
-        waitingStrategy = type == DisplayType.SECONDS ? new WaitSeconds() : new WaitSecondsAndMillis();
+        elapsedTimeStrategy = type == DisplayType.SECONDS ? new WaitSeconds() : new WaitSecondsAndMillis();
     }
 
     public static void sleep(long millis) {
@@ -16,7 +16,7 @@ public class StopWatch {
         long startMillis = System.currentTimeMillis();
         while (true) {
             sleep(10);
-            waitingStrategy.print(startMillis);
+            elapsedTimeStrategy.print(startMillis);
         }
     }
 }

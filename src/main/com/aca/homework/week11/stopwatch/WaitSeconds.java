@@ -1,6 +1,6 @@
 package com.aca.homework.week11.stopwatch;
 
-public class WaitSeconds implements WaitingStrategy {
+public class WaitSeconds implements ElapsedTimeStrategy {
     @Override
     public void print(long startMillis) {
 
