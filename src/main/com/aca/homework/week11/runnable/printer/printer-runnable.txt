@@ -1,0 +1,6 @@
+Create a NumberPrinterRunnable class that implements a java.lang.Runnable interface.
+The run method should pause 100ms and print the provided single number.
+Create a list of NumberPrinterRunnables in createRunnables method to print numbers from 1 to 100.
+Create a runAll method that takes a list of runnables and executes them.
+Create a main method, invoke createRunnables and runAll methods in it.
+There is no need to create unit tests.
