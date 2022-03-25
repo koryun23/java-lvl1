@@ -1,0 +1,13 @@
+There is a pool to understand how many types of car models society drive.
+Create a program that asks different users to type his/her name, the car brand, and the model that he/she drives.
+The program should print the number of unique car brand/name pairs and each of them in a sorted manner.
+e.g
+please type your name, the brand, and model of your car
+John bmw 7
+Jack opel astra
+Mary bmw 7
+finish
+Number of unique brand and models: 2
+bmw 7
+opel astra
+note: note an askAndCalcualte method that asks a user for an input and returns a set of cars. Create a separate method to print the result. Write a unit test on askAndCalcualte method.
