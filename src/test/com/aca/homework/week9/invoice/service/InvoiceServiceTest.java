@@ -4,62 +4,49 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
+import java.util.List;
 
 class InvoiceServiceTest {
     private InvoiceService testSubject;
 
     @BeforeEach
-    public void setUp() throws FileNotFoundException {
-        testSubject = new InvoiceService();
-        testSubject.load("invoices.txt");
+    public void setUp() {
+        testSubject = new InvoiceService(new InvoiceReaderForTest(List.of(
+                "SAD2022-87456,544611032,SAD,MY-CODE",
+                "SAD2022-e4459,259880314,SAD,GUCE-CUSTOMS",
+                "MAN2022-4660e,206727,MAN,PCS-HDL-BT",
+                "SAD2022-a6c3e,35751674,SAD,GUCE-CUSTOMS",
+                "MAN2022-920fe,44190,MAN,PCS-HDL-BT"
+        )));
+        testSubject.load();
     }
 
     @Test
     public void testTotalAmountByTypeSAD() {
-        Assertions.assertEquals(2602704070L, testSubject.totalAmountByType(InvoiceType.SAD));
+        Assertions.assertEquals(840243020, testSubject.totalAmountByType(InvoiceType.SAD));
     }
 
     @Test
     public void testGetBySADType() {
-        Invoice[] filteredBySADType = testSubject.getByType(InvoiceType.SAD);
-        boolean allTypesAreSAD = true;
-        for (Invoice invoice : filteredBySADType) {
-            if (invoice.getType() != InvoiceType.SAD) {
-                allTypesAreSAD = false;
-            }
-        }
-        Assertions.assertTrue(allTypesAreSAD);
+        Assertions.assertEquals(List.of(
+                new Invoice("SAD2022-87456", 544611032, InvoiceType.SAD, "MY-CODE"),
+                new Invoice("SAD2022-e4459", 259880314, InvoiceType.SAD, "GUCE-CUSTOMS"),
+                new Invoice("SAD2022-a6c3e", 35751674, InvoiceType.SAD, "GUCE-CUSTOMS")
+        ), testSubject.getByType(InvoiceType.SAD));
     }
 
     @Test
     public void testGetByMANType() {
-        Invoice[] filteredByMANType = testSubject.getByType(InvoiceType.MAN);
-        boolean allTypesAreMAN = true;
-        for (Invoice invoice : filteredByMANType) {
-            if (invoice.getType() != InvoiceType.MAN) {
-                allTypesAreMAN = false;
-                break;
-            }
-        }
-        Assertions.assertTrue(allTypesAreMAN);
+        Assertions.assertEquals(List.of(
+                new Invoice("MAN2022-4660e", 206727, InvoiceType.MAN, "PCS-HDL-BT"),
+                new Invoice("MAN2022-920fe", 44190, InvoiceType.MAN, "PCS-HDL-BT")
+        ), testSubject.getByType(InvoiceType.MAN));
     }
 
     @Test
-    public void getBySADTypeAndCode() {
-        Invoice[] filteredByTypeAndCode = testSubject.getByTypeAndCode(InvoiceType.SAD, "MY-CODE");
-        boolean allTypesAreSAD = true;
-        boolean allCodesAreMyCode = true;
-        for (Invoice invoice : filteredByTypeAndCode) {
-            if (invoice.getType() != InvoiceType.SAD) {
-                allTypesAreSAD = false;
-                break;
-            }
-            if (!"MY-CODE".equals(invoice.getCode())) {
-                allCodesAreMyCode = false;
-                break;
-            }
-        }
-        Assertions.assertTrue(allCodesAreMyCode && allTypesAreSAD);
+    public void testGetBySADTypeAndCode() {
+        Assertions.assertEquals(List.of(
+                new Invoice("SAD2022-87456", 544611032, InvoiceType.SAD, "MY-CODE")
+        ), testSubject.getByTypeAndCode(InvoiceType.SAD, "MY-CODE"));
     }
 }

@@ -2,36 +2,30 @@ package com.aca.homework.week9.invoice.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
-public class InvoiceReader {
-    public Invoice[] read(String filename) throws FileNotFoundException {
-        Invoice[] invoices = new Invoice[countLinesOfFile(filename) - 1];
-        int index = 0;
-        Scanner scanner = new Scanner(new File("C:\\Users\\Koryun\\Desktop\\java-lvl1\\src\\main\\com\\aca\\homework\\week9\\invoice\\service\\" + filename));
-        scanner.nextLine(); // to omit the first line of the file
-        while (scanner.hasNextLine()) {
-            String nextLine = scanner.nextLine();
-            String[] arrayOfInvoiceItems = nextLine.split(",");
-            Invoice invoice = new Invoice(
-                    arrayOfInvoiceItems[0],
-                    Long.parseLong(arrayOfInvoiceItems[1]),
-                    InvoiceType.valueOf(arrayOfInvoiceItems[2]),
-                    arrayOfInvoiceItems[3]
-            );
-            invoices[index++] = invoice;
-        }
-        return invoices;
+public class InvoiceReader extends AbstractReader implements Reader<Invoice> {
+
+    private final String filePath;
+
+    public InvoiceReader(String filePath) {
+        this.filePath = filePath;
     }
 
-    private int countLinesOfFile(String filename) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("C:\\Users\\Koryun\\Desktop\\java-lvl1\\src\\main\\com\\aca\\homework\\week9\\invoice\\service\\" + filename));
-        int countOfLines = 0;
-        while (scanner.hasNextLine()) {
-            countOfLines++;
-            scanner.nextLine();
+    public List<Invoice> read() {
+        List<Invoice> invoices = new LinkedList<>();
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new File(filePath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("File with path " + filePath + " was not found");
         }
-        return countOfLines;
+        scanner.nextLine();
+        while (scanner.hasNext()) {
+            invoices.add(fetchInvoiceFromLine(scanner.nextLine()));
+        }
+
+        return invoices;
     }
 }

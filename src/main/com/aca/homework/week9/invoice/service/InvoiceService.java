@@ -2,43 +2,51 @@ package com.aca.homework.week9.invoice.service;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class InvoiceService {
-    private Invoice[] invoices;
 
-    public void load(String filename) throws FileNotFoundException {
-        invoices = new InvoiceReader().read(filename);
+    private final Reader<Invoice> invoiceReader;
+    private List<Invoice> invoices;
+
+    public InvoiceService(Reader<Invoice> invoiceReader) {
+        this.invoiceReader = invoiceReader;
+    }
+
+    public void load() {
+        invoices = invoiceReader.read();
     }
 
     public long totalAmountByType(InvoiceType type) {
-        long totalAmount = 0;
-        for (Invoice invoice : invoices) {
-            if (invoice.getType().equals(type)) {
-                totalAmount += invoice.getAmount();
-            }
-        }
-        return totalAmount;
-    }
-
-    public Invoice[] getByType(InvoiceType type) {
-        Invoice[] invoicesFilteredByType = new Invoice[invoices.length];
-        int index = 0;
+        long sum = 0;
         for (Invoice invoice : invoices) {
             if (invoice.getType() == type) {
-                invoicesFilteredByType[index++] = invoice;
+                sum += invoice.getAmount();
             }
         }
-        return Arrays.copyOf(invoicesFilteredByType, index);
+
+        return sum;
     }
 
-    public Invoice[] getByTypeAndCode(InvoiceType type, String code) {
-        Invoice[] invoicesFilteredByTypeAndCode = new Invoice[invoices.length];
-        int index = 0;
-        for (Invoice invoice : invoices) {
-            if (invoice.getType() == type && invoice.getCode().equals(code)) {
-                invoicesFilteredByTypeAndCode[index++] = invoice;
+    public List<Invoice> getByType(InvoiceType type) {
+        List<Invoice> invoices = new LinkedList<>();
+        for (Invoice invoice : this.invoices) {
+            if (invoice.getType() == type) {
+                invoices.add(invoice);
             }
         }
-        return Arrays.copyOf(invoicesFilteredByTypeAndCode, index);
+        return invoices;
     }
+
+    public List<Invoice> getByTypeAndCode(InvoiceType type, String code) {
+        List<Invoice> invoices = new LinkedList<>();
+        for (Invoice invoice : this.invoices) {
+            if (invoice.getType() == type && invoice.getCode().equals(code)) {
+                invoices.add(invoice);
+            }
+        }
+        return invoices;
+    }
+
 }
