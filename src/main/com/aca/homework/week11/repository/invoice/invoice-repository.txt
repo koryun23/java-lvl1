@@ -1,0 +1,28 @@
+Create an Invoice class that has the following fields:
+
+String id
+double amountToPay
+InvoiceStatus status
+
+InvoiceStatus has the following values: PAID, UNPAID
+
+Create an InvoiceRepository interface that has the following methods:
+
+Invoice save(Invoice invoice)   //should be create-or-update by id
+@Nullable
+Invoice findById(String id)
+List<Invoice> findAll()
+void delete(Invoice invoice)
+
+
+Create a HashSetInvoiceRepository implementation, HashSetInvoiceRepositoryUnitTest and the following test methods:
+
+testSaveWhenSetIsEmpty()
+testSaveWhenExistsWithSameIdButNewFieldsAreDifferent()
+testSave2Times()
+testFindByIdWhenNotFound()
+testFindByIdWhenFound()
+testFindAllWhenEmpty()
+testFindAllWhenIsEmpty()
+testDeleteWhenEmpty()
+testDeleteWhenExist()
