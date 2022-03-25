@@ -7,6 +7,10 @@ public class Singer {
     private String lastName;
 
     public Singer(String firstName, String lastName) {
+        if(firstName == null)
+            throw new IllegalArgumentException("Provided first name is null.");
+        if(lastName == null)
+            throw new IllegalArgumentException("Provided lastname is null.");
         this.firstName = firstName;
         this.lastName = lastName;
     }
