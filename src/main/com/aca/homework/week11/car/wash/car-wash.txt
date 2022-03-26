@@ -1,0 +1,15 @@
+The Car Wash service named JILLY’S, has a promotion: every 5th wash is free.
+Create a CarWash class that has a double wash(String plateNumber) method. The method returns a wash price.
+Create a CarReporitory interface that has the following methods:
+void save(Object data)
+Object load()
+Create 2 CarRepository implementations. One saves a data object in a file using ObjectOutputStream, and the second for unit testing purposes.
+Create a CarWashUnitTest class and write the following tests:
+testWash1Time()
+testWash5Times()
+testWash6Times()
+testWash10Times()
+testGetName()
+note: every time when a CarWash object is created, the data should be loaded for the .txt file for that specific car wash
+(JILLY’S data should be loaded from JILLY’S.txt file, SONAX data should be NextCarfrom NextCar.txt, and so on)
+and every time when a car been washed, the data should be saved in .txt file.
