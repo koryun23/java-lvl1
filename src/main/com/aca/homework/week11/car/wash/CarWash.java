@@ -12,7 +12,7 @@ public class CarWash implements CarRepository {
 
     public CarWash(String name) {
         this.name = name;
-        filePath = "src\\main\\com\\aca\\homework\\week11\\car\\wash\\files\\" + name + ".txt";
+        filePath = "src\\main\\com\\aca\\homework\\week11\\car\\wash\\" + name + ".txt";
         timesWashedPerCar = isFileEmpty() ? new HashMap<>() : (HashMap<String, Integer>) load();
     }
 
