@@ -2,7 +2,7 @@ package com.aca.homework.week11.unique.cars;
 
 import java.util.Objects;
 
-public class Car implements Comparable<Car>{
+public class Car {
 
     private final String brand;
     private final String model;
@@ -36,15 +36,5 @@ public class Car implements Comparable<Car>{
     @Override
     public int hashCode() {
         return Objects.hash(brand, model);
-    }
-
-
-    @Override
-    public int compareTo(Car o) {
-        int result = this.brand.compareTo(o.getBrand());
-        if(result == 0){
-            return this.model.compareTo(o.getModel());
-        }
-        return result;
     }
 }

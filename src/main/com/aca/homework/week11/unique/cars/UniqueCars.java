@@ -1,9 +1,6 @@
 package com.aca.homework.week11.unique.cars;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class UniqueCars {
@@ -15,7 +12,16 @@ public class UniqueCars {
     }
 
     public Set<Car> askAndCalculate() {
-        Set<Car> cars = new HashSet<>();
+        Set<Car> cars = new TreeSet<>(new Comparator<Car>() {
+            @Override
+            public int compare(Car o1, Car o2) {
+                int result = o1.getBrand().compareTo(o2.getBrand());
+                if(result == 0){
+                    return o1.getModel().compareTo(o2.getModel());
+                }
+                return result;
+            }
+        });
         String input;
         while (true) {
             System.out.println("Please type your name, the brand, and model of your car(or type finish to terminate the program).");
@@ -35,10 +41,21 @@ public class UniqueCars {
         return cars;
     }
 
-    public void printResult(Set<Car> cars) {
-        new Result(cars).printAllData();
+    public void printAllData(Set<Car> cars) {
+        System.out.println("Number of unique brand and models: " + numberOfUniqueCars(cars) + "\n" + allCarsToString(cars));
     }
 
+    private static String allCarsToString(Set<Car> cars) {
+        StringBuilder sb = new StringBuilder();
+        for(Car car : cars) {
+            sb.append(car);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    private static int numberOfUniqueCars(Set<Car> cars){
+        return cars.size();
+    }
     private static boolean isEnd(String input) {
         return "finish".equals(input);
     }

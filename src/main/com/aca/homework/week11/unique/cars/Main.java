@@ -14,6 +14,6 @@ public class Main {
         });
 
         Set<Car> cars = uniqueCars.askAndCalculate();
-        uniqueCars.printResult(cars);
+        uniqueCars.printAllData(cars);
     }
 }
