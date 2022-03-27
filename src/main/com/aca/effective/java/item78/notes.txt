@@ -1,0 +1,18 @@
+Without synchronization, one thread’s changes might not be visible to other threads. Not only does
+synchronization prevent threads from observing an object in an inconsistent
+state, but it ensures that each thread entering a synchronized method or block
+sees the effects of all previous modifications that were guarded by the same
+lock.
+
+-----------------------------------------------------------------------------------------------
+
+Synchronization is required for reliable communication between threads as well as for
+mutual exclusion. This is due to a part of the language specification known
+as the memory model, which specifies when and how changes made by one
+thread become visible to others
+
+-----------------------------------------------------------------------------------------------
+
+If you need only inter-thread communication, and not mutual exclusion, the volatile
+modifier is an acceptable form of synchronization, but it can be tricky to use
+correctly.
