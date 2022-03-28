@@ -1,14 +1,9 @@
 package com.aca.homework.week11.stopwatch;
 
-public class WaitSecondsAndMillis implements ElapsedTimeStrategy {
+public class FormatSecondsAndMillis implements FormatTimeStrategy {
 
     @Override
-    public void print(long startMillis) {
-        System.out.println("Elapsed time: " + getElapsedTime(startMillis));
-    }
-
-    @Override
-    public String getElapsedTime(long startMillis) {
+    public String formatElapsedTime(long startMillis) {
         long elapsedTimeInMillis = System.currentTimeMillis() - startMillis;
         long seconds = elapsedTimeInMillis / 1000;
         long millis = elapsedTimeInMillis - seconds * 1000;

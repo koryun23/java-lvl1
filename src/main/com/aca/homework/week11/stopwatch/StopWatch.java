@@ -1,22 +1,19 @@
 package com.aca.homework.week11.stopwatch;
 
 public class StopWatch {
-    private final ElapsedTimeStrategy elapsedTimeStrategy;
+    private final FormatTimeStrategy formatTimeStrategy;
+    private final PrintTimeStrategy printTimeStrategy;
 
     public StopWatch(DisplayType type) {
-        elapsedTimeStrategy = type == DisplayType.SECONDS ? new WaitSeconds() : new WaitSecondsAndMillis();
+        formatTimeStrategy = type.getFormatTimeStrategy();
+        printTimeStrategy = type.getPrintTimeStrategy();
     }
 
-    public static void sleep(long millis) {
-        long startMillis = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startMillis < millis) ;
-    }
-
-    public void start() {
+    public void start() throws InterruptedException {
         long startMillis = System.currentTimeMillis();
         while (true) {
-            sleep(10);
-            elapsedTimeStrategy.print(startMillis);
+            Thread.sleep(10);
+            printTimeStrategy.print(startMillis, formatTimeStrategy.formatElapsedTime(startMillis));
         }
     }
 }

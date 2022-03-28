@@ -4,31 +4,31 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WaitSecondsTest {
-    private ElapsedTimeStrategy testSubject;
+class FormatSecondsTest {
+    private FormatTimeStrategy testSubject;
 
     @BeforeEach
     public void setUp() {
-        testSubject = new WaitSeconds();
+        testSubject = new FormatSeconds();
     }
 
     @Test
     public void testWaitSecondsAndMillisElapsedTimeWhenIs0() {
-        String elapsedTime = testSubject.getElapsedTime(System.currentTimeMillis());
+        String elapsedTime = testSubject.formatElapsedTime(System.currentTimeMillis());
         System.out.println(elapsedTime);
         Assertions.assertEquals("00", elapsedTime);
     }
 
     @Test
     public void testWaitSecondsAndMillisElapsedTimeWhenIsGT0() {
-        String elapsedTime = testSubject.getElapsedTime(System.currentTimeMillis() - 5);
+        String elapsedTime = testSubject.formatElapsedTime(System.currentTimeMillis() - 5);
         System.out.println(elapsedTime);
         Assertions.assertEquals("00", elapsedTime);
     }
 
     @Test
     public void testWaitSecondsAndMillisElapsedTimeWhenisGT1Second() {
-        String elapsedTime = testSubject.getElapsedTime(System.currentTimeMillis() - 1001);
+        String elapsedTime = testSubject.formatElapsedTime(System.currentTimeMillis() - 1001);
         System.out.println(elapsedTime);
         Assertions.assertEquals("01", elapsedTime);
     }
