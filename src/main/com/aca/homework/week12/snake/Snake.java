@@ -1,8 +1,5 @@
 package com.aca.homework.week12.snake;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Snake { // Snake is basically a linked list
 
     private SnakeHead head;

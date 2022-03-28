@@ -19,6 +19,15 @@ public class Board {
 
     }
 
+    public Snake getSnake(){
+        return snake;
+    }
+
+    public Apple getApple(){
+        return apple;
+    }
+
+
     public void setApple() {
         cells[apple.getRow()][apple.getCol()] = apple;
     }
