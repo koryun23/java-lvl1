@@ -1,0 +1,11 @@
+id, name, price, purchased_username
+
+1,mechanical keyboard,45000,meantfirethorn
+2,kafka book,25000,shawlinspire
+3,swarovski bracelet,20000,meantfirethorn
+4,queen crown,19000,lardbear
+5,michael kors watch,23000,shawlinspire
+6,hand warmer,15000,impossibleimmediate
+7,long usb,5000,burberryspectral
+8,wireless charger,6000,meantfirethorn
+9,picnic mat,3000,shawlinspire
