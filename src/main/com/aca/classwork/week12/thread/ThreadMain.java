@@ -4,15 +4,20 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class ThreadMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         Executor executor = Executors.newFixedThreadPool(16);
 
         System.out.println(System.currentTimeMillis());
+
         Thread[] threads = new Thread[16];
         for(int i = 0; i < 100; i++) {
-            for(Thread thread : threads) {
-                thread.start();
+            for(int j = 0; j < 16; j++) {
+                threads[j] = new Thread(new MyRunnable(i));
+                threads[j].start();
+            }
+            for(int j = 0; j < 16; j++) {
+                threads[j].join();
             }
         }
     }
