@@ -16,8 +16,6 @@ public class HashSetInvoiceRepository implements InvoiceRepository {
     public Invoice save(Invoice invoice) {
         if (invoice == null)
             throw new NullInvoiceException();
-        if(invoice.getId() == null)
-            throw new NullIdException();
         invoices.add(invoice);
         return invoice;
     }
