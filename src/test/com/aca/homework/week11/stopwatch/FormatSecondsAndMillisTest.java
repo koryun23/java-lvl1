@@ -13,7 +13,7 @@ class FormatSecondsAndMillisTest {
     }
 
     @Test
-    public void testWaitSecondsAndMillisElapsedTimeWhenIs0() {
+    public void testFormatSecondsAndMillisElapsedTimeWhenIs0() {
         String elapsedTime = testSubject.formatElapsedTime(System.currentTimeMillis());
         System.out.println(elapsedTime);
         Assertions.assertEquals(6, elapsedTime.length());
@@ -21,7 +21,7 @@ class FormatSecondsAndMillisTest {
     }
 
     @Test
-    public void testWaitSecondsAndMillisElapsedTimeWhenIsGT0() {
+    public void testFormatSecondsAndMillisElapsedTimeWhenIsGT0() {
         String elapsedTime = testSubject.formatElapsedTime(System.currentTimeMillis() - 5);
         System.out.println(elapsedTime);
         Assertions.assertEquals(6, elapsedTime.length());
