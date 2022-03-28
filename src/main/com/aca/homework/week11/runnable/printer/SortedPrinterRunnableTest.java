@@ -2,7 +2,7 @@ package com.aca.homework.week11.runnable.printer;
 
 import java.util.*;
 
-public class Main {
+public class SortedPrinterRunnableTest {
     public static void main(String[] args) {
         Set<SortedNumberPrinterRunnable> runnables = createRunnables();
         runAll(new ArrayList<>(runnables));
