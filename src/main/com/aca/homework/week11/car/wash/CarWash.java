@@ -29,7 +29,7 @@ public class CarWash implements CarRepository {
     public void save(Object data) {
         ObjectOutputStream objectOutputStream = dbWriter();
         try {
-            objectOutputStream.writeObject(data);
+            objectOutputStream.writeObject(new CarStats(timesWashedPerCar));
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Could not save object " + data + " to the file with path " + filePath);
@@ -40,7 +40,7 @@ public class CarWash implements CarRepository {
     public Object load() {
         ObjectInputStream objectInputStream = dbReader();
         try {
-            return objectInputStream.readObject();
+            return ((CarStats) objectInputStream.readObject()).getMap();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException("Could not read from file with path " + filePath);
