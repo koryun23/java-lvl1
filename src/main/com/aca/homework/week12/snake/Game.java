@@ -19,21 +19,22 @@ public class Game {
     public void start() {
         System.out.println("The game starts!");
         while(isRunning) {
+            board.updateBoard();
+            board.print();
             String move = getMove();
-            if(!isValidMove(move)) {
+            if(!Direction.isValidMove(move)) {
                 System.out.println("The move must be one of these options: A D W S");
                 continue;
             }
-
+            Direction direction = Direction.of(move);
+            snake.move(direction.getDeltaRowAndCol()[0], direction.getDeltaRowAndCol()[1]);
+            System.out.println(snake.snakeHead().getRow());
+            System.out.println(snake.snakeHead().getCol());
         }
     }
 
     public String getMove(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-    }
-
-    public boolean isValidMove(String move) {
-        return new HashSet<>(List.of("a", "d", "w", "d")).contains(move);
     }
 }

@@ -1,5 +1,7 @@
 package com.aca.homework.week12.snake;
 
+import java.util.List;
+
 public class Board {
     private Cell[][] cells;
     private Snake snake;
@@ -14,9 +16,8 @@ public class Board {
         this.snake = snake;
         cells = new Cell[rowCount][colCount];
         setAllEmpty();
-        setApple();
-        setSnake();
-
+        setApple(this.apple);
+        setSnake(this.snake);
     }
 
     public Snake getSnake(){
@@ -28,7 +29,8 @@ public class Board {
     }
 
 
-    public void setApple() {
+    public void setApple(Apple apple) {
+        this.apple = apple;
         cells[apple.getRow()][apple.getCol()] = apple;
     }
 
@@ -40,7 +42,8 @@ public class Board {
         }
     }
 
-    public void setSnake(){
+    public void setSnake(Snake snake){
+        this.snake = snake;
         SnakeHead head = snake.snakeHead();
         cells[head.getRow()][head.getCol()] = new SnakeHead(head.getRow(), head.getCol());
         while(head.next() != null) {
@@ -57,5 +60,25 @@ public class Board {
             System.out.println();
         }
     }
+
+    public void updateBoard() {
+        setAllEmpty();
+        updateAppleOnBoard();
+        updateSnakeOnBoard();
+    }
+
+    public void updateSnakeOnBoard() {
+        List<SnakeBodyCell> coords = snake.snakeCoords();
+        for (SnakeBodyCell bodyCell : coords) {
+            cells[bodyCell.getRow()][bodyCell.getCol()].setState(CellState.SNAKE_BODY);
+        }
+        cells[coords.get(0).getRow()][coords.get(0).getCol()].setState(CellState.SNAKE_HEAD);
+    }
+
+    public void updateAppleOnBoard(){
+        cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
+    }
+
+
 
 }
