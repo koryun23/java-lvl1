@@ -32,14 +32,12 @@ public class Board {
 
     public void setApple() {
         cells[apple.getRow()][apple.getCol()] = apple;
-        cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
     }
 
     public void setAllEmpty() {
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < colCount; j++) {
                 cells[i][j] = new EmptyCell(i, j);
-                //cells[i][j].setState(CellState.EMPTY);
             }
         }
     }
@@ -47,18 +45,15 @@ public class Board {
     public void setSnake() {
         SnakeHead head = snake.snakeHead();
         cells[head.getRow()][head.getCol()] = new SnakeHead(head.getRow(), head.getCol());
-        cells[head.getRow()][head.getCol()].setState(CellState.SNAKE_HEAD);
         while (head.next() != null) {
             SnakeBodyCell nextBodyCell = head.next();
             cells[nextBodyCell.getRow()][nextBodyCell.getCol()] = nextBodyCell;
-            cells[nextBodyCell.getRow()][nextBodyCell.getCol()].setState(CellState.SNAKE_BODY);
         }
     }
 
     public void print() {
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < colCount; j++) {
-                //System.out.println(cells[i][j].getState());
                 System.out.print(cells[i][j].toString() + " ");
             }
             System.out.println();
@@ -74,13 +69,13 @@ public class Board {
     public void updateSnakeOnBoard() {
         List<SnakeBodyCell> coords = snake.snakeCoords();
         for (SnakeBodyCell bodyCell : coords) {
-            cells[bodyCell.getRow()][bodyCell.getCol()].setState(CellState.SNAKE_BODY);
+            cells[bodyCell.getRow()][bodyCell.getCol()] = bodyCell;
         }
-        cells[coords.get(0).getRow()][coords.get(0).getCol()].setState(CellState.SNAKE_HEAD);
+        cells[coords.get(0).getRow()][coords.get(0).getCol()] = coords.get(0);
     }
 
     public void updateAppleOnBoard() {
-        cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
+        cells[apple.getRow()][apple.getCol()] = apple;
     }
 
     public int getRowCount() {

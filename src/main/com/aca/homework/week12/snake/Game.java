@@ -10,7 +10,7 @@ public class Game {
     private final Snake snake;
     private final Apple apple;
     private final boolean isRunning = true;
-    private Listener listener;
+    private final Listener listener;
 
     public Game(Board board) {
         this.board = board;
@@ -30,14 +30,17 @@ public class Game {
                 continue;
             }
             Direction direction = Direction.of(move);
+
             if(listener.changeDetected()) {
                 snake.extend(direction.getDeltaRowAndCol()[0], direction.getDeltaRowAndCol()[1]);
             }else {
                 snake.move(direction.getDeltaRowAndCol()[0], direction.getDeltaRowAndCol()[1]);
             }
+
             if (snakeCollidedApple()) {
                 apple.generate(board);
             }
+
         }
     }
 
