@@ -84,33 +84,5 @@ class SimpleCalculatorTest {
         Assertions.assertEquals("8", testSubject.askAndCalculate());
     }
 
-    @Test
-    public void testIsDigitForDigitsFrom0To9(){
-        testSubject = new SimpleCalculator(new StringSupplier() {
-            @Override
-            public String get() {
-                return "4+2";
-            }
-        });
-        Assertions.assertTrue(testSubject.isDigit('0'));
-        Assertions.assertTrue(testSubject.isDigit('1'));
-        Assertions.assertTrue(testSubject.isDigit('2'));
-        Assertions.assertTrue(testSubject.isDigit('3'));
-        Assertions.assertTrue(testSubject.isDigit('4'));
-        Assertions.assertTrue(testSubject.isDigit('5'));
-        Assertions.assertTrue(testSubject.isDigit('6'));
-        Assertions.assertTrue(testSubject.isDigit('7'));
-        Assertions.assertTrue(testSubject.isDigit('8'));
-        Assertions.assertTrue(testSubject.isDigit('9'));
-    }
-    @Test
-    public void testIsDigitForNonDigitCharacters(){
-        testSubject = new SimpleCalculator(new StringSupplier() {
-            @Override
-            public String get() {
-                return "4+2";
-            }
-        });
-        Assertions.assertFalse(testSubject.isDigit('='));
-    }
+
 }

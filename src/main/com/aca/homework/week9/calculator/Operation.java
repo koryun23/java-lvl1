@@ -39,5 +39,10 @@ public enum Operation {
         return map.containsKey(ch);
     }
 
+
+    public static boolean isDigit(char ch) {
+        return ch - 48 <= 9;
+    }
     public abstract String performOperation(int num1, int num2);
+
 }

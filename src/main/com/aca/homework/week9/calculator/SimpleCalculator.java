@@ -1,6 +1,7 @@
 package com.aca.homework.week9.calculator;
 
 public class SimpleCalculator {
+
     private final StringSupplier supplier;
 
     public SimpleCalculator(StringSupplier supplier) {
@@ -23,12 +24,10 @@ public class SimpleCalculator {
     }
 
     public boolean isValidExpression(String expression) {
-        return expression.length() == 3 && isDigit(expression.charAt(0)) && isDigit(expression.charAt(2)) && Operation.isOperation(expression.charAt(1));
-    }
-
-
-    public boolean isDigit(char ch) {
-        return ch - 48 <= 9;
+        return expression.length() == 3 &&
+                Operation.isDigit(expression.charAt(0)) &&
+                Operation.isDigit(expression.charAt(2)) &&
+                Operation.isOperation(expression.charAt(1));
     }
 
     public int getDigitFromChar(char ch) {

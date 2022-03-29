@@ -25,6 +25,25 @@ class OperationTest {
     }
 
     @Test
+    public void testIsDigitForValidDigitsFrom0To9(){
+        Assertions.assertTrue(Operation.isDigit('0'));
+        Assertions.assertTrue(Operation.isDigit('1'));
+        Assertions.assertTrue(Operation.isDigit('2'));
+        Assertions.assertTrue(Operation.isDigit('3'));
+        Assertions.assertTrue(Operation.isDigit('4'));
+        Assertions.assertTrue(Operation.isDigit('5'));
+        Assertions.assertTrue(Operation.isDigit('6'));
+        Assertions.assertTrue(Operation.isDigit('7'));
+        Assertions.assertTrue(Operation.isDigit('8'));
+        Assertions.assertTrue(Operation.isDigit('9'));
+    }
+
+    @Test
+    public void testIsDigitForNonDigitCharacters(){
+        Assertions.assertFalse(Operation.isDigit('='));
+    }
+
+    @Test
     public void testIsOperationWhenOperationIsAddition(){
         Assertions.assertTrue(Operation.isOperation('+'));
     }
