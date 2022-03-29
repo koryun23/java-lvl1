@@ -1,6 +1,6 @@
 package com.aca.homework.week12.snake;
 
-public class SnakeBodyCell extends Cell{
+public class SnakeBodyCell extends Cell {
 
     private SnakeBodyCell next;
 

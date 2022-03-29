@@ -16,6 +16,7 @@ public class Apple extends Cell{
 
     public void generate(Board board){
         List<Cell> emptyCells = board.emptyCells();
+        System.out.println(emptyCells.size());
         Random generator = new Random();
         Cell cell = emptyCells.get(generator.nextInt(emptyCells.size()));
         setRow(cell.getRow());

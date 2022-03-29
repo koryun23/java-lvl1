@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Board {
     private final Cell[][] cells;
-    private Snake snake;
-    private Apple apple;
-    private int rowCount;
-    private int colCount;
+    private final Snake snake;
+    private final Apple apple;
+    private final int rowCount;
+    private final int colCount;
 
     public Board(int rowCount, int colCount, Apple apple, Snake snake) {
         this.rowCount = rowCount;
@@ -21,39 +21,44 @@ public class Board {
         setSnake();
     }
 
-    public Snake getSnake(){
+    public Snake getSnake() {
         return snake;
     }
 
-    public Apple getApple(){
+    public Apple getApple() {
         return apple;
     }
 
 
     public void setApple() {
         cells[apple.getRow()][apple.getCol()] = apple;
+        cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
     }
 
-    public void setAllEmpty(){
-        for(int i = 0; i < rowCount; i++) {
-            for(int j = 0; j < colCount; j++) {
+    public void setAllEmpty() {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
                 cells[i][j] = new EmptyCell(i, j);
+                //cells[i][j].setState(CellState.EMPTY);
             }
         }
     }
 
-    public void setSnake(){
+    public void setSnake() {
         SnakeHead head = snake.snakeHead();
         cells[head.getRow()][head.getCol()] = new SnakeHead(head.getRow(), head.getCol());
-        while(head.next() != null) {
+        cells[head.getRow()][head.getCol()].setState(CellState.SNAKE_HEAD);
+        while (head.next() != null) {
             SnakeBodyCell nextBodyCell = head.next();
             cells[nextBodyCell.getRow()][nextBodyCell.getCol()] = nextBodyCell;
+            cells[nextBodyCell.getRow()][nextBodyCell.getCol()].setState(CellState.SNAKE_BODY);
         }
     }
 
-    public void print(){
-        for(int i = 0; i < rowCount; i++) {
-            for(int j = 0; j < colCount; j++) {
+    public void print() {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                //System.out.println(cells[i][j].getState());
                 System.out.print(cells[i][j].toString() + " ");
             }
             System.out.println();
@@ -74,27 +79,27 @@ public class Board {
         cells[coords.get(0).getRow()][coords.get(0).getCol()].setState(CellState.SNAKE_HEAD);
     }
 
-    public void updateAppleOnBoard(){
+    public void updateAppleOnBoard() {
         cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
     }
 
-    public int getRowCount(){
+    public int getRowCount() {
         return rowCount;
     }
 
-    public int getColCount(){
+    public int getColCount() {
         return colCount;
     }
 
-    public Cell[][] getCells(){
+    public Cell[][] getCells() {
         return cells.clone();
     }
 
-    public List<Cell> emptyCells(){
+    public List<Cell> emptyCells() {
         List<Cell> emptyCells = new LinkedList<>();
-        for(int i = 0; i < rowCount; i++) {
-            for(int j = 0; j < colCount; j++) {
-                if(cells[i][j].getState() == CellState.EMPTY) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                if (cells[i][j].getState() == CellState.EMPTY) {
                     emptyCells.add(cells[i][j]);
                 }
             }
