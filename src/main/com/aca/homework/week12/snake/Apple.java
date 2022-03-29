@@ -1,5 +1,6 @@
 package com.aca.homework.week12.snake;
 
+import java.util.List;
 import java.util.Random;
 
 public class Apple extends Cell{
@@ -14,13 +15,11 @@ public class Apple extends Cell{
     }
 
     public void generate(Board board){
+        List<Cell> emptyCells = board.emptyCells();
         Random generator = new Random();
-        int newRow, newCol;
-        do {
-            newRow = generator.nextInt(board.getRowCount());
-            newCol = generator.nextInt(board.getColCount());
-        } while(board.getCells()[newRow][newCol].getState() != CellState.EMPTY);
-        setRow(newRow);
-        setCol(newCol);
+        Cell cell = emptyCells.get(generator.nextInt(emptyCells.size()));
+        setRow(cell.getRow());
+        setCol(cell.getCol());
+        cell.setState(CellState.APPLE);
     }
 }

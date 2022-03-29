@@ -1,5 +1,6 @@
 package com.aca.homework.week12.snake;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Board {
@@ -89,6 +90,15 @@ public class Board {
         return cells.clone();
     }
 
-
-
+    public List<Cell> emptyCells(){
+        List<Cell> emptyCells = new LinkedList<>();
+        for(int i = 0; i < rowCount; i++) {
+            for(int j = 0; j < colCount; j++) {
+                if(cells[i][j].getState() == CellState.EMPTY) {
+                    emptyCells.add(cells[i][j]);
+                }
+            }
+        }
+        return emptyCells;
+    }
 }
