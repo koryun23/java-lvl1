@@ -3,7 +3,7 @@ package com.aca.homework.week12.snake;
 import java.util.List;
 
 public class Board {
-    private Cell[][] cells;
+    private final Cell[][] cells;
     private Snake snake;
     private Apple apple;
     private int rowCount;
@@ -16,8 +16,8 @@ public class Board {
         this.snake = snake;
         cells = new Cell[rowCount][colCount];
         setAllEmpty();
-        setApple(this.apple);
-        setSnake(this.snake);
+        setApple();
+        setSnake();
     }
 
     public Snake getSnake(){
@@ -29,8 +29,7 @@ public class Board {
     }
 
 
-    public void setApple(Apple apple) {
-        this.apple = apple;
+    public void setApple() {
         cells[apple.getRow()][apple.getCol()] = apple;
     }
 
@@ -42,8 +41,7 @@ public class Board {
         }
     }
 
-    public void setSnake(Snake snake){
-        this.snake = snake;
+    public void setSnake(){
         SnakeHead head = snake.snakeHead();
         cells[head.getRow()][head.getCol()] = new SnakeHead(head.getRow(), head.getCol());
         while(head.next() != null) {
@@ -77,6 +75,18 @@ public class Board {
 
     public void updateAppleOnBoard(){
         cells[apple.getRow()][apple.getCol()].setState(CellState.APPLE);
+    }
+
+    public int getRowCount(){
+        return rowCount;
+    }
+
+    public int getColCount(){
+        return colCount;
+    }
+
+    public Cell[][] getCells(){
+        return cells.clone();
     }
 
 

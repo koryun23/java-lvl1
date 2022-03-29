@@ -12,10 +12,10 @@ public class Snake { // Snake is basically a linked list
         head = new SnakeHead(headRow, headCol);
     }
 
-    public void extend(int newHeadRow, int newHeadCol){
+    public void extend(int deltaHeadRow, int deltaHeadCol){
         SnakeBodyCell newBodyCell = new SnakeBodyCell(head.getRow(), head.getCol(), CellState.SNAKE_BODY);
-        head.setRow(newHeadRow);
-        head.setCol(newHeadCol);
+        head.setRow(head.getRow() + deltaHeadRow);
+        head.setCol(head.getCol() + deltaHeadCol);
         newBodyCell.setNext(head.next());
         head.setNext(newBodyCell);
         size++;
