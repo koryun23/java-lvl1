@@ -86,10 +86,6 @@ public class Board {
         return colCount;
     }
 
-    public Cell[][] getCells() {
-        return cells.clone();
-    }
-
     public List<Cell> emptyCells() {
         List<Cell> emptyCells = new LinkedList<>();
         for (int i = 0; i < rowCount; i++) {

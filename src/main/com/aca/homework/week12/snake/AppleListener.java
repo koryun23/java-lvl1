@@ -14,7 +14,7 @@ public class AppleListener implements Listener {
 
     @Override
     public boolean changeDetected() {
-        if (apple.getRow() != startingAppleRow || apple.getCol() != startingAppleCol) {
+        if (apple.equals(new Apple(startingAppleRow, startingAppleCol))) {
             startingAppleCol = apple.getCol();
             startingAppleRow = apple.getRow();
             System.out.println("change detected");
