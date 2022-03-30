@@ -9,8 +9,8 @@ public class Game {
     private final Board board;
     private final Snake snake;
     private final Apple apple;
-    private final boolean isRunning = true;
     private final Listener listener;
+    private boolean isRunning = true;
 
     public Game(Board board) {
         this.board = board;
@@ -31,16 +31,18 @@ public class Game {
             }
             Direction direction = Direction.of(move);
 
-            if(listener.changeDetected()) {
+            if (listener.changeDetected()) {
                 snake.extend(direction.getDeltaRowAndCol()[0], direction.getDeltaRowAndCol()[1]);
-            }else {
+            } else {
                 snake.move(direction.getDeltaRowAndCol()[0], direction.getDeltaRowAndCol()[1]);
             }
 
-            if (snakeCollidedApple()) {
+            if (snake.snakeCollidedApple(apple)) {
                 apple.generate(board);
+            } else if (snake.headOutOfBounds(board) || snake.snakeHeadCollidedWithBody()) {
+                System.out.println("You lost.");
+                isRunning = false;
             }
-
         }
     }
 
@@ -49,8 +51,5 @@ public class Game {
         return scanner.nextLine();
     }
 
-    public boolean snakeCollidedApple() {
-        SnakeHead head = snake.snakeHead();
-        return head.getRow() == apple.getRow() && head.getCol() == apple.getCol();
-    }
+
 }

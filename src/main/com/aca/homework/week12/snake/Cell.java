@@ -1,5 +1,7 @@
 package com.aca.homework.week12.snake;
 
+import java.util.Objects;
+
 public class Cell {
     private int row;
     private int col;
@@ -38,5 +40,18 @@ public class Cell {
     @Override
     public String toString(){
         return state.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cell)) return false;
+        Cell cell = (Cell) o;
+        return row == cell.row && col == cell.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col);
     }
 }

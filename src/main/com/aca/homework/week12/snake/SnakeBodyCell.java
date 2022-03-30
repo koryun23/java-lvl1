@@ -1,5 +1,7 @@
 package com.aca.homework.week12.snake;
 
+import java.util.Objects;
+
 public class SnakeBodyCell extends Cell {
 
     private SnakeBodyCell next;
