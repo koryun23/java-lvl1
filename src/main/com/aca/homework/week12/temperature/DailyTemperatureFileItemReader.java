@@ -17,8 +17,6 @@ public class DailyTemperatureFileItemReader implements ItemReader<DailyTemperatu
 
     @Override
     public DailyTemperature itemRead() {
-        System.out.println(readDayNumber());
-        System.out.println(readDegree());
         return new DailyTemperature(
                 readDayNumber(),
                 readDegree()

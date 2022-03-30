@@ -15,8 +15,8 @@ public class DailyTemperatureFileItemWriter implements ItemWrite<DailyTemperatur
 
     @Override
     public void itemWrite(DailyTemperature item) {
-        writeDayNumber(objectOutputStream, item);
-        writeDegree(objectOutputStream, item);
+        writeDayNumber(item);
+        writeDegree(item);
     }
 
     private ObjectOutputStream connect() {
@@ -28,7 +28,7 @@ public class DailyTemperatureFileItemWriter implements ItemWrite<DailyTemperatur
         }
     }
 
-    private void writeDayNumber(ObjectOutputStream objectOutputStream, DailyTemperature item){
+    private void writeDayNumber(DailyTemperature item){
         try {
             objectOutputStream.writeInt(item.getDayNumber());
         } catch (IOException e) {
@@ -37,7 +37,7 @@ public class DailyTemperatureFileItemWriter implements ItemWrite<DailyTemperatur
         }
     }
 
-    private void writeDegree(ObjectOutputStream objectOutputStream, DailyTemperature item) {
+    private void writeDegree(DailyTemperature item) {
         try {
             objectOutputStream.writeDouble(item.getDegree());
         } catch (IOException e) {
