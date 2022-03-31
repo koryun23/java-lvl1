@@ -24,6 +24,8 @@ public class HashSetInvoiceRepository implements InvoiceRepository {
     public Invoice findById(String id) {
         if (id == null)
             throw new NullIdException();
+        if (!invoices.contains(new Invoice(id, 0, InvoiceStatus.PAID)))
+            return null;
         for (Invoice invoice : invoices) {
             if (id.equals(invoice.getId())) {
                 return invoice;
