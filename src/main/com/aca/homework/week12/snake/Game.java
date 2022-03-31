@@ -3,6 +3,7 @@ package com.aca.homework.week12.snake;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 public class Game {
 
@@ -11,11 +12,13 @@ public class Game {
     private final Apple apple;
     private final Listener listener;
     private boolean isRunning = true;
+    private final Supplier<String> moveSupplier;
 
-    public Game(Board board) {
+    public Game(Board board, Supplier<String> moveSupplier) {
         this.board = board;
         this.snake = board.getSnake();
         this.apple = board.getApple();
+        this.moveSupplier = moveSupplier;
         listener = new AppleListener(apple);
     }
 
@@ -24,7 +27,7 @@ public class Game {
         while (isRunning) {
             board.updateBoard();
             board.print();
-            String move = getMove();
+            String move = moveSupplier.get();
             if (!Direction.isValidMove(move)) {
                 System.out.println("The move must be one of these options: A D W S");
                 continue;
@@ -45,11 +48,4 @@ public class Game {
             }
         }
     }
-
-    public String getMove() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-
 }
