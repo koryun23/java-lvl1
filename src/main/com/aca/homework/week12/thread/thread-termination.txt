@@ -1,0 +1,6 @@
+Print "Started" text in main thread in ThreadTermination class, create 2 threads that print current milliseconds after 2 seconds sleep and start them. When all threads are finished print "Finished".
+In console user should se something like this:
+Started
+1648532379949
+1648532379949
+Finished

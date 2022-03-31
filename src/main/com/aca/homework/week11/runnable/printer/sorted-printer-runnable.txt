@@ -1,0 +1,7 @@
+Create a SortedNumberPrinterRunnable class that implements a java.lang.Runnable interface.
+The run method should pause randommly from 10 to 200ms (the time should be determined in constructor) and print the provided single number.
+Create a set of SortedNumberPrinterRunnable in createRunnables method to print numbers from 1 to 100.
+Create a runAll method that takes a set of runnables and executes them.
+Create a main method, invoke createRunnables and runAll methods in it.
+First the runnables that takes less time to be executed should run
+There is no need to create unit tests.
