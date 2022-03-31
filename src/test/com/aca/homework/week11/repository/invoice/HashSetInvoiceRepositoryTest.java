@@ -30,10 +30,9 @@ class HashSetInvoiceRepositoryTest {
     @Test
     public void testSave2Times() {
         testSubject.save(new Invoice("invoice-1", 500, InvoiceStatus.UNPAID));
-        testSubject.save(new Invoice("invoice-2", 500, InvoiceStatus.UNPAID));
-        Assertions.assertEquals(2, testSubject.findAll().size());
+        testSubject.save(new Invoice("invoice-1", 500, InvoiceStatus.UNPAID));
+        Assertions.assertEquals(1, testSubject.findAll().size());
         Assertions.assertEquals(new Invoice("invoice-1", 500, InvoiceStatus.UNPAID), testSubject.findById("invoice-1"));
-        Assertions.assertEquals(new Invoice("invoice-2", 500, InvoiceStatus.UNPAID), testSubject.findById("invoice-2"));
     }
 
     @Test
