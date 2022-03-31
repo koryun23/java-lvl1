@@ -13,6 +13,8 @@ public class MoveSupplierForTest implements Supplier<String> {
 
     @Override
     public String get() {
+        if (index >= moves.length)
+            return null;
         return moves[index++];
     }
 }

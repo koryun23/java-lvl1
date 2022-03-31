@@ -1,8 +1,5 @@
 package com.aca.homework.week12.snake;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class Game {
@@ -12,6 +9,7 @@ public class Game {
     private final Apple apple;
     private final Listener listener;
     private boolean isRunning = true;
+    private GameState gameState = GameState.RUNNING;
     private final Supplier<String> moveSupplier;
 
     public Game(Board board, Supplier<String> moveSupplier) {
@@ -45,7 +43,12 @@ public class Game {
             } else if (snake.headOutOfBounds(board) || snake.snakeHeadCollidedWithBody()) {
                 System.out.println("You lost.");
                 isRunning = false;
+                gameState = GameState.TERMINATED;
             }
         }
+    }
+
+    public GameState getState() {
+        return gameState;
     }
 }
