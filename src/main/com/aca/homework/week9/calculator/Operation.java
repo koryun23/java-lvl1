@@ -4,45 +4,63 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Operation {
-    ADDITION {
+    ADDITION('+') {
         @Override
         public String performOperation(int num1, int num2) {
             return String.valueOf(num1 + num2);
         }
     },
-    SUBTRACTION {
+    SUBTRACTION('-') {
         @Override
         public String performOperation(int num1, int num2) {
             return String.valueOf(num1 - num2);
         }
     },
-    MULTIPLICATION {
+    MULTIPLICATION('*') {
         @Override
         public String performOperation(int num1, int num2) {
             return String.valueOf(num1 * num2);
         }
     },
-    DIVISION {
+    DIVISION('/') {
         @Override
         public String performOperation(int num1, int num2) {
             return String.valueOf((double) num1 / num2);
         }
     };
 
-    private static final Map<Character, Operation> map = Map.of('+', Operation.ADDITION, '-', Operation.SUBTRACTION, '*', Operation.MULTIPLICATION, '/', Operation.DIVISION);
+    private final char operation;
+
+    Operation(char operation) {
+        this.operation = operation;
+    }
 
     public static Operation of(char ch) {
-        return map.get(ch);
+        for (Operation value : Operation.values()) {
+            if (value.getOperation() == ch) {
+                return value;
+            }
+        }
+        return Operation.ADDITION;
     }
 
     public static boolean isOperation(char ch) {
-        return map.containsKey(ch);
+        for (Operation value : Operation.values()) {
+            if (value.getOperation() == ch) {
+                return true;
+            }
+        }
+        return false;
     }
-
 
     public static boolean isDigit(char ch) {
         return ch - 48 <= 9;
     }
+
+    public char getOperation() {
+        return operation;
+    }
+
     public abstract String performOperation(int num1, int num2);
 
 }

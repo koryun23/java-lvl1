@@ -5,27 +5,27 @@ import org.junit.jupiter.api.Test;
 
 class OperationTest {
     @Test
-    public void testOfWhenOperationIsAddition(){
+    public void testOfWhenOperationIsAddition() {
         Assertions.assertEquals(Operation.ADDITION, Operation.of('+'));
     }
 
     @Test
-    public void testOfWhenOperationIsSubtraction(){
+    public void testOfWhenOperationIsSubtraction() {
         Assertions.assertEquals(Operation.SUBTRACTION, Operation.of('-'));
     }
 
     @Test
-    public void testOfWhenOperationIsDivision(){
+    public void testOfWhenOperationIsDivision() {
         Assertions.assertEquals(Operation.DIVISION, Operation.of('/'));
     }
 
     @Test
-    public void testofWhenOperationIsMultiplication(){
+    public void testofWhenOperationIsMultiplication() {
         Assertions.assertEquals(Operation.MULTIPLICATION, Operation.of('*'));
     }
 
     @Test
-    public void testIsDigitForValidDigitsFrom0To9(){
+    public void testIsDigitForValidDigitsFrom0To9() {
         Assertions.assertTrue(Operation.isDigit('0'));
         Assertions.assertTrue(Operation.isDigit('1'));
         Assertions.assertTrue(Operation.isDigit('2'));
@@ -39,57 +39,57 @@ class OperationTest {
     }
 
     @Test
-    public void testIsDigitForNonDigitCharacters(){
+    public void testIsDigitForNonDigitCharacters() {
         Assertions.assertFalse(Operation.isDigit('='));
     }
 
     @Test
-    public void testIsOperationWhenOperationIsAddition(){
+    public void testIsOperationWhenOperationIsAddition() {
         Assertions.assertTrue(Operation.isOperation('+'));
     }
 
     @Test
-    public void testIsOperationWhenOperationIsSubtraction(){
+    public void testIsOperationWhenOperationIsSubtraction() {
         Assertions.assertTrue(Operation.isOperation('-'));
     }
 
     @Test
-    public void testIsOperationWhenOperationIsDivision(){
+    public void testIsOperationWhenOperationIsDivision() {
         Assertions.assertTrue(Operation.isOperation('/'));
     }
 
     @Test
-    public void testIsOperationWhenOperationIsMultiplication(){
+    public void testIsOperationWhenOperationIsMultiplication() {
         Assertions.assertTrue(Operation.isOperation('*'));
     }
 
     @Test
-    public void testIsOperationWhenOperationIsInvalid(){
+    public void testIsOperationWhenOperationIsInvalid() {
         Assertions.assertFalse(Operation.isOperation('a'));
     }
 
     @Test
-    public void testPerformOperationWhenOperationIsAddition(){
+    public void testPerformOperationWhenOperationIsAddition() {
         Assertions.assertEquals("4", Operation.ADDITION.performOperation(3, 1));
     }
 
     @Test
-    public void testPerformOperationWhenOperationIsSubtraction(){
+    public void testPerformOperationWhenOperationIsSubtraction() {
         Assertions.assertEquals("2", Operation.SUBTRACTION.performOperation(3, 1));
     }
 
     @Test
-    public void testPerformOperationWhenOperationIsMultiplication(){
+    public void testPerformOperationWhenOperationIsMultiplication() {
         Assertions.assertEquals("6", Operation.MULTIPLICATION.performOperation(3, 2));
     }
 
     @Test
-    public void testPerformOperationWhenOperationIsDivision(){
+    public void testPerformOperationWhenOperationIsDivision() {
         Assertions.assertEquals("6.0", Operation.DIVISION.performOperation(18, 3));
     }
 
     @Test
-    public void testPerformOperationWhenOperationIsDivisionAndResultIsFloat(){
+    public void testPerformOperationWhenOperationIsDivisionAndResultIsFloat() {
         Assertions.assertEquals("0.5", Operation.DIVISION.performOperation(2, 4));
     }
 }
