@@ -2,12 +2,12 @@ package com.aca.homework.week11.runnable.printer;
 
 import java.util.Random;
 
-public class SortedNumberPrinterRunnable implements Runnable{
+public class SortedNumberPrinterRunnable implements Runnable {
 
-    private int waitingTime;
-    private int number;
+    private final int waitingTime;
+    private final int number;
 
-    public SortedNumberPrinterRunnable(int number){
+    public SortedNumberPrinterRunnable(int number) {
         waitingTime = new Random().nextInt(190) + 10;
         this.number = number;
     }
@@ -15,11 +15,11 @@ public class SortedNumberPrinterRunnable implements Runnable{
     @Override
     public void run() {
         long startMillis = System.currentTimeMillis();
-        while(System.currentTimeMillis() - startMillis < waitingTime);
+        while (System.currentTimeMillis() - startMillis < waitingTime) ;
         System.out.println(number);
     }
 
-    public int getWaitingTime(){
+    public int getWaitingTime() {
         return waitingTime;
     }
 }
