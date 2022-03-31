@@ -1,0 +1,30 @@
+Lazy initialization is the act of delaying the initialization of a field until its value is needed
+It decreases the cost of initializing a class or creating an instance, at the expense of increasing the cost
+of accessing the lazily initialized field.
+If a field is accessed only on a fraction of the instances of a class and it is costly to initialize the field, then
+lazy initialization may be worthwhile. The only way to know for sure is to measure the performance of the class with
+and without lazy initialization.
+
+Under most circumstances, normal initialization is preferable to lazy initialization
+
+If you use lazy initialization to break an initialization circularity, use a
+synchronized accessor because it is the simplest, clearest alternative
+
+
+1) Idiom1 - normal initialization (unchanged when applied to static fields, except that you add static modifier to the field and accessor)
+2) Idiom2 - lazy initialization with a synchronized accessor (unchanged when applied to static fields, except that you add static modifier to the field and accessor)
+3) Idiom3 - lazy initialization holder class idiom
+
+If you need to use lazy initialization for performance on a static field, use the lazy initialization holder class idiom.
+This idiom avoids the cost of locking when accessing the field after initialization.
+The idea of the idiom is to check the value of the field twice: once without locking and once with locking. Only if the
+second indicates that the field is uninitialized does the call initialize field. Because there is no locking once the field
+is initialized, modifier volatile is critical(?).
+
+In summary, you should initialize most fields normally, not lazily. If you
+must initialize a field lazily in order to achieve your performance goals or to
+break a harmful initialization circularity, then use the appropriate lazy
+initialization technique. For instance fields, it is the double-check idiom; for
+static fields, the lazy initialization holder class idiom. For instance fields that
+can tolerate repeated initialization, you may also consider the single-check
+idiom.
