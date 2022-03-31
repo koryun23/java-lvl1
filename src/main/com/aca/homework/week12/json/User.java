@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
     @JsonProperty("username")
-    private String userName;
+    private final String userName;
 
     @JsonProperty("name")
-    private String name;
+    private final String name;
 
     @JsonProperty("age")
-    private int age;
+    private final int age;
 
-    public User(String userName, String name, int age){
+    public User(String userName, String name, int age) {
         this.userName = userName;
         this.name = name;
         this.age = age;

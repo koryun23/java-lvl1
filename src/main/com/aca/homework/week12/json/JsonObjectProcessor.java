@@ -8,24 +8,28 @@ import java.util.List;
 
 public class JsonObjectProcessor {
 
-    public String process(Object o){
-        Field[] fields = getFieldsOfObject(o);
-
+    public String process(Object o) {
+        Field[] fields = o.getClass().getDeclaredFields();
+        setAccessibleAllFields(fields, true);
         return buildJsonObjectFromFields(fields, o);
     }
 
-    private String buildJsonObjectFromFields(Field[] fields, Object o){
+    private String buildJsonObjectFromFields(Field[] fields, Object o) {
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        for(Field field : fields) {
-            sb.append(field.getDeclaredAnnotation(JsonProperty.class).value());
+        for (Field field : fields) {
+            sb.append(format(field.getDeclaredAnnotation(JsonProperty.class).value()));
             sb.append(": ");
-            sb.append(getValueOfField(o, field));
+            sb.append(format(getValueOfField(o, field)));
             sb.append(", ");
         }
-        sb.delete(sb.length()-2, sb.length());
+        sb.delete(sb.length() - 2, sb.length());
         sb.append("}");
         return sb.toString();
+    }
+
+    private String format(Object obj) {
+        return '"' + obj.toString() + '"';
     }
 
     private Object getValueOfField(Object o, Field field) {
@@ -37,17 +41,8 @@ public class JsonObjectProcessor {
         }
     }
 
-    private Field[] getFieldsOfObject(Object o){
-        Field[] fields;
-        fields = o.getClass().getDeclaredFields();
-
-        setAccessibleAllFields(fields, true);
-
-        return fields;
-    }
-
     private void setAccessibleAllFields(Field[] fields, boolean flag) {
-        for(Field field : fields) {
+        for (Field field : fields) {
             field.setAccessible(flag);
         }
     }
