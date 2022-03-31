@@ -41,7 +41,7 @@ public enum Operation {
                 return value;
             }
         }
-        return Operation.ADDITION;
+        return null;
     }
 
     public static boolean isOperation(char ch) {
