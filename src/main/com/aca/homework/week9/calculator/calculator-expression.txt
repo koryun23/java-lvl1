@@ -1,0 +1,22 @@
+Create a SimpleCalculator class that has a
+String askAndCalculate() method.
+When the method is invoked, the user should input an expression, after that the result will be printed and returned.
+e.g
+3+9
+12
+2/4
+0.5
+9*9
+81
+The input text should be 'digit operation digit'. If the user input other formats, the application should print and return the 'error' text.
+Create a SimpleCalculatorTest class and the following test methods:
+testWhenInputStringLengthIs1()
+testWhenInputStringLengthIs2()
+testWhenInputStringLengthIs4()
+testWhenInputStringLengthIs3ButFirstSymbolIsNotDigit()
+testWhenInputStringLengthIs3ButSecondSymbolIsNotOperation()
+testWhenInputStringLengthIs3ButThirdSymbolIsNotOperation()
+testWhenOperationIsSum()
+testWhenOperationIsDivision()
+testWhenOperationIsSubtraction()
+testWhenOperationIsMultiplication()
