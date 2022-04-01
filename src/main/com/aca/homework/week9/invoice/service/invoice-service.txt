@@ -1,0 +1,17 @@
+Create a InvoiceReader class that hasint
+Invoice[] read() method and read data from the invoice.txt file, each line converts to the Invoice class and returns an array of the Invoices.
+The Invoice class has the following fields:
+id
+amount
+type
+code
+Implement the toSTring method and write testToString unit test.
+Create an InvoiceService class that has load() method which reads the data from invoice.txt file using the InvoiceReader class instance.
+The InvoiceService class also has long totalAmountByType(InvoiceType type) that returns the sum of invoices' amount,
+Invoice[] getByType(InvoiceType type) that returns an array of invoces that contains only the invoices of the provided type,
+Invoice[] getByTypeAndCode(InvoiceType type, String code) that returns an array of invoces that contains only the invoices of the provided type and code.
+Write the following tests:
+testTotalAmountByTypeSAD() // load the data first using extended InvoiceReader clas, run the totalAmountByType(InvoiceType.SAD) and make the assertion
+testGetBySADType() // load the data first using extended InvoiceReader class, run the getByType(InvoiceType.SAD) then make assertions
+testGetByMANType() // load the data first using extended InvoiceReader class, run the getByType(InvoiceType.MAN) then make assertions
+getBySADTypeAndCode() // load the data first using extended InvoiceReader class, run the getByTypeAndCode(InvoiceType.MAN, "MY-CODE") then make assertions
