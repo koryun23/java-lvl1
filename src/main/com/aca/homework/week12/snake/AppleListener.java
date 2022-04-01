@@ -4,7 +4,7 @@ public class AppleListener implements Listener {
 
     private int startingAppleRow;
     private int startingAppleCol;
-    private final Apple apple;
+    private Apple apple;
 
     public AppleListener(Apple apple) {
         this.apple = apple;

@@ -40,10 +40,26 @@ class GameTest {
     }
 
     @Test
-    public void testGameStateWhenSnakeDidNotHitEdgeOfBoard(){
-        String[] moves = {"s", "s", "s", "s", "d", "d", "d"};
+    public void testSizeWhenSnakeDidNotEatApple(){
+        String[] moves = {"d", "d", "d", "finish"};
         Game game = new Game(board, new MoveSupplierForTest(moves));
         game.start();
-        Assertions.assertEquals(GameState.RUNNING, game.getState());
+        Assertions.assertEquals(1, game.getSnake().size());
+    }
+
+    @Test
+    public void testSizeWhenSnakeAteAppleOnce() {
+        String[] moves = {"d", "s", "s", "s", "finish"};
+        Game game = new Game(board, new MoveSupplierForTest(moves));
+        game.start();
+        Assertions.assertEquals(2, game.getSnake().size());
+    }
+
+    @Test
+    public void testAppleGeneratedOnNewCellAfterSnakeAteIt(){
+        String[] moves = {"d", "s", "s", "finish"};
+        Game game = new Game(board, new MoveSupplierForTest(moves));
+        game.start();
+        Assertions.assertTrue(game.getAppleListener().changeDetected());
     }
 }

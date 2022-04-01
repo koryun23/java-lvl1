@@ -22,14 +22,22 @@ public class Game {
 
     public void start() {
         System.out.println("The game starts!");
+        System.out.println(Direction.isValidMove("w"));
         while (isRunning) {
             board.updateBoard();
             board.print();
             String move = moveSupplier.get();
+            if(isEnd(move)){
+                gameState = GameState.TERMINATED;
+                isRunning = false;
+                break;
+            }
+
             if (!Direction.isValidMove(move)) {
                 System.out.println("The move must be one of these options: A D W S");
                 continue;
             }
+
             Direction direction = Direction.of(move);
 
             if (listener.changeDetected()) {
@@ -40,7 +48,7 @@ public class Game {
 
             if (snake.snakeCollidedApple(apple)) {
                 apple.generate(board);
-            } else if (snake.headOutOfBounds(board) || snake.snakeHeadCollidedWithBody()) {
+            } else if (lostGame()) {
                 System.out.println("You lost.");
                 isRunning = false;
                 gameState = GameState.TERMINATED;
@@ -50,5 +58,20 @@ public class Game {
 
     public GameState getState() {
         return gameState;
+    }
+
+    public Listener getAppleListener(){
+        return listener;
+    }
+    public Snake getSnake() {
+        return snake.clone();
+    }
+
+    private boolean isEnd(String str) {
+        return "finish".equals(str);
+    }
+
+    private boolean lostGame(){
+        return snake.headOutOfBounds(board.getRowCount(), board.getColCount()) || snake.snakeHeadCollidedWithBody();
     }
 }
