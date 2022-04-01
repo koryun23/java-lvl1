@@ -1,0 +1,12 @@
+Create a User class that has the following fields
+@JsonProperty("username")
+private String userName;
+@JsonProperty("name")
+private String firstName;
+@JsonProperty("age")
+private String age;
+Create a User having userName=frosty_chebyshev, fisrtName=Anton, age=25
+Create an ObjectJsonProcessor class that has String process(Object o) method. The method should create a JSON string where keys are values of @JsonProperty annotation, and JSON values are values of fields.
+for the above mentioned user object process method should return the following string
+"{"username": "frosty_chebyshev", "name": "Anton", "age": "25"}"
+Create an ObjectJsonProcessor and write unit tests
