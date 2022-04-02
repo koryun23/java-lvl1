@@ -1,0 +1,4 @@
+Create a TextPrinterRunnable that prints the provided name every 2 seconds. Create a stop() method to stop the print process.
+Create a TextPrinterMain class and start a new thread to print the "HELLO WORLD!" text periodically. In 10 seconds stop the printer.
+Create a TextPrinterRunnableTest and write the following unit test.
+testRun() //assert that the provided text is printed (inject Consumer<String> in TextPrinterRunnable constructor)
