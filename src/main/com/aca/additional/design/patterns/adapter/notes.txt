@@ -1,0 +1,20 @@
+The intent of the Adapter design pattern is to convert the interface of a class into another interface clients expect.
+Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+
+
+The Adapter design pattern provides a solution:
+Define a separate Adapter class that converts the interface of a class (Adaptee)
+into another interface (Target) clients require.
+Work through an Adapter to work with classes that have not the required interface.
+
+There are 2 ways to define an adapter
+1) Class Adapter: Uses inheritance to implement Target interface in terms of(by inheriting from) an Adaptee class.
+2) Object Adapter: Uses object composition to implement a Target interface in terms of(by delegating to) an Adaptee object
+A class adapter commits to (inherits from) an Adaptee class at compile-time. An object
+adapter is more flexible because it commits (delegates) to an Adaptee object at run-time.
+
+Object adapter is more flexible than Class adapter.
+Class adapter is committed to an Adaptee class at compile-time and wouldn't work for other Adaptee classes.
+If the Adaptee implementation classes belong to another application they are usually hidden and can't be accessed.
+The object adapter, on the other hand, implements a Target interface in terms of(by delegating to) an Adaptee object at
+run-time(independently of Adaptee implementation classes).
