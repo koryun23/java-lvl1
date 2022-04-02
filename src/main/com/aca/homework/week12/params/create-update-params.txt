@@ -1,0 +1,2 @@
+Create a UserCreateParams and UserUpdateParams classes that have username, firstName, and age fields. None of the fields should be null.
+Create constructor unit tests.
