@@ -43,10 +43,22 @@ public class UserImpl implements UserPrototype, User {
         return String.format("USER[username = %s, first name = %s]", username, firstName);
     }
 
-    public static class Builder {
-        private String username;
-        private String firstName;
-        private String password;
+    public String defaultUsername() {
+        return username;
+    }
+
+    public String defaultFirstName() {
+        return firstName;
+    }
+
+    public String defaultPassword() {
+        return password;
+    }
+
+    public class Builder {
+        private String username = defaultUsername();
+        private String firstName = defaultFirstName();
+        private String password = defaultPassword();
 
         public Builder username(String username){
             this.username = username;
@@ -63,7 +75,7 @@ public class UserImpl implements UserPrototype, User {
             return this;
         }
 
-        public User build(){
+        public UserImpl build(){
             return new UserImpl(username, firstName, password);
         }
     }
