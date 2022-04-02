@@ -10,16 +10,16 @@ public class Main {
         System.out.println(prototypeCopy1);
         System.out.println(prototypeCopy2);
         System.out.println(prototypeCopy3);
-        prototypeCopy1 = prototypeCopy1.new Builder().
+        prototypeCopy1 = (UserImpl) prototypeCopy1.new Builder().
                 username("koryun23").
                 firstName("Koryun").
                 password("ete-10-ropeic-ste-chexav-qezem-tanum-qachal").
                 build();
-        prototypeCopy2 = prototypeCopy2.new Builder().
+        prototypeCopy2 = (UserImpl) prototypeCopy2.new Builder().
                 username("i4ceu2lose").
                 password("somepassword").
                 build();
-        prototypeCopy3 = prototypeCopy3.new Builder().
+        prototypeCopy3 = (UserImpl) prototypeCopy3.new Builder().
                 username("notagmbruh").
                 firstName("firstname").
                 password("password").

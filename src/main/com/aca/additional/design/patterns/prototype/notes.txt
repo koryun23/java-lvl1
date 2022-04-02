@@ -1,0 +1,8 @@
+The intent of the prototype design pattern is to specify the kinds of objects to create using a prototypical instance,
+and create new objects by copying this prototype.
+
+
+The Prototype design pattern provides a solution:
+Define a Prototype object that returns a copy of itself.
+Create new objects by copying a Prototype object.
+

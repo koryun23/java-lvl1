@@ -1,6 +1,6 @@
 package com.aca.additional.design.patterns.prototype.example3;
 
-public class UserImpl implements UserPrototype, User {
+public class UserImpl implements UserPrototype {
     private final String username;
     private final String firstName;
     private final String password;
@@ -18,23 +18,20 @@ public class UserImpl implements UserPrototype, User {
         password = userImpl.getPassword();
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
 
     @Override
-    public UserImpl clone() {
+    public UserPrototype clone() {
         return new UserImpl(this);
     }
 
@@ -75,7 +72,7 @@ public class UserImpl implements UserPrototype, User {
             return this;
         }
 
-        public UserImpl build(){
+        public UserPrototype build(){
             return new UserImpl(username, firstName, password);
         }
     }
