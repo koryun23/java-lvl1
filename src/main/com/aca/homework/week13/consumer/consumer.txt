@@ -1,6 +1,0 @@
-Create a PrinterConsumer class that implements Consumer<String> interface and prints the provided string.
-Create a TextPrinter class that has printAll(List<String> list) class and print the list items.
-Create a TextPrinterTest class and the following unit tests:
-testWhenListIsEmpty() // assert that the consumer's accept() method never invoked
-testWhenListContains1Item() // assert that the conusmer's accept() method invoked only once and took the list item as an argument
-testWhenListContains2Items()
