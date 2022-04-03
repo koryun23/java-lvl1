@@ -15,6 +15,8 @@ public class DailyTemperatureFileItemWriter implements ItemWrite<DailyTemperatur
 
     @Override
     public void itemWrite(DailyTemperature item) {
+        System.out.println(item.getDayNumber());
+        System.out.println(item.getDegree());
         writeDayNumber(item);
         writeDegree(item);
     }

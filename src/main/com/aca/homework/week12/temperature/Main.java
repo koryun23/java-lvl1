@@ -28,7 +28,6 @@ public class Main {
         List<DailyTemperature> dailyTemperatureList = new LinkedList<>();
 
         for(int i = 0; i < 365; i++) {
-            System.out.println(reader.itemRead());
             dailyTemperatureList.add(reader.itemRead());
         }
         return dailyTemperatureList;
