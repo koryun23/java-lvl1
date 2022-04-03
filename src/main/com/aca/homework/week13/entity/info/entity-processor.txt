@@ -1,0 +1,17 @@
+Create the following class
+@Entity
+@Table(name = "PRODUCT")
+public class Product {
+  @Id
+  private Long id;
+  @Column(name="NAME")
+  private String name;
+}
+Create a EntityProcessor class that has void printInfo(Object o) method.
+If the object is annotated with Entity annotation print the table name, @Id annotated field name and value, and all field's columns' names and field values. If the object is not annotated with @Entity print an empty string.
+e.g
+for the object new Product(10, "box") the printInfo should print the foolowing text:
+table name is: PRODUCT, id is 10, NAME is box
+Create EntityProcessorTest class and the following unit test:
+testPrintInfoWhenObjectIsProduct()
+testPrintInfoWhenObjectIsString()
