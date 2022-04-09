@@ -1,31 +1,23 @@
 package com.aca.homework.week12.params;
 
+import java.util.Objects;
+
 public class UserUpdateParams {
-    private String username;
-    private String firstName;
+    private final String username;
+    private final String firstName;
     private int age;
 
     public UserUpdateParams(@NotNull String username, @NotNull String firstName, int age) {
-        setUsername(username);
-        setFirstName(firstName);
+        Objects.requireNonNull(username);
+        Objects.requireNonNull(firstName);
+        this.username = username;
+        this.firstName = firstName;
         setAge(age);
     }
 
-    public void setUsername(String username) {
-        if(username == null)
-            throw new IllegalArgumentException("Provided username is null.");
-        this.username = username;
-    }
-
-    public void setFirstName(String firstName){
-        if(firstName == null)
-            throw new IllegalArgumentException("Provided first name is null.");
-        this.firstName = firstName;
-    }
-
     public void setAge(int age) {
-        if(age < 0)
-            throw new IllegalArgumentException("Provided age is negative.");
+        if (age < 0)
+            throw new IllegalArgumentException("Age must be a positive number");
         this.age = age;
     }
 }

@@ -7,12 +7,12 @@ class UserCreateParamsTest {
 
     @Test
     public void testNewUserWithInvalidUsername() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new UserCreateParams(null, "firstname", 34));
+        Assertions.assertThrows(NullPointerException.class, () -> new UserCreateParams(null, "firstname", 34));
     }
 
     @Test
     public void testNewUserWithInvalidFirstName() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new UserCreateParams("username", null, 34));
+        Assertions.assertThrows(NullPointerException.class, () -> new UserCreateParams("username", null, 34));
     }
 
     @Test

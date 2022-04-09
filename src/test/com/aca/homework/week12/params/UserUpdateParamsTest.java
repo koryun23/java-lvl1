@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 class UserUpdateParamsTest {
     @Test
     public void testNewUserWithInvalidUsername() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new UserUpdateParams(null, "firstname", 34));
+        Assertions.assertThrows(NullPointerException.class, () -> new UserUpdateParams(null, "firstname", 34));
     }
 
     @Test
     public void testNewUserWithInvalidFirstName() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new UserUpdateParams("username", null, 34));
+        Assertions.assertThrows(NullPointerException.class, () -> new UserUpdateParams("username", null, 34));
     }
 
     @Test
