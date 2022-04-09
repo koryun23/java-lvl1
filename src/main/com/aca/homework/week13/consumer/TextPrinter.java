@@ -5,12 +5,13 @@ import java.util.function.Consumer;
 
 public class TextPrinter {
 
-    Consumer<String> consumer;
+    private final Consumer<String> consumer;
+
     public TextPrinter(Consumer<String> consumer) {
         this.consumer = consumer;
     }
 
-    public void printAll(List<String> list){
+    public void printAll(List<String> list) {
         list.forEach(consumer);
     }
 }

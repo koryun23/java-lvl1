@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class PrinterConsumer implements Consumer<String> {
-    private int timesAccessed = 0;
-    private List<String> argumentsTaken;
 
-    public PrinterConsumer(){
+    private int timesAccessed = 0;
+    private final List<String> argumentsTaken;
+
+    public PrinterConsumer() {
         argumentsTaken = new LinkedList<>();
     }
 
@@ -23,7 +24,7 @@ public class PrinterConsumer implements Consumer<String> {
         return timesAccessed;
     }
 
-    public List<String> getArgumentsTaken(){
+    public List<String> getArgumentsTaken() {
         return argumentsTaken;
     }
 }
