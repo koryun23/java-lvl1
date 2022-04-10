@@ -1,0 +1,7 @@
+Create a Runnable implementation that every 2 seconds creates a new String using UUID.randomUUID().toString() and adds it into the shared List.
+The run method should be sensitive to thread interruption events. (When the thread.interrupt() is invoked, the runnable should gracefully stop the work)
+Create InterruptionSensitiveRunnableTest and the following test method:
+testImmediateInterrutpt() // start the thread, interrupt it as soon as possible, wait until all threads stop the work, and assert that the shared list size is 0
+testInterrutptIn1Sec() // start the thread, interrupt it in 1 sec, wait until all threads stop the work, and assert that the shared list size is 0
+testInterrutptIn3Sec() // start the thread, interrupt it in 3 sec, wait until all threads stop the work, and assert that the shared list size is 1
+testInterrutptIn5Sec() // start the thread, interrupt it in 5 sec, wait until all threads stop the work, and assert that the shared list size is 2
