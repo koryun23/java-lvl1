@@ -3,6 +3,7 @@ package com.aca.homework.week14.thread.interrupt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ class InterruptionSensitiveRunnableTest {
 
     @Test
     public void testImmediateInterrupt() {
-        List<String> sharedList = new LinkedList<>();
+        List<String> sharedList = Collections.synchronizedList(new LinkedList<>());
         Thread thread = new Thread(new InterruptionSensitiveRunnable(sharedList));
         thread.start();
         thread.interrupt();
@@ -20,7 +21,7 @@ class InterruptionSensitiveRunnableTest {
 
     @Test
     public void testInterruptIn1Sec() {
-        List<String> sharedList = new LinkedList<>();
+        List<String> sharedList = Collections.synchronizedList(new LinkedList<>());
         Thread thread = new Thread(new InterruptionSensitiveRunnable(sharedList));
         thread.start();
         try {
@@ -35,7 +36,7 @@ class InterruptionSensitiveRunnableTest {
 
     @Test
     public void testInterruptIn3Sec() {
-        List<String> sharedList = new LinkedList<>();
+        List<String> sharedList = Collections.synchronizedList(new LinkedList<>());
         Thread thread = new Thread(new InterruptionSensitiveRunnable(sharedList));
         thread.start();
         try {
@@ -50,7 +51,7 @@ class InterruptionSensitiveRunnableTest {
 
     @Test
     public void testInterruptIn5Sec() {
-        List<String> sharedList = new LinkedList<>();
+        List<String> sharedList = Collections.synchronizedList(new LinkedList<>());
         Thread thread = new Thread(new InterruptionSensitiveRunnable(sharedList));
         thread.start();
         try {
