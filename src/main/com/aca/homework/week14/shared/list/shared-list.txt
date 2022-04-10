@@ -1,0 +1,3 @@
+Create a Runnable implementation (named NumberAdderRunnable) that adds a given number to the synchronized list. Execute 1000 runnables to add 1 to 1000 numbers into the shared list. Return the shared list size when all threads finish the work.
+Create SharedListMainTest class and write the following test:
+testStart() // assert that the return result is equals to 1000
