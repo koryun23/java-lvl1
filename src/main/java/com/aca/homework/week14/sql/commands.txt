@@ -1,4 +1,4 @@
-run -d postgres:9.6.12
+docker run -d postgres:9.6.12
 docker exec -it <id> bash
 psql -U postgres
 create database testdb;
