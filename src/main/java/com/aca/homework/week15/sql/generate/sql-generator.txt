@@ -1,0 +1,19 @@
+Create a User class that has the following fields:
+
+@Column(name = "full_name")
+private String name;
+
+@Column(name = "age")
+private Integer age;
+
+The User class is annotated with @Table(name = "users")
+
+Create an SQLGenerator class that has the String generateInsert(User user) method.
+
+the generateInsert should return insertion SQL.
+
+For instance for generateInsert(new User("john kehoe", 45)) should return the following sql string:
+
+"insert into users (full_name, age) values ('john kehoe', 45);"
+
+Create an SQLGeneratorTest and write unit tests.
