@@ -1,0 +1,12 @@
+Create a TimerRunnable Runnable implementation that every second writes an elapsed second to the file (removes the old and writes the new value)
+
+The TimerRunnable takes a fileName into the constructor and has stop() method.
+
+Ask a user to provide a fileName and start the timer (submit the timer runnable). After 2 fileName inputs ask a user to write fileName to stop the corresponding timer (the user should always write valid fileNames).
+
+
+Create a TimerMainTest class and the following tests:
+
+test5And3() //input timer1, wait 2.5seconds, write timer2, wait 3.2 seconds, write timer1, timer2 and assert that the timer1.txt file contains a 5 text, and timer2.txt contains 3.
+
+test5And5() //input timer1, write timer2, wait 5.2 seconds, write timer1, timer2 and assert that the timer1.txt file contains a 5 text, and timer2.txt contains 5.
