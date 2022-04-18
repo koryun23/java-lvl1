@@ -1,0 +1,16 @@
+Start the postgres docker container.
+Exec into it.
+Log in as postgres user.
+
+Create an 'aca' database, EXAMS table that has the following coulmns:
+
+id (primary key)
+task_name (should not be null, should be unique)
+task_description (should not be null)
+
+Add 3 records without specifying the ids.
+
+Select everything having 3 id.
+Select everything where task name is 'test task'.
+Shw the count of all records.
+Select only task names.

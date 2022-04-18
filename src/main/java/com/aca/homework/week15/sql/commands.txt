@@ -1,0 +1,17 @@
+docker run -d postgres:9.6.12
+docker exec -it <id> bash
+psql -U postgres
+create database aca;
+\c aca;
+create table EXAMS (id serial primary key,
+                    task_name varchar(255) not null unique,
+                    task_description varchar(255) not null);
+
+insert into EXAMS (task_name, task_description) values ('test task', 'task description');
+insert into EXAMS (task_name, task_description) values ('task 1', 'description 1');
+insert into EXAMS (task_name, task_description) values ('task 2', 'description 2');
+
+select * from EXAMS where id = 3;
+select * from EXAMS where task_name = 'test task';
+select count(*) from EXAMS;
+select task_name from EXAMS;
