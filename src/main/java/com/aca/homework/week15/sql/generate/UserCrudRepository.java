@@ -20,7 +20,7 @@ public class UserCrudRepository {
         String insertQuery = SqlGenerator.generateInsert(user);
         System.out.println(insertQuery);
         try {
-            connection.createStatement().executeQuery(insertQuery);
+            connection.createStatement().execute(insertQuery);
         } catch (SQLException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("Could not insert user " + user.toString() + " to the database");

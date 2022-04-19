@@ -14,7 +14,7 @@ class UserCrudRepositoryTest {
     public void testInsertIntoRepository() {
         UserCrudRepository repo = null;
         try {
-            repo = new UserCrudRepository(DriverManager.getConnection("jdbc:postgresql://127.0.0.1:7432/aca", "postgres", null));
+            repo = new UserCrudRepository(DriverManager.getConnection("jdbc:postgresql://127.0.0.1:8432/aca", "postgres", null));
         } catch (SQLException e) {
             e.printStackTrace();
         }
