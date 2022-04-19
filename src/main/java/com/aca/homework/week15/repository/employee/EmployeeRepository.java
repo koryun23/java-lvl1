@@ -26,7 +26,7 @@ public class EmployeeRepository implements CrudRepository<Employee, String> {
     public void save(Employee employee) {
         Connection connection = connectionFactory.getObject();
         try(connection) {
-            connection.createStatement().executeQuery(
+            connection.createStatement().execute(
                     String.format("insert into employees (id, first_name, second_name, salary) values ('%s', '%s', '%s', %s);",
                             employee.getId(), employee.getFirstName(), employee.getSecondName(), employee.getSalary())
             );
@@ -87,7 +87,7 @@ public class EmployeeRepository implements CrudRepository<Employee, String> {
     public void deleteAll() {
         Connection connection = connectionFactory.getObject();
         try(connection) {
-            connection.createStatement().executeQuery("delete from employees;");
+            connection.createStatement().execute("delete from employees;");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Could not delete all the data from employees table.");

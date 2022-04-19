@@ -11,3 +11,4 @@ public interface CrudRepository<T, ID> {
 
     void deleteAll();
 }
+

@@ -22,3 +22,4 @@ Create EmployeeRepositoryIntegrationTest and test all methods.
 note:
 1) Do not use a reflection to generate SQL statements.
 2) To fetch all Employees use executeQuery() method that returns a ResultSet. Assume that Employee always has the same columns count and the column's position is immutable.
+
