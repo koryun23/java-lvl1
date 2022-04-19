@@ -1,0 +1,24 @@
+Create a ConnectionFactory class that has Connection getObject() method.
+
+Create an Employee class that has the following fields.
+
+String id;
+String firstName;
+String secondName;
+Long salary;
+
+Create CrudRepository<T, ID> interface that has the following methods:
+
+void save(T t);
+List<T> findAll();
+T findById(ID id);
+void deleteAll();
+
+Create EmployeeRepository CrudRepository implementation that takes a ConnectionFactory in the constructor.
+Implement all methods. (Fetch a new connection from the factory and close it once finished the DB interaction)
+
+Create EmployeeRepositoryIntegrationTest and test all methods.
+
+note:
+1) Do not use a reflection to generate SQL statements.
+2) To fetch all Employees use executeQuery() method that returns a ResultSet. Assume that Employee always has the same columns count and the column's position is immutable.
