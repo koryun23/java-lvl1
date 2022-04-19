@@ -1,0 +1,39 @@
+docker run -d -p 6432:5432 postgres:9.6.12
+docker exec -it <id> bash
+psql -h localhost -p 5432 -U postgres
+create database db;
+\c db;
+create table users (id serial primary key,
+                    username varchar(255) not null,
+                    first_name varchar(255) not null,
+                    last_name varchar(255) not null,
+                    registration_date date not null,
+                    company_id int references companies(id));
+create table companies (id serial primary key,
+                        name varchar(255) unique not null,
+                        creation_date date not null,
+                        price int not null);
+
+insert into companies (name, creation_date, price) values ('superAI', '2000-01-01', 100000);
+insert into companies (name, creation_date, price) values ('marketAC', '2005-01-01', 100001);
+insert into users (username, first_name, last_name, registration_date, company_id) values (
+    'jane', 'Jane', 'Williams', '2001-05-06', 1
+);
+insert into users (username, first_name, last_name, registration_date, company_id) values (
+    'jack', 'Jack', 'Walker', '2003-11-01', 1
+);
+insert into users (username, first_name, last_name, registration_date, company_id) values (
+    'johnny', 'John', 'Brown', '2002-05-06', 1
+);
+insert into users (username, first_name, last_name, registration_date, company_id) values (
+    'kim', 'Kim', 'White', '2007-12-18', 2
+);
+insert into users (username, first_name, last_name, registration_date, company_id) values (
+    'paul', 'Paul', 'Black', '2008-09-02', 2
+);
+
+select name from companies;
+select count(*) from companies;
+select name from users;
+select u.first_name, u.last_name, c.name from companies c inner join users u on c.id = u.company_id;
+select * from users inner join companies on companies.name = 'superAI' where users.company_id = companies.id;
