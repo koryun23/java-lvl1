@@ -15,22 +15,13 @@ public class InterruptionSensitiveRunnable implements Runnable {
     @Override
     public void run() {
         long start = System.currentTimeMillis();
-        while (true) {
-            if (Thread.interrupted()) {
-                return;
-            }
-
+        while (!Thread.interrupted()) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 Thread.currentThread().interrupt();
             }
-
-            if (Thread.interrupted()) {
-                return;
-            }
-
             sharedList.add(UUID.randomUUID().toString());
         }
     }
