@@ -1,0 +1,13 @@
+There are a lot of companies and users that can not exist outside of the company.
+Each user belongs only and only to one company.
+e.g.
+a company named superAI has 3 users: Jane, Jack, and John
+a company named marketAC has 2 users: Kim, Paul
+the database should keep the following information:
+username, first name, last name, user registration date, company name, company price, company creation date
+create 2 companies, 5 users
+1) show all company names
+2) show the total number of companies
+3) show all user's names
+4) show all companies with users (company name, user first name, and last name only)
+5) show all users belonging to the company named superAI
