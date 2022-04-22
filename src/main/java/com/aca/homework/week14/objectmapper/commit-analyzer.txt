@@ -1,0 +1,7 @@
+Create a CommitAnalyzer class that has
+int count() method that returns the total commits count.
+The CommitAnalyzer should take a file in the constructor.
+Implement the count method by using the JSON schema provided in the commits-data.txt.
+Create CommitAnalyzerTest class and write testCount() for the provided commits-data.txt text file.
+To parse the JSON the jackson-databind library should be used (objectMapper.readValue(***))
+implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
