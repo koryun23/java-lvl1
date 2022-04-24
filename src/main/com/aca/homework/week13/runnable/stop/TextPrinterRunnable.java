@@ -17,6 +17,11 @@ public class TextPrinterRunnable implements Runnable {
     @Override
     public void run() {
         while (isRunning) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             consumer.accept(text);
         }
     }
