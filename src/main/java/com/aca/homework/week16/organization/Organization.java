@@ -22,11 +22,6 @@ public class Organization {
         this.fullAddress = fullAddress;
     }
 
-    public Organization(OrganizationCreateParams params) {
-        this.name = params.getName();
-        this.fullAddress = params.getFullAddress();
-    }
-
     public Long getId() {
         return id;
     }
@@ -52,12 +47,12 @@ public class Organization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return name.equals(that.name) && fullAddress.equals(that.fullAddress);
+        return name.equals(that.name) && fullAddress.equals(that.fullAddress) && id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(name, fullAddress, id);
     }
 
     @Override

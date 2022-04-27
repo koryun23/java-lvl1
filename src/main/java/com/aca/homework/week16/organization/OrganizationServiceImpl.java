@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 public class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
-    private final Logger LOGGER = LoggerFactory.getLogger(OrganizationServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 
     public OrganizationServiceImpl(OrganizationRepository organizationRepository) {
         LOGGER.info("Creating an OrganizationServiceImpl object");
@@ -19,7 +19,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization create(OrganizationCreateParams params) {
         LOGGER.info("Retrieving an organization from the provided params - {}", params);
         Assert.notNull(params, "parameters required for user creation should not be null");
-        Organization organization = new Organization(params);
+        Organization organization = new Organization(params.getName(), params.getFullAddress());
         LOGGER.info("Successfully retrieved a {} from the provided params - {}", organization, params);
         return organization;
     }
