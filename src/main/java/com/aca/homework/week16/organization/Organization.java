@@ -47,7 +47,7 @@ public class Organization {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Organization that = (Organization) o;
-        return name.equals(that.name) && fullAddress.equals(that.fullAddress) && id.equals(that.id);
+        return Objects.equals(name, that.name) && Objects.equals(fullAddress, that.fullAddress) && Objects.equals(id, that.id);
     }
 
     @Override
