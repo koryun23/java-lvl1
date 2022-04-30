@@ -1,0 +1,11 @@
+Create a UserCrudRepository that takes a Connection in the constructor.
+Create User save(User user) method that creates an insertion statement and executes it.
+The User class is annotated with @Table(name = "users") and has the following fields:
+@Column(name = "full_name")
+private String name;
+@Column(name = "age")
+private Integer age;
+Run the Postgres container, and expose 5432 port to localhost.
+docker run -d -p 7432:5432 postgres:9.6.12
+Create UserCrudRepositoryIntegrationTest and testSave() integration test, that creates a new User and saves it in a database.
+Make sure that the test result is passed (user has been added to the database users table).
