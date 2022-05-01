@@ -25,7 +25,7 @@ public class Main {
         UserRepository userRepository = context.getBean(UserRepository.class);
         NoteRepository noteRepository = context.getBean(NoteRepository.class);
         UserService userService = new UserServiceImpl(userRepository);
-        NoteService noteService = new NoteServiceImpl(noteRepository);
+        NoteService noteService = new NoteServiceImpl(noteRepository, userService);
         UserFacade userFacade = new UserFacadeImpl(userService);
         NoteFacade noteFacade = new NoteFacadeImpl(noteService, userService);
 

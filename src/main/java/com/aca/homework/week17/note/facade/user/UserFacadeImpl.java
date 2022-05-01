@@ -13,6 +13,7 @@ public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
 
     public UserFacadeImpl(UserService userService) {
+        Assert.notNull(userService, "user service should not be null");
         this.userService = userService;
     }
 
@@ -28,8 +29,6 @@ public class UserFacadeImpl implements UserFacade {
                 )
         );
         LOGGER.info("successfully signed up a new user - {}", user);
-        UserSignUpResponseDto responseDto = new UserSignUpResponseDto(user.getUsername());
-        LOGGER.info("successfully created a response dto - {}", responseDto);
-        return responseDto;
+        return new UserSignUpResponseDto(user.getUsername());
     }
 }

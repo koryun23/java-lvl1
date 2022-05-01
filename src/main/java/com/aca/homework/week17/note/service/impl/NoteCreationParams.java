@@ -1,25 +1,29 @@
 package com.aca.homework.week17.note.service.impl;
 
 import com.aca.homework.week17.note.entity.User;
+import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class NoteCreationParams {
-    private final User user;
+    private final String username;
 
     private final String text;
 
     private final LocalDate creationDate;
 
-    public NoteCreationParams(User user, String text, LocalDate creationDate) {
-        this.user = user;
+    public NoteCreationParams(String username, String text, LocalDate creationDate) {
+        Assert.notNull(username, "username should not be null");
+        Assert.notNull(text, "text should not be null");
+        Assert.notNull(creationDate, "creation date should not be null");
+        this.username = username;
         this.text = text;
         this.creationDate = creationDate;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
     public String getText() {
@@ -35,18 +39,18 @@ public class NoteCreationParams {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NoteCreationParams that = (NoteCreationParams) o;
-        return Objects.equals(user, that.user) && Objects.equals(text, that.text) && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(username, that.username) && Objects.equals(text, that.text) && Objects.equals(creationDate, that.creationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, text, creationDate);
+        return Objects.hash(username, text, creationDate);
     }
 
     @Override
     public String toString() {
         return "NoteCreationParams{" +
-                "user=" + user +
+                "user=" + username +
                 ", text='" + text + '\'' +
                 ", creationDate=" + creationDate +
                 '}';

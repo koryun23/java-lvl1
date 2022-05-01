@@ -26,13 +26,13 @@ public class NoteFacadeImpl implements NoteFacade {
     @Override
     public NoteCreationResponseDto create(NoteCreationRequestDto dto) {
         Assert.notNull(dto, "note creation request dto should not be null");
-        LOGGER.info("Creating a new Note for the note creation response - {}", dto);
+        LOGGER.info("Creating a new Note for the note creation request - {}", dto);
         Note note = noteService.create(new NoteCreationParams(
-                userService.getByUsername(dto.getUsername()),
+                dto.getUsername(),
                 dto.getText(),
                 LocalDate.now()
         ));
-        LOGGER.info("Successfully added a new note - {}", note);
+
 
         NoteCreationResponseDto responseDto = new NoteCreationResponseDto(
                 note.getUser().getUsername(),

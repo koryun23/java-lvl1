@@ -1,5 +1,7 @@
 package com.aca.homework.week17.note.facade.note;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class NoteCreationRequestDto {
@@ -7,6 +9,7 @@ public class NoteCreationRequestDto {
     private final String text;
 
     public NoteCreationRequestDto(String username, String text) {
+        Assert.notNull(username, "username should not be null");
         this.username = username;
         this.text = text;
     }

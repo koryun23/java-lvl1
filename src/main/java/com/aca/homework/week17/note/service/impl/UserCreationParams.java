@@ -1,5 +1,7 @@
 package com.aca.homework.week17.note.service.impl;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class UserCreationParams {
@@ -8,6 +10,9 @@ public class UserCreationParams {
     private final String secondName;
 
     public UserCreationParams(String username, String firstName, String secondName) {
+        Assert.notNull(username, "username should not be null");
+        Assert.notNull(firstName, "first name should not be null");
+        Assert.notNull(secondName, "second name should not be null");
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;

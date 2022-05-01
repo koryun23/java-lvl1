@@ -5,14 +5,17 @@ import com.aca.homework.week17.note.repository.UserRepository;
 import com.aca.homework.week17.note.service.core.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
+        Assert.notNull(userRepository, "user repository should not be null");
         this.userRepository = userRepository;
     }
 

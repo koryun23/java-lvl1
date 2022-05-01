@@ -1,5 +1,7 @@
 package com.aca.homework.week17.note.facade.user;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class UserSignUpResponseDto {
@@ -7,6 +9,7 @@ public class UserSignUpResponseDto {
     private final String username;
 
     public UserSignUpResponseDto(String username) {
+        Assert.notNull(username, "username should not be null");
         this.username = username;
     }
 
