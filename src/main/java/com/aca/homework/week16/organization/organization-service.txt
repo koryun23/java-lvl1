@@ -1,0 +1,12 @@
+Create an Organization entity class that has id, name, String fullAddress fields.
+
+Create OrganizationRepository, OrganziationService, OrganizationServiceImpl
+
+implement the following service methods
+
+Organization create(OrganizationCreateParams params)
+Organization getById(Long id)
+
+Create OrganizationCreateParamsUnitTest
+
+OrganizationServiceImplUnitTest and test getById method
