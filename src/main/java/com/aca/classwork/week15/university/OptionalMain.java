@@ -1,6 +1,6 @@
 package com.aca.classwork.week15.university;
 
-import com.aca.entity.User;
+import com.aca.classwork.week15.university.entity.User;
 
 import java.util.Optional;
 
