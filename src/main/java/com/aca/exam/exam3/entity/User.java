@@ -20,7 +20,9 @@ public class User {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
-    public User(){}
+    public User() {
+    }
+
     public User(String passport, String firstName, String secondName) {
         this.passport = passport;
         this.firstName = firstName;

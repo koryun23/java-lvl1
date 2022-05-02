@@ -1,16 +1,15 @@
-package com.aca.exam.exam3.service.core;
+package com.aca.exam.exam3.service.core.plate.number;
 
 import com.aca.exam.exam3.entity.UserPlateNumber;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserPlateNumberService {
     UserPlateNumber create(UserPlateNumberCreationParams params);
 
     UserPlateNumber getByPlateNumber(String plateNumber);
 
-    List<UserPlateNumber> getAllUserPlateNumbersByUser(String passport);
+    List<UserPlateNumber> getAllPlateNumbersByPassport(String passport);
 
     UserPlateNumber update(Long id, UserPlateNumberUpdateParams params);
 }

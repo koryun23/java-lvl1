@@ -1,16 +1,13 @@
-package com.aca.exam.exam3.service.core;
-
-import org.springframework.util.Assert;
+package com.aca.exam.exam3.facade.plate.number.response;
 
 import java.util.Objects;
 
-public class UserPlateNumberCreationParams {
+public class CreatePlateNumberResponseDto {
+
     private final String plateNumber;
     private final String passport;
 
-    public UserPlateNumberCreationParams(String plateNumber, String passport) {
-        Assert.notNull(plateNumber, "plate number should not be null");
-        Assert.notNull(passport, "passport should not be null");
+    public CreatePlateNumberResponseDto(String plateNumber, String passport) {
         this.plateNumber = plateNumber;
         this.passport = passport;
     }
@@ -27,7 +24,7 @@ public class UserPlateNumberCreationParams {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserPlateNumberCreationParams that = (UserPlateNumberCreationParams) o;
+        CreatePlateNumberResponseDto that = (CreatePlateNumberResponseDto) o;
         return Objects.equals(plateNumber, that.plateNumber) && Objects.equals(passport, that.passport);
     }
 
@@ -38,7 +35,7 @@ public class UserPlateNumberCreationParams {
 
     @Override
     public String toString() {
-        return "UserPlateNumberCreationParams{" +
+        return "CreatePlateNumberResponseDto{" +
                 "plateNumber='" + plateNumber + '\'' +
                 ", passport='" + passport + '\'' +
                 '}';

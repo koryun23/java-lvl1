@@ -1,4 +1,4 @@
-package com.aca.exam.exam3.service.core;
+package com.aca.exam.exam3.service.core.user;
 
 import java.util.Objects;
 

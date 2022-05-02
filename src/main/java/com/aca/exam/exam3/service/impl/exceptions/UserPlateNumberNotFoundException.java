@@ -1,8 +1,8 @@
-package com.aca.exam.exam3.service.impl;
+package com.aca.exam.exam3.service.impl.exceptions;
 
 import com.aca.exam.exam3.entity.UserPlateNumber;
 
-public class UserPlateNumberNotFoundException extends RuntimeException{
+public class UserPlateNumberNotFoundException extends RuntimeException {
     public UserPlateNumberNotFoundException(String plateNumber) {
         super(String.format("No plate found having number %s", plateNumber));
     }

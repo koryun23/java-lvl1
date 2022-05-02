@@ -1,6 +1,4 @@
-package com.aca.exam.exam3.service.core;
-
-import com.aca.exam.exam3.entity.User;
+package com.aca.exam.exam3.service.core.plate.number;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
-package com.aca.exam.exam3.service.impl;
+package com.aca.exam.exam3.service.impl.exceptions;
 
-public class UserNotFoundException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String passport) {
         super(String.format("User with passport '%s' does not exist", passport));
     }

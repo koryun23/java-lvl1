@@ -3,10 +3,11 @@ package com.aca.exam.exam3.service.impl;
 import com.aca.exam.exam3.entity.User;
 import com.aca.exam.exam3.entity.UserPlateNumber;
 import com.aca.exam.exam3.repository.UserPlateNumberRepository;
-import com.aca.exam.exam3.service.core.UserPlateNumberCreationParams;
-import com.aca.exam.exam3.service.core.UserPlateNumberService;
-import com.aca.exam.exam3.service.core.UserPlateNumberUpdateParams;
-import com.aca.exam.exam3.service.core.UserService;
+import com.aca.exam.exam3.service.core.plate.number.UserPlateNumberCreationParams;
+import com.aca.exam.exam3.service.core.plate.number.UserPlateNumberService;
+import com.aca.exam.exam3.service.core.plate.number.UserPlateNumberUpdateParams;
+import com.aca.exam.exam3.service.core.user.UserService;
+import com.aca.exam.exam3.service.impl.exceptions.UserPlateNumberNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -51,7 +52,7 @@ public class UserPlateNumberServiceImpl implements UserPlateNumberService {
     }
 
     @Override
-    public List<UserPlateNumber> getAllUserPlateNumbersByUser(String passport) {
+    public List<UserPlateNumber> getAllPlateNumbersByPassport(String passport) {
         Assert.notNull(passport, "passport should not be null");
         LOGGER.info("Retrieving all plates a user with passport {} has", passport);
         List<UserPlateNumber> userPlateNumberList = userPlateNumberRepository.findAllByUser(
@@ -66,7 +67,7 @@ public class UserPlateNumberServiceImpl implements UserPlateNumberService {
     public UserPlateNumber update(Long id, UserPlateNumberUpdateParams params) {
         Assert.notNull(params, "UserPlateNumberUpdateParams should not be null");
         LOGGER.info("Updating record with id = {} according to params - {}", id, params);
-        if(!userPlateNumberRepository.existsById(id)) throw new UserPlateNumberNotFoundException(id);
+        if (!userPlateNumberRepository.existsById(id)) throw new UserPlateNumberNotFoundException(id);
         UserPlateNumber plateNumber = new UserPlateNumber(
                 params.getPlateNubmer(),
                 userService.getByPassport(params.getPassport())

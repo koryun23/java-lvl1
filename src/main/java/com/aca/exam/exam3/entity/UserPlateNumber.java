@@ -21,7 +21,9 @@ public class UserPlateNumber {
             referencedColumnName = "id")
     private User user;
 
-    public UserPlateNumber(){}
+    public UserPlateNumber() {
+    }
+
     public UserPlateNumber(String plateNumber, User user) {
         this.plateNumber = plateNumber;
         this.user = user;

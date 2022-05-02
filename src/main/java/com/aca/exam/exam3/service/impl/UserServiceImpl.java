@@ -1,16 +1,13 @@
 package com.aca.exam.exam3.service.impl;
 
 import com.aca.exam.exam3.entity.User;
-import com.aca.exam.exam3.entity.UserPlateNumber;
 import com.aca.exam.exam3.repository.UserRepository;
-import com.aca.exam.exam3.service.core.UserCreationParams;
-import com.aca.exam.exam3.service.core.UserService;
+import com.aca.exam.exam3.service.core.user.UserCreationParams;
+import com.aca.exam.exam3.service.core.user.UserService;
+import com.aca.exam.exam3.service.impl.exceptions.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -43,6 +40,14 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByPassport(passport).orElseThrow(() -> new UserNotFoundException(passport));
         LOGGER.info("Successfully retrieved a user - {}", user);
         return user;
+    }
+
+    @Override
+    public boolean existsWithPassport(String passport) {
+        Assert.notNull(passport, "passport should not be null");
+        LOGGER.info("checking if a user with passport id {} exists", passport);
+        User user = userRepository.findByPassport(passport).orElse(null);
+        return user != null;
     }
 
 

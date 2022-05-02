@@ -1,26 +1,29 @@
 package com.aca.exam.exam3;
 
-import com.aca.exam.exam3.facade.UserPlateNumberFacade;
-import com.aca.exam.exam3.facade.UserPlateNumberFacadeImpl;
+import com.aca.exam.exam3.facade.plate.number.UserPlateNumberFacade;
+import com.aca.exam.exam3.facade.plate.number.UserPlateNumberFacadeImpl;
+import com.aca.exam.exam3.facade.plate.number.requests.CreatePlateNumberRequestDto;
+import com.aca.exam.exam3.facade.plate.number.requests.TakePlateNumberRequestDto;
 import com.aca.exam.exam3.repository.UserPlateNumberRepository;
 import com.aca.exam.exam3.repository.UserRepository;
-import com.aca.exam.exam3.service.core.UserCreationParams;
-import com.aca.exam.exam3.service.core.UserPlateNumberCreationParams;
-import com.aca.exam.exam3.service.core.UserPlateNumberService;
-import com.aca.exam.exam3.service.core.UserService;
+import com.aca.exam.exam3.service.core.user.UserCreationParams;
+import com.aca.exam.exam3.service.core.plate.number.UserPlateNumberService;
+import com.aca.exam.exam3.service.core.user.UserService;
 import com.aca.exam.exam3.service.impl.UserPlateNumberServiceImpl;
 import com.aca.exam.exam3.service.impl.UserServiceImpl;
+import com.aca.exam.exam3.generator.Generator;
+import com.aca.exam.exam3.generator.PlateNumberGeneratorImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
 
 @EnableJpaRepositories
 @SpringBootApplication
 public class Main {
+
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
         UserRepository userRepository = context.getBean(UserRepository.class);
@@ -42,18 +45,21 @@ public class Main {
                 "Arakelyan"
         ));
 
-        userPlateNumberService.create(new UserPlateNumberCreationParams(
-                "GB 123",
-                null
-        ));
 
-        userPlateNumberService.create(new UserPlateNumberCreationParams(
-                "HP 456",
-                null
-        ));
+        UserPlateNumberFacade userPlateNumberFacade = new UserPlateNumberFacadeImpl(
+                userService, userPlateNumberService
+        );
 
-        UserPlateNumberFacade facade = new UserPlateNumberFacadeImpl(userService, userPlateNumberService);
-        facade.takePlateNumber("AR123", "HP 456");
-        System.out.println(facade.allPlateNumbers("AR123"));
+        create(userPlateNumberFacade);
+    }
+
+    public static void create(UserPlateNumberFacade facade) {
+        Generator<String> generator = new PlateNumberGeneratorImpl();
+        List<String> plateNumbers = generator.generate();
+        for(String plateNumber : plateNumbers) {
+            facade.create(new CreatePlateNumberRequestDto(
+                    plateNumber, null
+            ));
+        }
     }
 }
