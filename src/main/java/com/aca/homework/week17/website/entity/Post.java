@@ -25,10 +25,6 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_POST_USER_ID_ID"), referencedColumnName = "id")
     private User user;
-
-    @Transient
-    private List<ImageDto> imageDtos;
-
     public Post() {
     }
     public Post(String title, String description, User user) {
@@ -72,14 +68,4 @@ public class Post {
         Assert.notNull(user, "user should not be null");
         this.user = user;
     }
-
-    public void setImageDtos(List<ImageDto> imageDtos) {
-        this.imageDtos = imageDtos;
-    }
-
-    public List<ImageDto> getImageDtos() {
-        return imageDtos;
-    }
-
-
 }
