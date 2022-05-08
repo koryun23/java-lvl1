@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     public User create(CreateUserParams params) {
         Assert.notNull(params, "the params cannot be null");
         LOGGER.info("Creating user for the provided params - {}", params);
-        User user = new User(params.getUsername(), params.getFirstName(), params.getSecondName());
+        User user = new User(params.getUsername(), params.getFirstName(), params.getSecondName(), params.getCreatedAt());
         User savedUser = userRepository.save(user);
         LOGGER.info("Successfully created a user for the provided params - {}", params);
         return savedUser;
@@ -43,6 +43,20 @@ public class UserServiceImpl implements UserService {
                 user);
 
         return user;
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        Assert.hasText(username, "Username should not be null or empty");
+        LOGGER.info("Retrieving user for the provided username - {}", username);
+
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        LOGGER.info("Successfully retrieved the user for the provided username - {}, result - {}",
+                username,
+                userOptional);
+
+        return userOptional;
     }
 
     @Override

@@ -1,21 +1,31 @@
 package com.aca.classwork.week15.university.facade;
 
+import com.aca.classwork.week15.university.entity.Diploma;
+import com.aca.classwork.week15.university.entity.DiplomaColorType;
 import com.aca.classwork.week15.university.entity.User;
+import com.aca.classwork.week15.university.service.core.CreateDiplomaParams;
 import com.aca.classwork.week15.university.service.core.CreateUserParams;
 import com.aca.classwork.week15.university.service.core.DiplomaService;
 import com.aca.classwork.week15.university.service.core.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 public class UniversityFacadeImpl implements UniversityFacade{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UniversityFacadeImpl.class);
     private final UserService userService;
     private final DiplomaService diplomaService;
+    private final UserMapper userMapper;
 
-    public UniversityFacadeImpl(UserService userService, DiplomaService diplomaService) {
+    public UniversityFacadeImpl(UserService userService, DiplomaService diplomaService, UserMapper userMapper) {
         this.userService = userService;
         this.diplomaService = diplomaService;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -26,10 +36,47 @@ public class UniversityFacadeImpl implements UniversityFacade{
                 new CreateUserParams(
                         dto.getFirstName() + "_" + dto.getSecondName(),
                         dto.getFirstName(),
-                        dto.getSecondName()
+                        dto.getSecondName(),
+                        LocalDate.now()
                 )
         );
 
-        return new UserAdmissionResponseDto(user.getUsername(), user.getFirstName(), user.getSecondName());
+        UserAdmissionResponseDto userAdmissionResponseDto = userMapper.map(user);
+        LOGGER.info("Successfully admitted a student for the provided request - {}, response - {}", dto, userAdmissionResponseDto);
+        return userAdmissionResponseDto;
+    }
+
+    @Override
+    public UserGraduationResponseDto graduate(UserGraduationRequestDto dto) {
+        Assert.notNull(dto, "The User graduation request dto should not be null");
+        LOGGER.debug("Starting graduation process fro the provided dto - {}", dto);
+
+        Optional<User> userOptional = userService.findByUsername(dto.getUsername());
+        if(userOptional.isEmpty()) {
+            return new UserGraduationResponseDto(List.of("user not found"));
+        }
+        User user = userOptional.get();
+
+        Diploma diploma = diplomaService.create(
+                new CreateDiplomaParams(
+                        DiplomaColorType.RED,
+                        user.getDate(),
+                        LocalDate.now(),
+                        user.getId()
+                )
+        );
+
+        UserGraduationResponseDto userGraduationResponseDto = new UserGraduationResponseDto(
+                user.getFirstName(),
+                user.getSecondName(),
+                diploma.getStartDate(),
+                diploma.getEndDate(),
+                diploma.getColorType(),
+                "N" + diploma.getId()
+        );
+
+        LOGGER.info("Successfully processed graduation for the provided request - {}, response - {}", dto, userGraduationResponseDto);
+
+        return userGraduationResponseDto;
     }
 }
