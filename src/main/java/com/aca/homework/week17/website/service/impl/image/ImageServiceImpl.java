@@ -38,29 +38,25 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> getAllByPost(Post post) {
-        Assert.notNull(post, "post should not be null");
-        LOGGER.info("retrieving all images of post - {}", post);
-        List<Image> allByPost = imageRepository.findAllByPost(post);
-        if(allByPost.isEmpty()){
-            LOGGER.info("the post - {} had not images, returning an empty list.", post);
-            return Collections.emptyList();
-        }
-        LOGGER.info("successfully retrieved all images - {} of post - {}", allByPost, post);
+    public List<Image> getAllByPostId(Long id) {
+        Assert.notNull(id, "post should not be null");
+        LOGGER.info("retrieving all images of post with id - {}", id);
+        List<Image> allByPost = imageRepository.findAllByPostId(id);
+        LOGGER.info("successfully retrieved all images - {} of post with id - {}", allByPost, id);
         return Collections.unmodifiableList(allByPost);
     }
 
     @Override
-    public List<Image> getAllByUser(User user) {
-        Assert.notNull(user, "user should not be null");
-        LOGGER.info("retrieving all the images from user - {}", user);
-        List<Post> allByUser = postService.getAllByUser(user);
+    public List<Image> getAllByUserId(Long id) {
+        Assert.notNull(id, "user should not be null");
+        LOGGER.info("retrieving all the images from user - {}", id);
+        List<Post> allByUser = postService.getAllByUserId(id);
         List<Image> imagesByUser = new LinkedList<>();
         for(Post post : allByUser) {
-            List<Image> allByPost = getAllByPost(post);
+            List<Image> allByPost = getAllByPostId(post.getId());
             imagesByUser.addAll(allByPost);
         }
-        LOGGER.info("successfully retrieved all images - {} of the user - {}", imagesByUser, user);
+        LOGGER.info("successfully retrieved all images - {} of the user with id - {}", imagesByUser, id);
         return imagesByUser;
     }
 

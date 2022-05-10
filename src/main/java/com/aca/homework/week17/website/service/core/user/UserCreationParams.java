@@ -1,14 +1,20 @@
 package com.aca.homework.week17.website.service.core.user;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
-public class UserCreationParams {
+public final class UserCreationParams {
     private String username;
     private String firstName;
     private String secondName;
     private String password;
 
     public UserCreationParams(String username, String firstName, String secondName, String password) {
+        Assert.notNull(username, "username should not be null");
+        Assert.notNull(firstName, "first name should not be null");
+        Assert.notNull(secondName, "second name should not be null");
+        Assert.notNull(password, "password should not be null");
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;

@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByUsernameAndPassword(String username, String password) {
-        Assert.notNull(username, "username should not be null");
-        Assert.notNull(password, "password should not be null");
+        Assert.hasText(username, "username should not be null and should contain 1+ symbols");
+        Assert.hasText(password, "password should not be null and should contain 1+ symbols");
         LOGGER.info("retrieving a user optional according to username and password");
         Optional<User> optionalUser = userRepository.findByUsernameAndPassword(username, password);
         LOGGER.info("successfully retrieved a user optional - {}", optionalUser);
@@ -50,5 +50,14 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         LOGGER.info("successfully retrieved a user - {}", user);
         return user;
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        Assert.notNull(id, "id should not be null");
+        LOGGER.info("retrieving an optional of a user having id {}", id);
+        Optional<User> optionalUser = userRepository.findById(id);
+        LOGGER.info("successfully retrieved the optional - {}", optionalUser);
+        return optionalUser;
     }
 }

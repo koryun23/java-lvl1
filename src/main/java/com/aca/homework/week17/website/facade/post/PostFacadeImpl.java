@@ -20,6 +20,7 @@ import com.aca.homework.week17.website.service.core.image.ImageService;
 import com.aca.homework.week17.website.service.core.post.PostCreationParams;
 import com.aca.homework.week17.website.service.core.post.PostService;
 import com.aca.homework.week17.website.service.core.user.UserService;
+import com.aca.homework.week17.website.service.impl.post.PostNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -27,6 +28,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PostFacadeImpl implements PostFacade {
@@ -35,9 +37,9 @@ public class PostFacadeImpl implements PostFacade {
     private final UserService userService;
     private final PostService postService;
     private final ImageService imageService;
-    private UserDtoMapper userDtoMapper;
-    private PostDtoMapper postDtoMapper;
-    private Mapper<Image, ImageDto> imageDtoMapper;
+    private final UserDtoMapper userDtoMapper;
+    private final PostDtoMapper postDtoMapper;
+    private final Mapper<Image, ImageDto> imageDtoMapper;
 
     public PostFacadeImpl(UserService userService,
                           PostService postService,
@@ -62,8 +64,12 @@ public class PostFacadeImpl implements PostFacade {
     public PostCreationResponseDto create(PostCreationRequestDto dto) {
         Assert.notNull(dto, "post creation request dto should not be null");
         List<ImageUploadRequestDto> imageUploadRequestDtos = dto.getImageUploadRequestDtos();
-        if(imageUploadRequestDtos.size() > 5) {
-            throw new ImageMaximumCountOutOfBoundsException(imageUploadRequestDtos.size(), 5);
+        if (imageUploadRequestDtos.size() > 5) {
+            return new PostCreationResponseDto(List.of(
+                    String.format(
+                            "image maximum count exceeded: maximum count - 5, actual count - %d",
+                            imageUploadRequestDtos.size()))
+            );
         }
         LOGGER.info("creating a new post according to post creation request dto - {}", dto);
         Post post = postService.create(
@@ -74,48 +80,57 @@ public class PostFacadeImpl implements PostFacade {
                 )
         );
         List<ImageUploadResponseDto> imageUploadResponseDtos = new LinkedList<>();
-        for(ImageUploadRequestDto imageUploadRequestDto : imageUploadRequestDtos) {
+        for (ImageUploadRequestDto imageUploadRequestDto : imageUploadRequestDtos) {
             imageUploadResponseDtos.add(this.uploadImage(imageUploadRequestDto));
         }
-        LOGGER.info("successfully created a new post - {}", post);
-        return new PostCreationResponseDto(
+        PostCreationResponseDto postCreationResponseDto = new PostCreationResponseDto(
                 imageUploadResponseDtos,
                 post.getTitle(),
                 post.getDescription(),
                 LocalDateTime.now()
         );
+        LOGGER.info("successfully created a new post - {}, response - {}", post, postCreationResponseDto);
+        return postCreationResponseDto;
     }
 
     @Override
     public ImageUploadResponseDto uploadImage(ImageUploadRequestDto dto) {
         Assert.notNull(dto, "image upload request dto should not be null");
+        if (!postService.existsById(dto.getPostId())) {
+            return new ImageUploadResponseDto(List.of(String.format("Post with id(%d) does not exist", dto.getPostId())));
+        }
         LOGGER.info("uploading a new image according to image upload request dto - {}", dto);
         Image image = imageService.create(new ImageCreationParams(dto.getBlobId(), dto.getPostId()));
-        LOGGER.info("successfully uploaded a new image - {}", image);
-        return new ImageUploadResponseDto(
+        ImageUploadResponseDto imageUploadResponseDto = new ImageUploadResponseDto(
                 image.getBlobId(),
                 image.getPost().getId()
         );
+        LOGGER.info("successfully uploaded a new image - {}, response - {}", image, imageUploadResponseDto);
+        return imageUploadResponseDto;
     }
 
     @Override
     public PostsRetrievalResponseDto getAllUserPosts(PostsRetrievalRequestDto dto) {
         Assert.notNull(dto, "posts retrieval request dto should not be null");
         LOGGER.info("retrieving all posts of user with id = {}", dto.getUserId());
-        User user = userService.getById(dto.getUserId());
+        Optional<User> optionalUser = userService.findById(dto.getUserId());
+        if (optionalUser.isEmpty()) {
+            return new PostsRetrievalResponseDto(List.of(String.format("user with id = %d does not exist", dto.getUserId())));
+        }
+        User user = optionalUser.get();
         UserDto userDto = userDtoMapper.apply(user);
-        List<Post> posts = postService.getAllByUser(user);
+        List<Post> posts = postService.getAllByUserId(user.getId());
         List<PostDto> postDtos = new LinkedList<>();
 
-        for(Post post : posts) {
-            List<Image> images = imageService.getAllByPost(post);
+        for (Post post : posts) {
+            List<Image> images = imageService.getAllByPostId(post.getId());
             List<ImageDto> imageDtos = new LinkedList<>();
             images.forEach(image -> imageDtos.add(imageDtoMapper.apply(image)));
             postDtoMapper.apply(post);
             postDtos.add(new PostDto(
-                            post.getTitle(),
-                            post.getDescription(),
-                            imageDtos
+                    post.getTitle(),
+                    post.getDescription(),
+                    imageDtos
             ));
         }
 

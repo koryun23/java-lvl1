@@ -1,8 +1,10 @@
 package com.aca.homework.week17.website.service.core.post;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
-public class PostCreationParams {
+public final class PostCreationParams {
     private final String title;
 
     private final String description;
@@ -10,6 +12,9 @@ public class PostCreationParams {
     private final Long userId;
 
     public PostCreationParams(String title, String description, Long userId) {
+        Assert.notNull(title, "title should not be null");
+        Assert.notNull(description, "description should not be null");
+        Assert.notNull(userId, "user id should not be null");
         this.title = title;
         this.description = description;
         this.userId = userId;

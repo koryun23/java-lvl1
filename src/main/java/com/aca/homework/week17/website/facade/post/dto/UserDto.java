@@ -3,7 +3,7 @@ package com.aca.homework.week17.website.facade.post.dto;
 import java.util.Objects;
 
 public class UserDto {
-    private String username;
+    private final String username;
 
     public UserDto(String username) {
         this.username = username;

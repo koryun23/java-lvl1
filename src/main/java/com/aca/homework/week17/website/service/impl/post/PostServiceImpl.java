@@ -48,11 +48,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getAllByUser(User user) {
-        Assert.notNull(user, "user should not be null");
-        LOGGER.info("getting all posts of user with id {}", user);
-        List<Post> allByUser = postRepository.findAllByUser(user);
+    public List<Post> getAllByUserId(Long id) {
+        Assert.notNull(id, "id should not be null");
+        LOGGER.info("getting all posts of user with id {}", id);
+        List<Post> allByUser = postRepository.findAllByUserId(id);
         LOGGER.info("successfully retrieved all users - {}", allByUser);
         return allByUser;
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        Assert.notNull(id, "id should not be null");
+        LOGGER.info("checking id a user with id = {} exists", id);
+        return postRepository.existsById(id);
     }
 }

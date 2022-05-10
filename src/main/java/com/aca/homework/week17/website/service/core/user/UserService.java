@@ -10,4 +10,6 @@ public interface UserService {
     User create(UserCreationParams params);
 
     User getById(Long id);
+
+    Optional<User> findById(Long id);
 }

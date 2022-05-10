@@ -11,5 +11,7 @@ public interface PostService {
 
     Post getById(Long id);
 
-    List<Post> getAllByUser(User user);
+    List<Post> getAllByUserId(Long id);
+
+    boolean existsById(Long id);
 }

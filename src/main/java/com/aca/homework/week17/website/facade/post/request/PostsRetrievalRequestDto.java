@@ -2,7 +2,7 @@ package com.aca.homework.week17.website.facade.post.request;
 
 public class PostsRetrievalRequestDto {
 
-    private Long userId;
+    private final Long userId;
 
     public PostsRetrievalRequestDto(Long userId) {
         this.userId = userId;

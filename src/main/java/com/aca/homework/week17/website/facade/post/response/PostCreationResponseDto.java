@@ -5,16 +5,22 @@ import java.util.List;
 
 public class PostCreationResponseDto {
 
-    private final List<ImageUploadResponseDto> imageDtos;
-    private final String title;
-    private final String description;
-    private final LocalDateTime creationDate;
+    private List<ImageUploadResponseDto> imageDtos;
+    private String title;
+    private String description;
+    private LocalDateTime creationDate;
+
+    private List<String> errors;
 
     public PostCreationResponseDto(List<ImageUploadResponseDto> images, String title, String description, LocalDateTime creationDate) {
         this.imageDtos = images;
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;
+    }
+
+    public PostCreationResponseDto(List<String> errors) {
+        this.errors = errors;
     }
 
     public List<ImageUploadResponseDto> getImageDtos() {
@@ -40,6 +46,7 @@ public class PostCreationResponseDto {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", creationDate=" + creationDate +
+                ", errors=" + errors +
                 '}';
     }
 }

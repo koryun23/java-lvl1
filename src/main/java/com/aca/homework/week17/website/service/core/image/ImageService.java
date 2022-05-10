@@ -9,7 +9,7 @@ import java.util.List;
 public interface ImageService {
     Image create(ImageCreationParams params);
 
-    List<Image> getAllByPost(Post post);
+    List<Image> getAllByPostId(Long id);
 
-    List<Image> getAllByUser(User user);
+    List<Image> getAllByUserId(Long id);
 }

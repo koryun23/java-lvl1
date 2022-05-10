@@ -16,10 +16,15 @@ public class Image {
     private String blobId;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", foreignKey = @ForeignKey(name = "FK_IMAGES_POST_ID_ID"), referencedColumnName = "id")
+    @JoinColumn(name = "post_id",
+            foreignKey = @ForeignKey(name = "FK_IMAGES_POST_ID_ID"),
+            referencedColumnName = "id",
+            nullable = false)
     private Post post;
 
-    public Image() {}
+    public Image() {
+    }
+
     public Image(String blobId, Post post) {
         this.blobId = blobId;
         this.post = post;

@@ -1,12 +1,16 @@
 package com.aca.homework.week17.website.service.core.image;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
-public class ImageCreationParams {
+public final class ImageCreationParams {
     private final String blobId;
     private final Long postId;
 
     public ImageCreationParams(String blobId, Long postId) {
+        Assert.notNull(blobId, "blob id should not be null");
+        Assert.notNull(postId, "post id should not be null");
         this.blobId = blobId;
         this.postId = postId;
     }

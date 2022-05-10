@@ -7,12 +7,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class PostsRetrievalResponseDto {
-    private final UserDto userDto;
-    private final List<PostDto> postDtos;
+    private UserDto userDto;
+    private List<PostDto> postDtos;
+
+    private List<String> errors;
 
     public PostsRetrievalResponseDto(UserDto userDto, List<PostDto> postDtos) {
         this.userDto = userDto;
         this.postDtos = postDtos;
+    }
+
+    public PostsRetrievalResponseDto(List<String> errors) {
+        this.errors = errors;
     }
 
     public UserDto getUserDto() {
@@ -41,8 +47,7 @@ public class PostsRetrievalResponseDto {
         return "PostsRetrievalResponseDto{" +
                 "userDto=" + userDto +
                 ", postDtos=" + postDtos +
+                ", errors=" + errors +
                 '}';
     }
-
-
 }

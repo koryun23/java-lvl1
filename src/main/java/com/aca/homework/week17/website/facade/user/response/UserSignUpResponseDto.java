@@ -1,16 +1,24 @@
 package com.aca.homework.week17.website.facade.user.response;
 
+import java.util.List;
+
 public class UserSignUpResponseDto {
-    private final String username;
-    private final String firstName;
-    private final String secondName;
-    private final String password;
+    private String username;
+    private String firstName;
+    private String secondName;
+    private String password;
+
+    private List<String> errors;
 
     public UserSignUpResponseDto(String username, String firstName, String secondName, String password) {
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;
         this.password = password;
+    }
+
+    public UserSignUpResponseDto(List<String> errors) {
+        this.errors = errors;
     }
 
     public String getUsername() {
@@ -36,6 +44,7 @@ public class UserSignUpResponseDto {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", password='" + password + '\'' +
+                ", errors='" + errors + '\'' +
                 '}';
     }
 }

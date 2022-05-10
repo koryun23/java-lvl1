@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserFacadeImpl implements UserFacade {
@@ -28,7 +29,7 @@ public class UserFacadeImpl implements UserFacade {
         LOGGER.info("Signing up a new user according to the user sign up request dto - {}", dto);
         Optional<User> userOptional = userService.findUserByUsernameAndPassword(dto.getUsername(), dto.getPassword());
         if (userOptional.isPresent()) {
-            throw new UserAlreadyExistsException(dto.getUsername());
+            return new UserSignUpResponseDto(List.of(String.format("User with username %s already exists", dto.getUsername())));
         }
         User user = userService.create(new UserCreationParams(
                 dto.getUsername(),
@@ -36,13 +37,14 @@ public class UserFacadeImpl implements UserFacade {
                 dto.getSecondName(),
                 dto.getPassword()
         ));
-        LOGGER.info("successfully signed up a new user - {}", user);
-        return new UserSignUpResponseDto(
+        UserSignUpResponseDto userSignUpResponseDto = new UserSignUpResponseDto(
                 user.getUsername(),
                 user.getFirstName(),
                 user.getSecondName(),
                 user.getPassword()
         );
+        LOGGER.info("successfully signed up a new user - {}, response - {}", user, userSignUpResponseDto);
+        return userSignUpResponseDto;
     }
 
 
