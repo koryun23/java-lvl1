@@ -26,19 +26,8 @@ public class Main {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
-        UserRepository userRepository = context.getBean(UserRepository.class);
-        UserService userService = new UserServiceImpl(userRepository);
-        DiplomaRepository diplomaRepository = context.getBean(DiplomaRepository.class);
-        DiplomaService diplomaService = new DiplomaServiceImpl(diplomaRepository, userService);
 
-        UniversityFacade universityFacade = new UniversityFacadeImpl(
-                new UserServiceImpl(userRepository),
-                new DiplomaServiceImpl(
-                        diplomaRepository,
-                        new UserServiceImpl(userRepository)
-                ),
-                new UserMapperImpl()
-        );
+        final UniversityFacade universityFacade = context.getBean(UniversityFacade.class);
 
         UserAdmissionResponseDto name1Response = universityFacade.admit(new UserAdmissionRequestDto(
                 "name1", "secondName2"
@@ -54,7 +43,5 @@ public class Main {
         universityFacade.graduate(new UserGraduationRequestDto("John_Daniels"));
         universityFacade.graduate(new UserGraduationRequestDto(armenResponse.getUsername()));
         System.out.println(universityFacade.graduate(new UserGraduationRequestDto("abc")));
-
-
     }
 }
