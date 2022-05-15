@@ -12,7 +12,7 @@ public class Organization {
     @SequenceGenerator(name = "ORGANIZATION_ID_SEQUENCE")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Organization() {
