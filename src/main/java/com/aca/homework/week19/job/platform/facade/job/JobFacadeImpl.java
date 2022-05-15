@@ -33,8 +33,14 @@ public class JobFacadeImpl implements JobFacade {
     public JobHireResponseDto hire(JobHireRequestDto dto) {
         Assert.notNull(dto, "job hire request dto should not be null");
         LOGGER.info("hiring a user according to job hire request dto - {}", dto);
-        if(!isValidJobHireRequestDto(dto)) {
-            return new JobHireResponseDto(List.of(String.format("user with id(%d) did not accept invitation from organization with id(%d)", dto.getUserId(), dto.getOrganizationId())));
+        if(invitationService.getByUserIdAndOrganizationId(dto.getUserId(), dto.getOrganizationId()).getStatus() != InvitationStatusType.ACCEPTED) {
+            return new JobHireResponseDto(List.of(String.format("user with id(%d) did not accept job invitation from organization with id(%d)", dto.getUserId(), dto.getOrganizationId())));
+        }
+        if(userService.findById(dto.getUserId()).isEmpty()) {
+            return new JobHireResponseDto(List.of("Organization cannot hire a non-existing user"));
+        }
+        if(organizationService.findById(dto.getOrganizationId()).isEmpty()) {
+            return new JobHireResponseDto(List.of("Non-existing organization cannot hire a user"));
         }
         invitationService.getByUserIdAndOrganizationId(dto.getUserId(), dto.getOrganizationId()).getStatus();
         User user = userService.registerUserAtOrganization(dto.getUserId(), dto.getOrganizationId());
@@ -44,12 +50,5 @@ public class JobFacadeImpl implements JobFacade {
         );
         LOGGER.info("Successfully registered user {} at organization {}.", user, organizationService.getById(dto.getOrganizationId()));
         return responseDto;
-    }
-
-    private boolean isValidJobHireRequestDto(JobHireRequestDto dto) {
-        return invitationService.getByUserIdAndOrganizationId(
-                dto.getUserId(),
-                dto.getOrganizationId()
-        ).getStatus() == InvitationStatusType.ACCEPTED;
     }
 }

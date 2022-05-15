@@ -91,6 +91,9 @@ public class InvitationFacadeImpl implements InvitationFacade {
             return new InvitationDetailsDto(List.of("a user cannot accept a non-existing job invitation"));
         }
         Invitation invitation = invitationOptional.get();
+        if(invitation.getStatus() != InvitationStatusType.OPEN) {
+            return new InvitationDetailsDto(List.of(String.format("Cannot accept an invitation that is already %s", invitation.getStatus())));
+        }
         invitationService.markAs(invitation.getId(), InvitationStatusType.ACCEPTED);
         Organization organization = invitation.getOrganization();
         InvitationDetailsDto invitationDetailsDto = new InvitationDetailsDto(
@@ -115,6 +118,9 @@ public class InvitationFacadeImpl implements InvitationFacade {
             return new InvitationDetailsDto(List.of("user cannot reject a non-existing job invitation"));
         }
         Invitation invitation = invitationOptional.get();
+        if(invitation.getStatus() != InvitationStatusType.OPEN) {
+            return new InvitationDetailsDto(List.of(String.format("Cannot reject an invitation that is already %s", invitation.getStatus())));
+        }
         invitationService.markAs(invitation.getId(), InvitationStatusType.REJECTED);
         Organization organization = invitation.getOrganization();
         InvitationDetailsDto invitationDetailsDto = new InvitationDetailsDto(
