@@ -7,7 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-public class UserMapperImpl implements UserMapper{
+@Component
+public class UserMapperImpl implements UserMapper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserMapperImpl.class);
 

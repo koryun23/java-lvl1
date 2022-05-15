@@ -1,6 +1,5 @@
 package com.aca.classwork.week15.university;
 
-import com.aca.classwork.week15.university.facade.UserMapper;
 import com.aca.classwork.week15.university.facade.UserMapperImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     @Bean
-    public UserMapper userMapper() {
+    public UserMapperImpl userMapper() {
         return new UserMapperImpl();
     }
 }
