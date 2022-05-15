@@ -97,7 +97,7 @@ public class InvitationFacadeImpl implements InvitationFacade {
         invitationService.markAs(invitation.getId(), InvitationStatusType.ACCEPTED);
         Organization organization = invitation.getOrganization();
         InvitationDetailsDto invitationDetailsDto = new InvitationDetailsDto(
-                invitation.getStatus(),
+                InvitationStatusType.ACCEPTED,
                 userMapper.map(userOptional.get()),
                 organization.getName()
         );
@@ -124,11 +124,11 @@ public class InvitationFacadeImpl implements InvitationFacade {
         invitationService.markAs(invitation.getId(), InvitationStatusType.REJECTED);
         Organization organization = invitation.getOrganization();
         InvitationDetailsDto invitationDetailsDto = new InvitationDetailsDto(
-                invitation.getStatus(),
+                InvitationStatusType.REJECTED,
                 userMapper.map(userOptional.get()),
                 organization.getName()
         );
         LOGGER.info("successfully rejected an invitation, invitation details - {}", invitationDetailsDto);
-        return null;
+        return invitationDetailsDto;
     }
 }

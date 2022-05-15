@@ -102,4 +102,14 @@ public class InvitationServiceImpl implements InvitationService {
         LOGGER.info("successfully retrieved an optional - {}", invitationOptional);
         return invitationOptional;
     }
+
+    @Override
+    public Optional<Invitation> findByUserIdAndOrganizationId(Long userId, Long organizationId) {
+        Assert.notNull(userId, "user id should not be null");
+        Assert.notNull(organizationId, "organization id should not be null");
+        LOGGER.info("retrieving an optional of an invitation from organization with id ({}) to user with id ({})", organizationId, userId);
+        Optional<Invitation> invitationOptional = invitationRepository.findByUserIdAndOrganizationId(userId, organizationId);
+        LOGGER.info("successfully retrieved an optional of an invitation - {}", invitationOptional);
+        return invitationOptional;
+    }
 }

@@ -24,34 +24,17 @@ public class Main {
         JobFacade jobFacade = context.getBean(JobFacade.class);
         OrganizationFacade organizationFacade = context.getBean(OrganizationFacade.class);
         UserFacade userFacade = context.getBean(UserFacade.class);
-        userFacade.signUp(new UserSignUpRequestDto(
-                "John", "Williams"
-        ));
-        userFacade.signUp(new UserSignUpRequestDto(
-                "Jack", "Smith"
-        ));
-        userFacade.signUp(new UserSignUpRequestDto(
-                "Lisa", "Simpson"
-        ));
-        organizationFacade.register(new OrganizationRegistrationRequestDto("ACA"));
-        organizationFacade.register(new OrganizationRegistrationRequestDto("Google"));
-        invitationFacade.sendInvitation(new InvitationRequestDto(
-                1L, 1L
-        ));
-        invitationFacade.sendInvitation(new InvitationRequestDto(
-                2L, 1L
-        ));
-        invitationFacade.sendInvitation(new InvitationRequestDto(
-                3L, 2L
-        ));
-        invitationFacade.acceptInvitation(new InvitationAcceptDto(
-                1L, 1L
-        ));
-        invitationFacade.rejectInvitation(new InvitationRejectDto(
-                2L, 2L
-        ));
-        jobFacade.hire(new JobHireRequestDto(
-                1L, 1L
-        ));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("John", "Williams")));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Jack", "Smith")));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Lisa", "Simpson")));
+        System.out.println(organizationFacade.register(new OrganizationRegistrationRequestDto("ACA")));
+        System.out.println(organizationFacade.register(new OrganizationRegistrationRequestDto("Google")));
+        System.out.println(invitationFacade.sendInvitation(new InvitationRequestDto(1L, 1L)));
+        System.out.println(invitationFacade.sendInvitation(new InvitationRequestDto(2L, 1L)));
+        System.out.println(invitationFacade.sendInvitation(new InvitationRequestDto(3L, 2L)));
+        System.out.println(invitationFacade.acceptInvitation(new InvitationAcceptDto(1L, 1L)));
+        System.out.println(invitationFacade.rejectInvitation(new InvitationRejectDto(2L, 2L)));
+        System.out.println(jobFacade.hire(new JobHireRequestDto(1L, 1L)));
+        System.out.println(invitationFacade.rejectInvitation(new InvitationRejectDto(1L, 1L)));
     }
 }

@@ -17,4 +17,6 @@ public interface InvitationService {
     Invitation getById(Long id);
 
     Optional<Invitation> findById(Long id);
+
+    Optional<Invitation> findByUserIdAndOrganizationId(Long userId, Long organizationId);
 }
