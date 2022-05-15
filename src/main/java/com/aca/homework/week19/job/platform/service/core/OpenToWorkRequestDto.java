@@ -1,14 +1,19 @@
 package com.aca.homework.week19.job.platform.service.core;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class OpenToWorkRequestDto {
 
-    private String firstName;
-    private String secondName;
-    private Long organizationId;
+    private final String firstName;
+    private final String secondName;
+    private final Long organizationId;
 
     public OpenToWorkRequestDto(String firstName, String secondName, Long organizationId) {
+        Assert.notNull(firstName, "first name should not be null");
+        Assert.notNull(secondName, "second name should not be null");
+        Assert.notNull(organizationId, "organization id should not be null");
         this.firstName = firstName;
         this.secondName = secondName;
         this.organizationId = organizationId;
@@ -18,24 +23,12 @@ public class OpenToWorkRequestDto {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getSecondName() {
         return secondName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
-    }
-
     public Long getOrganizationId() {
         return organizationId;
-    }
-
-    public void setOrganizationId(Long organizationId) {
-        this.organizationId = organizationId;
     }
 
     @Override

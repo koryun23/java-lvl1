@@ -1,6 +1,7 @@
 package com.aca.homework.week19.job.platform.facade.organization;
 
 import com.aca.homework.week19.job.platform.facade.user.UserDetailsDto;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,8 @@ public class OrganizationDetailsDto {
     private List<String> errors;
 
     public OrganizationDetailsDto(String name, List<UserDetailsDto> employees) {
+        Assert.notNull(name, "name should not be null");
+        Assert.notNull(employees, "user details dto list should not be null");
         this.name = name;
         this.employees = employees;
     }
@@ -25,16 +28,8 @@ public class OrganizationDetailsDto {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<UserDetailsDto> getEmployees() {
         return employees;
-    }
-
-    public void setEmployees(List<UserDetailsDto> employees) {
-        this.employees = employees;
     }
 
     @Override

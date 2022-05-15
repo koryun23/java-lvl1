@@ -1,12 +1,17 @@
 package com.aca.homework.week19.job.platform.facade.invitation.request;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class InvitationRejectDto {
-    private Long userId;
-    private Long invitationId;
+
+    private final Long userId;
+    private final Long invitationId;
 
     public InvitationRejectDto(Long userId, Long invitationId) {
+        Assert.notNull(userId, "user id should not be null");
+        Assert.notNull(invitationId, "invitation id should not be null");
         this.userId = userId;
         this.invitationId = invitationId;
     }
@@ -15,16 +20,8 @@ public class InvitationRejectDto {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getInvitationId() {
         return invitationId;
-    }
-
-    public void setInvitationId(Long invitationId) {
-        this.invitationId = invitationId;
     }
 
     @Override

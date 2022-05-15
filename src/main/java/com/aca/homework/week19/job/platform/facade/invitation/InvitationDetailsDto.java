@@ -3,6 +3,7 @@ package com.aca.homework.week19.job.platform.facade.invitation;
 import com.aca.homework.week19.job.platform.entity.InvitationStatusType;
 import com.aca.homework.week19.job.platform.facade.organization.OrganizationDetailsDto;
 import com.aca.homework.week19.job.platform.facade.user.UserDetailsDto;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,9 @@ public class InvitationDetailsDto {
     private List<String> errors;
 
     public InvitationDetailsDto(InvitationStatusType status, UserDetailsDto userDto, String organizationName) {
+        Assert.notNull(status, "status should not be null");
+        Assert.notNull(userDto, "user details dto object should not be null");
+        Assert.notNull(organizationName, "organization name should not be null");
         this.status = status;
         this.userDto = userDto;
         this.organizationName = organizationName;
@@ -28,40 +32,16 @@ public class InvitationDetailsDto {
         return status;
     }
 
-    public void setStatus(InvitationStatusType status) {
-        this.status = status;
-    }
-
     public UserDetailsDto getUserDto() {
         return userDto;
-    }
-
-    public void setUserDto(UserDetailsDto userDto) {
-        this.userDto = userDto;
-    }
-
-    public String getOrganizationDto() {
-        return organizationName;
-    }
-
-    public void setOrganizationDto(String organizationDto) {
-        this.organizationName = organizationName;
     }
 
     public String getOrganizationName() {
         return organizationName;
     }
 
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
-    }
-
     public List<String> getErrors() {
         return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
     }
 
     @Override

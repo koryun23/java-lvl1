@@ -1,20 +1,19 @@
 package com.aca.homework.week19.job.platform.service.core;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class OrganizationCreationParams {
-    private String name;
+    private final String name;
 
     public OrganizationCreationParams(String name) {
+        Assert.notNull(name, "organization name should not be null");
         this.name = name;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

@@ -1,13 +1,17 @@
 package com.aca.homework.week19.job.platform.facade.user.request;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class UserSignUpRequestDto {
 
-    private String firstName;
-    private String secondName;
+    private final String firstName;
+    private final String secondName;
 
     public UserSignUpRequestDto(String firstName, String secondName) {
+        Assert.notNull(firstName, "first name should not be null");
+        Assert.notNull(secondName, "second name should not be null");
         this.firstName = firstName;
         this.secondName = secondName;
     }
@@ -16,16 +20,8 @@ public class UserSignUpRequestDto {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getSecondName() {
         return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
     }
 
     @Override

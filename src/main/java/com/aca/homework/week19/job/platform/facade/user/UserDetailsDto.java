@@ -1,5 +1,7 @@
 package com.aca.homework.week19.job.platform.facade.user;
 
+import org.springframework.util.Assert;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +13,8 @@ public class UserDetailsDto {
     private List<String> errors;
 
     public UserDetailsDto(String firstName, String secondName) {
+        Assert.notNull(firstName, "first name should not be null");
+        Assert.notNull(secondName, "second name should not be null");
         this.firstName = firstName;
         this.secondName = secondName;
     }
@@ -23,16 +27,8 @@ public class UserDetailsDto {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getSecondName() {
         return secondName;
-    }
-
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
     }
 
     @Override
