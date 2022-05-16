@@ -2,6 +2,7 @@ package com.aca.homework.week17.website.facade.post.response;
 
 import com.aca.homework.week17.website.facade.post.dto.PostDto;
 import com.aca.homework.week17.website.facade.post.dto.UserDto;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,8 @@ public class PostsRetrievalResponseDto {
     private List<String> errors;
 
     public PostsRetrievalResponseDto(UserDto userDto, List<PostDto> postDtos) {
+        Assert.notNull(userDto, "user dto object should not be null");
+        Assert.notNull(postDtos, "post dto list should not be null");
         this.userDto = userDto;
         this.postDtos = postDtos;
     }

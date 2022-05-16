@@ -9,10 +9,12 @@ import com.aca.homework.week17.website.service.core.post.PostService;
 import com.aca.homework.week17.website.service.core.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
+@Service
 public class PostServiceImpl implements PostService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
@@ -20,6 +22,8 @@ public class PostServiceImpl implements PostService {
     private final UserService userService;
 
     public PostServiceImpl(PostRepository postRepository, UserService userService) {
+        Assert.notNull(postRepository, "post repository should not be null");
+        Assert.notNull(userService, "user service should not be null");
         this.postRepository = postRepository;
         this.userService = userService;
     }
@@ -27,39 +31,40 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post create(PostCreationParams params) {
         Assert.notNull(params, "post creation params should not be null");
-        LOGGER.info("creating a new post according to params - {}", params);
+        LOGGER.info("Creating a new post according to params - {}", params);
         Post post = postRepository.save(
                 new Post(
                         params.getTitle(),
                         params.getDescription(),
                         userService.getById(params.getUserId()))
         );
-        LOGGER.info("successfully created a new post - {}", post);
+        LOGGER.info("Successfully created a new post - {}", post);
         return post;
     }
 
     @Override
     public Post getById(Long id) {
         Assert.notNull(id, "id should not be null");
-        LOGGER.info("retrieving a post with id = {}", id);
+        LOGGER.info("Retrieving a post with id = {}", id);
         Post post = postRepository.findById(id).orElseThrow(() -> new PostNotFoundException(id));
-        LOGGER.info("successfully retrieved a post - {}", post);
+        LOGGER.info("Successfully retrieved a post - {}", post);
         return post;
     }
 
     @Override
     public List<Post> getAllByUserId(Long id) {
         Assert.notNull(id, "id should not be null");
-        LOGGER.info("getting all posts of user with id {}", id);
+        LOGGER.info("Getting all posts of user with id - {}", id);
         List<Post> allByUser = postRepository.findAllByUserId(id);
-        LOGGER.info("successfully retrieved all users - {}", allByUser);
+        LOGGER.info("Successfully retrieved all users - {}", allByUser);
         return allByUser;
     }
 
     @Override
     public boolean existsById(Long id) {
         Assert.notNull(id, "id should not be null");
-        LOGGER.info("checking id a user with id = {} exists", id);
-        return postRepository.existsById(id);
+        boolean result = postRepository.existsById(id);
+        LOGGER.info("Checking id a user with id - {} exists, result - {}", id, result);
+        return result;
     }
 }

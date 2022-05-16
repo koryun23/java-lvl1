@@ -10,6 +10,4 @@ public interface ImageService {
     Image create(ImageCreationParams params);
 
     List<Image> getAllByPostId(Long id);
-
-    List<Image> getAllByUserId(Long id);
 }

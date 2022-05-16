@@ -13,7 +13,9 @@ public final class PostCreationParams {
 
     public PostCreationParams(String title, String description, Long userId) {
         Assert.notNull(title, "title should not be null");
+        Assert.hasText(title, "title should not be empty");
         Assert.notNull(description, "description should not be null");
+        Assert.hasText(description, "description should not be empty");
         Assert.notNull(userId, "user id should not be null");
         this.title = title;
         this.description = description;

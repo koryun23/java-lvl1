@@ -3,6 +3,8 @@ package com.aca.homework.week17.website.facade.user;
 import com.aca.homework.week17.website.entity.User;
 import com.aca.homework.week17.website.facade.user.request.UserSignUpRequestDto;
 import com.aca.homework.week17.website.facade.user.response.UserSignUpResponseDto;
+import com.aca.homework.week17.website.mapper.user.UserSignUpResponseDtoMapper;
+import com.aca.homework.week17.website.mapper.user.UserSignUpResponseDtoMapperImpl;
 import com.aca.homework.week17.website.service.core.user.UserCreationParams;
 import com.aca.homework.week17.website.service.core.user.UserService;
 import org.assertj.core.api.Assertions;
@@ -23,7 +25,7 @@ class UserFacadeTest {
 
     @BeforeEach
     public void init() {
-        userFacade = new UserFacadeImpl(userService);
+        userFacade = new UserFacadeImpl(userService, new UserSignUpResponseDtoMapperImpl());
     }
 
     @Test
@@ -39,6 +41,9 @@ class UserFacadeTest {
                 "John",
                 "Williams",
                 "1234abc"
+        ));
+        Mockito.verify(userService).create(new UserCreationParams(
+                "johnny11", "John", "Williams", "1234abc"
         ));
         Assertions.assertThat(signUp.getFirstName()).isEqualTo("John");
         Assertions.assertThat(signUp.getSecondName()).isEqualTo("Williams");

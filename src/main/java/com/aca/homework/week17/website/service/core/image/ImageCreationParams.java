@@ -10,6 +10,7 @@ public final class ImageCreationParams {
 
     public ImageCreationParams(String blobId, Long postId) {
         Assert.notNull(blobId, "blob id should not be null");
+        Assert.hasText(blobId, "blobid should not be empty");
         Assert.notNull(postId, "post id should not be null");
         this.blobId = blobId;
         this.postId = postId;

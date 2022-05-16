@@ -3,24 +3,30 @@ package com.aca.homework.week17.website.facade.user;
 import com.aca.homework.week17.website.entity.User;
 import com.aca.homework.week17.website.facade.user.request.UserSignUpRequestDto;
 import com.aca.homework.week17.website.facade.user.response.UserSignUpResponseDto;
+import com.aca.homework.week17.website.mapper.user.UserSignUpResponseDtoMapper;
 import com.aca.homework.week17.website.service.core.user.UserCreationParams;
 import com.aca.homework.week17.website.service.impl.user.UserNotFoundException;
 import com.aca.homework.week17.website.service.core.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class UserFacadeImpl implements UserFacade {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserFacadeImpl.class);
     private final UserService userService;
+    private final UserSignUpResponseDtoMapper userSignUpResponseDtoMapper;
 
-    public UserFacadeImpl(UserService userService) {
+    public UserFacadeImpl(UserService userService, UserSignUpResponseDtoMapper userSignUpResponseDtoMapper) {
         Assert.notNull(userService, "user service should not be null");
+        Assert.notNull(userSignUpResponseDtoMapper, "user sign up response dto mapper object should not be null");
         this.userService = userService;
+        this.userSignUpResponseDtoMapper = userSignUpResponseDtoMapper;
     }
 
     @Override
@@ -37,13 +43,8 @@ public class UserFacadeImpl implements UserFacade {
                 dto.getSecondName(),
                 dto.getPassword()
         ));
-        UserSignUpResponseDto userSignUpResponseDto = new UserSignUpResponseDto(
-                user.getUsername(),
-                user.getFirstName(),
-                user.getSecondName(),
-                user.getPassword()
-        );
-        LOGGER.info("successfully signed up a new user - {}, response - {}", user, userSignUpResponseDto);
+        UserSignUpResponseDto userSignUpResponseDto = userSignUpResponseDtoMapper.apply(user);
+        LOGGER.info("Successfully signed up a new user - {}, response - {}", user, userSignUpResponseDto);
         return userSignUpResponseDto;
     }
 

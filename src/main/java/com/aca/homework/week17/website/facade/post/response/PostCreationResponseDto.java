@@ -1,5 +1,7 @@
 package com.aca.homework.week17.website.facade.post.response;
 
+import org.springframework.util.Assert;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,6 +15,12 @@ public class PostCreationResponseDto {
     private List<String> errors;
 
     public PostCreationResponseDto(List<ImageUploadResponseDto> images, String title, String description, LocalDateTime creationDate) {
+        Assert.notNull(images, "image upload response dto list should not be null");
+        Assert.notNull(title, "title should not be null");
+        Assert.hasText(title, "title should not be empty");
+        Assert.notNull(description, "description should not be null");
+        Assert.hasText(description, "description should not be empty");
+        Assert.notNull(creationDate, "creation date should not be null");
         this.imageDtos = images;
         this.title = title;
         this.description = description;

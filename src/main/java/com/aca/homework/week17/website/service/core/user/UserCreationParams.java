@@ -12,9 +12,13 @@ public final class UserCreationParams {
 
     public UserCreationParams(String username, String firstName, String secondName, String password) {
         Assert.notNull(username, "username should not be null");
+        Assert.hasText(username, "username should not be empty");
         Assert.notNull(firstName, "first name should not be null");
+        Assert.hasText(firstName, "first name should not be empty");
         Assert.notNull(secondName, "second name should not be null");
+        Assert.hasText(secondName, "second name should not be empty");
         Assert.notNull(password, "password should not be null");
+        Assert.hasText(password, "password should not be empty");
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -72,7 +76,6 @@ public final class UserCreationParams {
                 "username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

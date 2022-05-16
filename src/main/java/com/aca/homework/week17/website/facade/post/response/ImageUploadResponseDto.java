@@ -1,5 +1,7 @@
 package com.aca.homework.week17.website.facade.post.response;
 
+import org.springframework.util.Assert;
+
 import java.util.List;
 
 public class ImageUploadResponseDto {
@@ -9,6 +11,9 @@ public class ImageUploadResponseDto {
     private List<String> errors;
 
     public ImageUploadResponseDto(String blobId, Long postId) {
+        Assert.notNull(blobId, "blob id should not be null");
+        Assert.hasText(blobId, "blob id should not be empty");
+        Assert.notNull(postId, "post id should not be null");
         this.blobId = blobId;
         this.postId = postId;
     }

@@ -94,7 +94,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }

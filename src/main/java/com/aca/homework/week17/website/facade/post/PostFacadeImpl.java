@@ -20,20 +20,22 @@ import com.aca.homework.week17.website.service.core.image.ImageService;
 import com.aca.homework.week17.website.service.core.post.PostCreationParams;
 import com.aca.homework.week17.website.service.core.post.PostService;
 import com.aca.homework.week17.website.service.core.user.UserService;
-import com.aca.homework.week17.website.service.impl.post.PostNotFoundException;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
+@Component
 public class PostFacadeImpl implements PostFacade {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostFacadeImpl.class);
+    private static final int MAXIMUM_IMAGE_COUNT = 5;
     private final UserService userService;
     private final PostService postService;
     private final ImageService imageService;
@@ -64,11 +66,11 @@ public class PostFacadeImpl implements PostFacade {
     public PostCreationResponseDto create(PostCreationRequestDto dto) {
         Assert.notNull(dto, "post creation request dto should not be null");
         List<ImageUploadRequestDto> imageUploadRequestDtos = dto.getImageUploadRequestDtos();
-        if (imageUploadRequestDtos.size() > 5) {
+        if (imageUploadRequestDtos.size() > MAXIMUM_IMAGE_COUNT) {
             return new PostCreationResponseDto(List.of(
                     String.format(
-                            "image maximum count exceeded: maximum count - 5, actual count - %d",
-                            imageUploadRequestDtos.size()))
+                            "image maximum count exceeded: maximum count - %d, actual count - %d",
+                            MAXIMUM_IMAGE_COUNT, imageUploadRequestDtos.size()))
             );
         }
         LOGGER.info("creating a new post according to post creation request dto - {}", dto);
@@ -96,23 +98,27 @@ public class PostFacadeImpl implements PostFacade {
     @Override
     public ImageUploadResponseDto uploadImage(ImageUploadRequestDto dto) {
         Assert.notNull(dto, "image upload request dto should not be null");
+        LOGGER.info("Uploading a new image according to image upload request dto - {}", dto);
+
+        if(dto.getImageCount() >= MAXIMUM_IMAGE_COUNT) {
+            return new ImageUploadResponseDto(List.of(String.format("Cannot upload more than %d images.", MAXIMUM_IMAGE_COUNT)));
+        }
         if (!postService.existsById(dto.getPostId())) {
             return new ImageUploadResponseDto(List.of(String.format("Post with id(%d) does not exist", dto.getPostId())));
         }
-        LOGGER.info("uploading a new image according to image upload request dto - {}", dto);
         Image image = imageService.create(new ImageCreationParams(dto.getBlobId(), dto.getPostId()));
         ImageUploadResponseDto imageUploadResponseDto = new ImageUploadResponseDto(
                 image.getBlobId(),
                 image.getPost().getId()
         );
-        LOGGER.info("successfully uploaded a new image - {}, response - {}", image, imageUploadResponseDto);
+        LOGGER.info("Successfully uploaded a new image - {}, response - {}", image, imageUploadResponseDto);
         return imageUploadResponseDto;
     }
 
     @Override
     public PostsRetrievalResponseDto getAllUserPosts(PostsRetrievalRequestDto dto) {
         Assert.notNull(dto, "posts retrieval request dto should not be null");
-        LOGGER.info("retrieving all posts of user with id = {}", dto.getUserId());
+        LOGGER.info("Retrieving all posts of user with id = {}", dto.getUserId());
         Optional<User> optionalUser = userService.findById(dto.getUserId());
         if (optionalUser.isEmpty()) {
             return new PostsRetrievalResponseDto(List.of(String.format("user with id = %d does not exist", dto.getUserId())));
@@ -130,15 +136,15 @@ public class PostFacadeImpl implements PostFacade {
             postDtos.add(new PostDto(
                     post.getTitle(),
                     post.getDescription(),
-                    imageDtos
-            ));
+                    imageDtos,
+                    userDtoMapper.apply(user)));
         }
 
         PostsRetrievalResponseDto postsRetrievalResponseDto = new PostsRetrievalResponseDto(
                 userDto,
                 postDtos
         );
-        LOGGER.info("successfully retrieved all posts - {}", postsRetrievalResponseDto);
+        LOGGER.info("Successfully retrieved all posts - {}", postsRetrievalResponseDto);
         return postsRetrievalResponseDto;
     }
 }
