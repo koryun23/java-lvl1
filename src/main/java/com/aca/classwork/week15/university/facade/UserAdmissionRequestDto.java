@@ -2,9 +2,10 @@ package com.aca.classwork.week15.university.facade;
 
 public class UserAdmissionRequestDto {
 
-    private final String firstName;
-    private final String secondName;
+    private String firstName;
+    private String secondName;
 
+    public UserAdmissionRequestDto(){}
     public UserAdmissionRequestDto(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
@@ -16,6 +17,14 @@ public class UserAdmissionRequestDto {
 
     public String getSecondName() {
         return secondName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     @Override

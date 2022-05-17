@@ -9,6 +9,7 @@ import com.aca.classwork.week15.university.service.core.DiplomaService;
 import com.aca.classwork.week15.university.service.core.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -23,11 +24,13 @@ public class UniversityFacadeImpl implements UniversityFacade{
     private final UserService userService;
     private final DiplomaService diplomaService;
     private final UserMapper userMapper;
+    private final String usernamePrefix;
 
-    public UniversityFacadeImpl(UserService userService, DiplomaService diplomaService, UserMapper userMapper) {
+    public UniversityFacadeImpl(UserService userService, DiplomaService diplomaService, UserMapper userMapper, @Value("${university.username.prefix}")String usernamePrefix) {
         this.userService = userService;
         this.diplomaService = diplomaService;
         this.userMapper = userMapper;
+        this.usernamePrefix = usernamePrefix;
     }
 
     @Override
@@ -36,7 +39,7 @@ public class UniversityFacadeImpl implements UniversityFacade{
 
         User user = userService.create(
                 new CreateUserParams(
-                        dto.getFirstName() + "_" + dto.getSecondName(),
+                        usernamePrefix + dto.getFirstName() + "_" + dto.getSecondName(),
                         dto.getFirstName(),
                         dto.getSecondName(),
                         LocalDate.now()

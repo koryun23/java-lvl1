@@ -26,7 +26,7 @@ class UniversityFacadeImplTest {
 
     @BeforeEach
     public void init() {
-        testSubject = new UniversityFacadeImpl(userService, diplomaService, new UserMapperImpl());
+        testSubject = new UniversityFacadeImpl(userService, diplomaService, new UserMapperImpl(), "");
     }
 
     @Test

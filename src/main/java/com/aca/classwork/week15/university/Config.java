@@ -11,4 +11,9 @@ public class Config {
     public UserMapperImpl userMapper() {
         return new UserMapperImpl();
     }
+
+    @Bean
+    public String stringBean() {
+        return "MYPREFIX";
+    }
 }
