@@ -1,6 +1,5 @@
 package com.aca.homework.week20.retrofit.cat;
 
-import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -9,7 +8,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         Retrofit retrofit = Client.getClient("https://catfact.ninja/");
-        Service service = retrofit.create(Service.class);
+        CatFactService service = CatFactServiceFactory.getCatFactService(retrofit);
         Response<FactDto> response;
         try {
             response = service.getFactDto().execute();
