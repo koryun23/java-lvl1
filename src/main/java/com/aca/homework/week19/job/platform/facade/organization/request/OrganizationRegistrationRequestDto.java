@@ -10,6 +10,7 @@ public class OrganizationRegistrationRequestDto {
 
     public OrganizationRegistrationRequestDto(String name) {
         Assert.notNull(name, "organization name should not be null");
+        Assert.hasText(name, "name should not be empty");
         this.name = name;
     }
 

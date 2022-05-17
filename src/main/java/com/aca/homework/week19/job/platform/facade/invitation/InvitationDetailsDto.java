@@ -19,6 +19,7 @@ public class InvitationDetailsDto {
         Assert.notNull(status, "status should not be null");
         Assert.notNull(userDto, "user details dto object should not be null");
         Assert.notNull(organizationName, "organization name should not be null");
+        Assert.hasText(organizationName, "organization name should not be empty");
         this.status = status;
         this.userDto = userDto;
         this.organizationName = organizationName;

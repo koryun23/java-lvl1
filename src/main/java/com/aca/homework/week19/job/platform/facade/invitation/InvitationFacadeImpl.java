@@ -39,6 +39,12 @@ public class InvitationFacadeImpl implements InvitationFacade {
                                 UserMapper userMapper,
                                 OrganizationMapper organizationMapper,
                                 InvitationMapper invitationMapper) {
+        Assert.notNull(invitationService, "invitation service should not be null");
+        Assert.notNull(userService, "user service should not be null");
+        Assert.notNull(organizationService, "organization service should not be null");
+        Assert.notNull(userMapper, "user mapper should not be null");
+        Assert.notNull(organizationMapper, "organization mapper should not be null");
+        Assert.notNull(invitationMapper, "invitation mapper should not be null");
         this.invitationService = invitationService;
         this.userService = userService;
         this.organizationService = organizationService;
@@ -50,7 +56,7 @@ public class InvitationFacadeImpl implements InvitationFacade {
     @Override
     public InvitationDetailsDto sendInvitation(InvitationRequestDto dto) {
         Assert.notNull(dto, "invitation request dto should not be null");
-        LOGGER.info("sending an invitation according to invitation request dto - {}", dto);
+        LOGGER.info("Sending an invitation according to the invitation request dto - {}", dto);
         Optional<User> userOptional = userService.findById(dto.getUserId());
         if(userOptional.isEmpty()) {
             return new InvitationDetailsDto(List.of("could not send an invitation to a non-existing user"));
@@ -74,14 +80,14 @@ public class InvitationFacadeImpl implements InvitationFacade {
                 userMapper.map(userService.getById(dto.getUserId())),
                 organizationOptional.get().getName()
         );
-        LOGGER.info("successfully sent an invitation according to invitation request dto - {}, invitation details - {}", dto, invitationDetailsDto);
+        LOGGER.info("Successfully sent an invitation according to the invitation request dto - {}, invitation details - {}", dto, invitationDetailsDto);
         return invitationDetailsDto;
     }
 
     @Override
     public InvitationDetailsDto acceptInvitation(InvitationAcceptDto dto) {
         Assert.notNull(dto, "invitation acceptance dto should not be null");
-        LOGGER.info("accepting an invitation according to invitation acceptance dto - {}", dto);
+        LOGGER.info("Accepting an invitation according to the invitation acceptance dto - {}", dto);
         Optional<User> userOptional = userService.findById(dto.getUserId());
         if(userOptional.isEmpty()) {
             return new InvitationDetailsDto(List.of("non-existing user cannot accept job invitation"));
@@ -108,7 +114,7 @@ public class InvitationFacadeImpl implements InvitationFacade {
     @Override
     public InvitationDetailsDto rejectInvitation(InvitationRejectDto dto) {
         Assert.notNull(dto, "invitation rejection dto should not be null");
-        LOGGER.info("rejecting an invitation according to invitation rejection dto - {}", dto);
+        LOGGER.info("Rejecting an invitation according to invitation rejection dto - {}", dto);
         Optional<User> userOptional = userService.findById(dto.getUserId());
         if(userOptional.isEmpty()) {
             return new InvitationDetailsDto(List.of("non-existing user cannot reject job invitation"));
@@ -128,7 +134,7 @@ public class InvitationFacadeImpl implements InvitationFacade {
                 userMapper.map(userOptional.get()),
                 organization.getName()
         );
-        LOGGER.info("successfully rejected an invitation, invitation details - {}", invitationDetailsDto);
+        LOGGER.info("Successfully rejected an invitation, invitation details - {}", invitationDetailsDto);
         return invitationDetailsDto;
     }
 }

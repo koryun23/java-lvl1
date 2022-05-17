@@ -26,6 +26,9 @@ public class JobFacadeImpl implements JobFacade {
     private final InvitationService invitationService;
 
     public JobFacadeImpl(UserService userService, OrganizationService organizationService, InvitationService invitationService) {
+        Assert.notNull(userService, "user service should not be null");
+        Assert.notNull(organizationService, "organization service should not be null");
+        Assert.notNull(invitationService, "invitation service should not be null");
         this.userService = userService;
         this.organizationService = organizationService;
         this.invitationService = invitationService;
@@ -34,7 +37,7 @@ public class JobFacadeImpl implements JobFacade {
     @Override
     public JobHireResponseDto hire(JobHireRequestDto dto) {
         Assert.notNull(dto, "job hire request dto should not be null");
-        LOGGER.info("hiring a user according to job hire request dto - {}", dto);
+        LOGGER.info("Hiring a user according to the job hire request dto - {}", dto);
 
         Optional<User> userOptional = userService.findById(dto.getUserId());
         if(userOptional.isEmpty()) {

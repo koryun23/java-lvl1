@@ -19,26 +19,27 @@ public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
 
     public UserFacadeImpl(UserService userService) {
+        Assert.notNull(userService, "user service should not be null");
         this.userService = userService;
     }
 
     @Override
     public UserDetailsDto signUp(UserSignUpRequestDto dto) {
         Assert.notNull(dto, "user sign up request dto should not be null");
-        LOGGER.info("signing up a new user according to user sign up dto - {}", dto);
+        LOGGER.info("Signing up a new user according to the user sign up dto - {}", dto);
         User user = userService.create(new UserCreationParams(
                 dto.getFirstName(),
                 dto.getSecondName()
         ));
         UserDetailsDto userDetailsDto = new UserDetailsDto(user.getFirstName(), user.getSecondName());
-        LOGGER.info("successfully signed up a new user - {}, user details dto - {}", user, userDetailsDto);
+        LOGGER.info("Successfully signed up a new user - {}, user details dto - {}", user, userDetailsDto);
         return userDetailsDto;
     }
 
     @Override
     public UserDetailsDto getUserDetails(Long userId) {
         Assert.notNull(userId, "user id should not be null");
-        LOGGER.info("retrieving details of a user with id = {}", userId);
+        LOGGER.info("Retrieving details of a user with id - {}", userId);
         Optional<User> userOptional = userService.findById(userId);
         if (userOptional.isEmpty()) {
             return new UserDetailsDto(
@@ -51,14 +52,14 @@ public class UserFacadeImpl implements UserFacade {
         UserDetailsDto userDetailsDto = new UserDetailsDto(
                 user.getFirstName(), user.getSecondName()
         );
-        LOGGER.info("successfully retrieved details of the user - {}", userDetailsDto);
+        LOGGER.info("Successfully retrieved details of the user - {}", userDetailsDto);
         return userDetailsDto;
     }
 
     @Override
     public UserDetailsDto openToWork(Long userId) {
         Assert.notNull(userId, "user id should not be null");
-        LOGGER.info("marking a user with id = {} open for job offers", userId);
+        LOGGER.info("Marking a user with id - {} open for job offers", userId);
         if (userService.findById(userId).isEmpty()) {
             return new UserDetailsDto(List.of("cannot mark a non-existing user open for job offers"));
         }
@@ -67,7 +68,7 @@ public class UserFacadeImpl implements UserFacade {
                 user.getFirstName(),
                 user.getSecondName()
         );
-        LOGGER.info("user details dto - {}", userDetailsDto);
+        LOGGER.info("User details dto - {}", userDetailsDto);
         return userDetailsDto;
     }
 }

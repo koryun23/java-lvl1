@@ -26,6 +26,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     private final UserMapper userMapper;
 
     public OrganizationServiceImpl(OrganizationRepository organizationRepository, UserMapper userMapper) {
+        Assert.notNull(organizationRepository, "organization repository should not be null");
+        Assert.notNull(userMapper, "user mapper should not be null");
         this.organizationRepository = organizationRepository;
         this.userMapper = userMapper;
     }
@@ -33,16 +35,16 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Organization create(OrganizationCreationParams params) {
         Assert.notNull(params, "organization creation params should not be null");
-        LOGGER.info("saving a new organization according to params - {}", params);
+        LOGGER.info("Saving a new organization according to the params - {}", params);
         Organization organization = organizationRepository.save(new Organization(params.getName()));
-        LOGGER.info("successfully saved a new organization - {}", organization);
+        LOGGER.info("Successfully saved a new organization - {}", organization);
         return organization;
     }
 
     @Override
     public Optional<Organization> findById(Long id) {
         Assert.notNull(id, "id should not be null");
-        LOGGER.info("retrieving an optional of organization having id {}", id);
+        LOGGER.info("Retrieving an optional of an organization having id {}", id);
         Optional<Organization> optionalOrganization = organizationRepository.findById(id);
         LOGGER.info("successfully retrieved an optional - {}", optionalOrganization);
         return optionalOrganization;

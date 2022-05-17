@@ -15,6 +15,7 @@ public class OrganizationDetailsDto {
 
     public OrganizationDetailsDto(String name, List<UserDetailsDto> employees) {
         Assert.notNull(name, "name should not be null");
+        Assert.hasText(name, "name should not be empty");
         Assert.notNull(employees, "user details dto list should not be null");
         this.name = name;
         this.employees = employees;

@@ -24,6 +24,8 @@ public class OrganizationFacadeImpl implements OrganizationFacade {
     private final UserService userService;
 
     public OrganizationFacadeImpl(OrganizationService organizationService, UserService userService) {
+        Assert.notNull(organizationService, "organization service should not be null");
+        Assert.notNull(userService, "user service should not be null");
         this.organizationService = organizationService;
         this.userService = userService;
     }
@@ -31,7 +33,7 @@ public class OrganizationFacadeImpl implements OrganizationFacade {
     @Override
     public OrganizationDetailsDto register(OrganizationRegistrationRequestDto dto) {
         Assert.notNull(dto, "organization registration request dto should not be null");
-        LOGGER.info("registering a new organization according to organization registration request dto - {}", dto);
+        LOGGER.info("Registering a new organization according to the organization registration request dto - {}", dto);
         Organization organization = organizationService.create(new OrganizationCreationParams(
                 dto.getName()
         ));
@@ -39,14 +41,14 @@ public class OrganizationFacadeImpl implements OrganizationFacade {
                 organization.getName(),
                 Collections.emptyList()
         );
-        LOGGER.info("successfully registered a new organization - {}, organization details dto - {}", organization, organizationDetailsDto);
+        LOGGER.info("Successfully registered a new organization - {}, organization details dto - {}", organization, organizationDetailsDto);
         return organizationDetailsDto;
     }
 
     @Override
     public OrganizationDetailsDto getOrganizationDetails(Long organizationId) {
         Assert.notNull(organizationId, "organization id should not be null");
-        LOGGER.info("retrieving organization details of an organization having id - {}", organizationId);
+        LOGGER.info("Retrieving organization details of an organization having id - {}", organizationId);
         if (userService.findById(organizationId).isEmpty()) {
             return new OrganizationDetailsDto(List.of(String.format("organization with id(%d) not found", organizationId)));
         }
@@ -59,7 +61,7 @@ public class OrganizationFacadeImpl implements OrganizationFacade {
                 organizationService.getById(organizationId).getName(),
                 userDetailsDtos
         );
-        LOGGER.info("successfully retrieved organization details dtos - {}", organizationDetailsDto);
+        LOGGER.info("Successfully retrieved organization details dto-s - {}", organizationDetailsDto);
         return organizationDetailsDto;
     }
 }
