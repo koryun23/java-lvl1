@@ -11,19 +11,19 @@ class CreateUserParamsTest {
 
     @Test
     public void testInvalidFirstName() {
-        Assertions.assertThatThrownBy(() -> new CreateUserParams("username", null, "second name", LocalDate.now()))
+        Assertions.assertThatThrownBy(() -> new CreateUserParams("username", null, "first name", "second name",  LocalDate.now()))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void testInvalidSecondName() {
-        Assertions.assertThatThrownBy(() -> new CreateUserParams("username", "first name", null, LocalDate.now()))
+        Assertions.assertThatThrownBy(() -> new CreateUserParams("username", "first name", "first name", "second name", LocalDate.now()))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     public void testNullUsername() {
-        Assertions.assertThatThrownBy(() -> new CreateUserParams(null, "firstname", "secondName", LocalDate.now()))
+        Assertions.assertThatThrownBy(() -> new CreateUserParams(null, "firstname", "first name", "second name", LocalDate.now()))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 }

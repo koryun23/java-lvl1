@@ -6,6 +6,7 @@ import com.aca.classwork.week15.university.service.core.CreateUserParams;
 import com.aca.classwork.week15.university.service.core.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -15,12 +16,14 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         Assert.notNull(userRepository, "user repository cannot be null");
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -28,10 +31,20 @@ public class UserServiceImpl implements UserService {
     public User create(CreateUserParams params) {
         Assert.notNull(params, "the params cannot be null");
         LOGGER.info("Creating user for the provided params - {}", params);
-        User user = new User(params.getUsername(), params.getFirstName(), params.getSecondName(), params.getCreatedAt());
+
+        String encodedPassword = passwordEncoder.encode(params.getPassword());
+        User user = new User(params.getUsername(), encodedPassword, params.getFirstName(), params.getSecondName(), params.getCreatedAt());
         User savedUser = userRepository.save(user);
-        LOGGER.info("Successfully created a user for the provided params - {}", params);
+        LOGGER.info("Successfully created a user for the provided params - {}, saved user - {}", params, savedUser);
         return savedUser;
+    }
+
+    @Override
+    public boolean checkCredentials(String username, String password) {
+        return userRepository.findByUsername(username)
+                .map(user -> user.getPassword())
+                .map(encryptedPassword -> passwordEncoder.matches(password, encryptedPassword))
+                .orElse(false);
     }
 
     @Override

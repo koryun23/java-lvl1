@@ -24,12 +24,16 @@ public class User {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
+    @Column(name = "password", nullable = false)
+    private String password;
+
     public User() {}
-    public User(String username, String firstName, String secondName, LocalDate createdAt) {
+    public User(String username, String password, String firstName, String secondName, LocalDate createdAt) {
         this.date = createdAt;
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;
+        this.password = password;
     }
 
 
@@ -73,12 +77,20 @@ public class User {
         this.date = date;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(date, user.date) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName);
+        return Objects.equals(id, user.id) && Objects.equals(date, user.date) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName) && Objects.equals(password, user.password);
     }
 
     @Override
