@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
         LOGGER.info("Saving a new user according to the params - {}", params);
         User user = userRepository.save(new User(
                 params.getFirstName(),
-                params.getSecondName()
+                params.getSecondName(),
+                params.getUsername()
         ));
         LOGGER.info("Successfully saved a new user - {}", user);
         return user;
@@ -63,9 +64,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(userId)
         );
-        UserOrganization userOrganization = userOrganizationRepository.findByUserFirstNameAndUserSecondName(
-                user.getFirstName(),
-                user.getSecondName()
+        UserOrganization userOrganization = userOrganizationRepository.findByUserUsername(
+                user.getUsername()
         ).get();
 
         userOrganizationRepository.delete(userOrganization);
@@ -79,9 +79,8 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(userId, "user id should not be null");
         LOGGER.info("Checking if a user with id - {} has a job or not", userId);
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
-        boolean result = userOrganizationRepository.findByUserFirstNameAndUserSecondName(
-                user.getFirstName(),
-                user.getSecondName()
+        boolean result = userOrganizationRepository.findByUserUsername(
+                user.getUsername()
         ).isPresent();
         LOGGER.info("Result of checking if a user - {} has a job or not - {}", user, result);
         return result;
@@ -103,13 +102,11 @@ public class UserServiceImpl implements UserService {
         List<UserOrganization> userOrganizations = userOrganizationRepository.findAllByOrganizationId(organizationId);
         List<User> users = new LinkedList<>();
         for (UserOrganization userOrganization : userOrganizations) {
-            users.add(userRepository.findByFirstNameAndSecondName(
-                            userOrganization.getUser().getFirstName(),
-                            userOrganization.getUser().getSecondName()
+            users.add(userRepository.findByUsername(
+                            userOrganization.getUser().getUsername()
                     ).orElseThrow(() -> new UserNotFoundException(
-                            userOrganization.getUser().getFirstName(),
-                            userOrganization.getUser().getSecondName()))
-            );
+                            userOrganization.getUser().getUsername()
+            )));
         }
         LOGGER.info("The list of users working in the organization having id - {} is {}", organizationId, users);
         return Collections.unmodifiableList(users);

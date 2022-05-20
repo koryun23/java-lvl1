@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserOrganizationRepository extends JpaRepository<UserOrganization, Long> {
-    void deleteByUserFirstNameAndUserSecondName(String firstName, String secondName);
+    void deleteByUserUsername(String username);
 
-    Optional<UserOrganization> findByUserFirstNameAndUserSecondName(String firstName, String secondName);
+    Optional<UserOrganization> findByUserUsername(String username);
 
     List<UserOrganization> findAllByOrganizationId(Long organizationId);
 }

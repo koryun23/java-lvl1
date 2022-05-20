@@ -29,7 +29,8 @@ public class UserFacadeImpl implements UserFacade {
         LOGGER.info("Signing up a new user according to the user sign up dto - {}", dto);
         User user = userService.create(new UserCreationParams(
                 dto.getFirstName(),
-                dto.getSecondName()
+                dto.getSecondName(),
+                dto.getUsername()
         ));
         UserDetailsDto userDetailsDto = new UserDetailsDto(user.getFirstName(), user.getSecondName());
         LOGGER.info("Successfully signed up a new user - {}, user details dto - {}", user, userDetailsDto);

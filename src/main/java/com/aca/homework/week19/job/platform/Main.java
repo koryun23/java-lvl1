@@ -24,9 +24,9 @@ public class Main {
         JobFacade jobFacade = context.getBean(JobFacade.class);
         OrganizationFacade organizationFacade = context.getBean(OrganizationFacade.class);
         UserFacade userFacade = context.getBean(UserFacade.class);
-        System.out.println(userFacade.signUp(new UserSignUpRequestDto("John", "Williams")));
-        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Jack", "Smith")));
-        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Lisa", "Simpson")));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("John", "Williams", "john-williams")));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Jack", "Smith", "jack-smith")));
+        System.out.println(userFacade.signUp(new UserSignUpRequestDto("Lisa", "Simpson", "lisa-simpson")));
         System.out.println(organizationFacade.register(new OrganizationRegistrationRequestDto("ACA")));
         System.out.println(organizationFacade.register(new OrganizationRegistrationRequestDto("Google")));
         System.out.println(invitationFacade.sendInvitation(new InvitationRequestDto(1L, 1L)));
