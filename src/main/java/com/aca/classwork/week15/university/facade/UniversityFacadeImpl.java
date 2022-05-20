@@ -41,6 +41,7 @@ public class UniversityFacadeImpl implements UniversityFacade{
                 new CreateUserParams(
                         usernamePrefix + dto.getFirstName() + "_" + dto.getSecondName(),
                         dto.getFirstName(),
+                        dto.getFirstName(),
                         dto.getSecondName(),
                         LocalDate.now()
                 )

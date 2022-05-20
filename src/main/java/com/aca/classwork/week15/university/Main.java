@@ -15,17 +15,34 @@ import com.aca.classwork.week15.university.service.impl.DiplomaServiceImpl;
 import com.aca.classwork.week15.university.service.impl.UserServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
 @EnableJpaRepositories
+//@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+
+        UserService userService = context.getBean(UserService.class);
+
+        PasswordEncoder encoder = context.getBean(PasswordEncoder.class);
+
+        System.out.println();
+
+        userService.create(new CreateUserParams(
+                "username",
+                "password",
+                "first name",
+                "second name",
+                LocalDate.now()
+        ));
 
         final UniversityFacade universityFacade = context.getBean(UniversityFacade.class);
 
