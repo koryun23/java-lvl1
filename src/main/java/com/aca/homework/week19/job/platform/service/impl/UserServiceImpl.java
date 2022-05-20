@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException(userId)
         );
-        UserOrganization userOrganization = userOrganizationRepository.findByFirstNameAndSecondName(
+        UserOrganization userOrganization = userOrganizationRepository.findByUserFirstNameAndUserSecondName(
                 user.getFirstName(),
                 user.getSecondName()
         ).get();
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(userId, "user id should not be null");
         LOGGER.info("Checking if a user with id - {} has a job or not", userId);
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
-        boolean result = userOrganizationRepository.findByFirstNameAndSecondName(
+        boolean result = userOrganizationRepository.findByUserFirstNameAndUserSecondName(
                 user.getFirstName(),
                 user.getSecondName()
         ).isPresent();
@@ -104,11 +104,11 @@ public class UserServiceImpl implements UserService {
         List<User> users = new LinkedList<>();
         for (UserOrganization userOrganization : userOrganizations) {
             users.add(userRepository.findByFirstNameAndSecondName(
-                            userOrganization.getFirstName(),
-                            userOrganization.getSecondName()
+                            userOrganization.getUser().getFirstName(),
+                            userOrganization.getUser().getSecondName()
                     ).orElseThrow(() -> new UserNotFoundException(
-                            userOrganization.getFirstName(),
-                            userOrganization.getSecondName()))
+                            userOrganization.getUser().getFirstName(),
+                            userOrganization.getUser().getSecondName()))
             );
         }
         LOGGER.info("The list of users working in the organization having id - {} is {}", organizationId, users);
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
         User user = getById(userId);
         Organization organization = organizationService.getById(organizationId);
         userOrganizationRepository.save(new UserOrganization(
-                user.getFirstName(), user.getSecondName(), organization
+                user, organization
         ));
         LOGGER.info("Successfully registered user - {} at organization - {}", user, organization);
         return user;
