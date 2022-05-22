@@ -43,17 +43,21 @@ public class JobFacadeImpl implements JobFacade {
         if(userOptional.isEmpty()) {
             return new JobHireResponseDto(List.of("Organization cannot hire a non-existing user"));
         }
+
         Optional<Organization> organizationOptional = organizationService.findById(dto.getOrganizationId());
         if(organizationOptional.isEmpty()) {
             return new JobHireResponseDto(List.of("Non-existing organization cannot hire a user"));
         }
+
         Optional<Invitation> invitationOptional = invitationService.findByUserIdAndOrganizationId(dto.getUserId(), dto.getOrganizationId());
         if(invitationOptional.isEmpty()) {
             return new JobHireResponseDto(List.of(String.format("no invitation was sent to a user with id(%d) from organization with id(%d)", dto.getUserId(), dto.getOrganizationId())));
         }
+
         if(invitationOptional.get().getStatus() != InvitationStatusType.ACCEPTED) {
             return new JobHireResponseDto(List.of(String.format("user with id(%d) did not accept job invitation from organization with id(%d)", dto.getUserId(), dto.getOrganizationId())));
         }
+
         User user = userService.registerUserAtOrganization(dto.getUserId(), dto.getOrganizationId());
         JobHireResponseDto responseDto = new JobHireResponseDto(
                 dto.getUserId(),

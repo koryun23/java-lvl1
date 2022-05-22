@@ -30,6 +30,10 @@ public class JobHireResponseDto {
         return organizationId;
     }
 
+    public List<String> getErrors() {
+        return errors;
+    }
+
     @Override
     public String toString() {
         return "JobHireResponseDto{" +

@@ -77,7 +77,7 @@ public class InvitationFacadeImpl implements InvitationFacade {
         invitationService.markAs(invitation.getId(), InvitationStatusType.OPEN);
         InvitationDetailsDto invitationDetailsDto = invitationMapper.map(
                 invitation,
-                userMapper.map(userService.getById(dto.getUserId())),
+                userMapper.map(userOptional.get()),
                 organizationOptional.get().getName()
         );
         LOGGER.info("Successfully sent an invitation according to the invitation request dto - {}, invitation details - {}", dto, invitationDetailsDto);
