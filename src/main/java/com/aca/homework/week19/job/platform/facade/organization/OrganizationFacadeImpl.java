@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class OrganizationFacadeImpl implements OrganizationFacade {
@@ -49,16 +50,20 @@ public class OrganizationFacadeImpl implements OrganizationFacade {
     public OrganizationDetailsDto getOrganizationDetails(Long organizationId) {
         Assert.notNull(organizationId, "organization id should not be null");
         LOGGER.info("Retrieving organization details of an organization having id - {}", organizationId);
-        if (userService.findById(organizationId).isEmpty()) {
+
+        Optional<Organization> organizationOptional = organizationService.findById(organizationId);
+        if (organizationOptional.isEmpty()) {
             return new OrganizationDetailsDto(List.of(String.format("organization with id(%d) not found", organizationId)));
         }
+        Organization organization = organizationOptional.get();
+
         List<UserDetailsDto> userDetailsDtos = new LinkedList<>();
         List<User> allByOrganizationId = userService.getAllByOrganizationId(organizationId);
         for (User user : allByOrganizationId) {
-            userDetailsDtos.add(new UserDetailsDto(user.getFirstName(), user.getSecondName()));
+            userDetailsDtos.add(new UserDetailsDto(user.getFirstName(), user.getSecondName(), user.getUsername()));
         }
         OrganizationDetailsDto organizationDetailsDto = new OrganizationDetailsDto(
-                organizationService.getById(organizationId).getName(),
+                organization.getName(),
                 userDetailsDtos
         );
         LOGGER.info("Successfully retrieved organization details dto-s - {}", organizationDetailsDto);

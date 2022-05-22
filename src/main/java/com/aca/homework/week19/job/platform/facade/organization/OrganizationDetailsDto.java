@@ -33,6 +33,10 @@ public class OrganizationDetailsDto {
         return employees;
     }
 
+    public List<String> getErrors() {
+        return errors;
+    }
+
     @Override
     public String toString() {
         return "OrganizationDetailsDto{" +

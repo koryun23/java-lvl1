@@ -111,7 +111,7 @@ class InvitationFacadeImplTest {
     @Test
     public void sendValidInvitation() {
         User user = new User("John", "Jackson", "jj");
-        UserDetailsDto userDetailsDto = new UserDetailsDto("John", "Jackson");
+        UserDetailsDto userDetailsDto = new UserDetailsDto("John", "Jackson", "jj");
         String organizationName = "Amazon";
         Organization organization = new Organization(organizationName);
         Mockito.when(userService.findById(1L)).thenReturn(Optional.of(user));

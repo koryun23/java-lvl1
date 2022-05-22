@@ -9,6 +9,6 @@ public class UserMapperImpl implements UserMapper {
 
     @Override
     public UserDetailsDto map(User user) {
-        return new UserDetailsDto(user.getFirstName(), user.getSecondName());
+        return new UserDetailsDto(user.getFirstName(), user.getSecondName(), user.getUsername());
     }
 }

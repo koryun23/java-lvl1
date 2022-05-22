@@ -32,7 +32,7 @@ public class UserFacadeImpl implements UserFacade {
                 dto.getSecondName(),
                 dto.getUsername()
         ));
-        UserDetailsDto userDetailsDto = new UserDetailsDto(user.getFirstName(), user.getSecondName());
+        UserDetailsDto userDetailsDto = new UserDetailsDto(user.getFirstName(), user.getSecondName(), user.getUsername());
         LOGGER.info("Successfully signed up a new user - {}, user details dto - {}", user, userDetailsDto);
         return userDetailsDto;
     }
@@ -51,7 +51,7 @@ public class UserFacadeImpl implements UserFacade {
         }
         User user = userOptional.get();
         UserDetailsDto userDetailsDto = new UserDetailsDto(
-                user.getFirstName(), user.getSecondName()
+                user.getFirstName(), user.getSecondName(), user.getUsername()
         );
         LOGGER.info("Successfully retrieved details of the user - {}", userDetailsDto);
         return userDetailsDto;
@@ -66,8 +66,7 @@ public class UserFacadeImpl implements UserFacade {
         }
         User user = userService.removeUserFromOrganization(userId);
         UserDetailsDto userDetailsDto = new UserDetailsDto(
-                user.getFirstName(),
-                user.getSecondName()
+                user.getFirstName(), user.getSecondName(), user.getUsername()
         );
         LOGGER.info("User details dto - {}", userDetailsDto);
         return userDetailsDto;
