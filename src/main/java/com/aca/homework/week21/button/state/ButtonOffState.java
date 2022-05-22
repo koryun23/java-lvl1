@@ -1,0 +1,47 @@
+package com.aca.homework.week21.button.state;
+
+import java.util.Objects;
+
+public class ButtonOffState implements ButtonState {
+
+    private final ColorType color;
+
+    public ButtonOffState(ColorType color) {
+        this.color = color;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public ColorType getColor() {
+        return color;
+    }
+
+    @Override
+    public ButtonState nextState() {
+        return new ButtonOnState(ColorType.GREEN);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ButtonOffState that = (ButtonOffState) o;
+        return color == that.color;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color);
+    }
+
+    @Override
+    public String toString() {
+        return "ButtonOffState{" +
+                "color=" + color +
+                '}';
+    }
+}
