@@ -4,8 +4,10 @@ import com.aca.homework.week21.post.CatFactDto;
 import com.aca.homework.week21.post.CatFactFetcherService;
 import com.aca.homework.week21.post.entity.CatFact;
 import com.aca.homework.week21.post.entity.Post;
+import com.aca.homework.week21.post.service.core.CatFactCreationParams;
 import com.aca.homework.week21.post.service.core.CatFactService;
 import com.aca.homework.week21.post.service.core.PostService;
+import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -48,5 +50,30 @@ public class PostFacadeImpl implements PostFacade {
     @Override
     public void deletePostById(Long id) {
         postService.deletePostById(id);
+    }
+
+    @Override
+    public CatFactDto fetchCatFact() {
+        LOGGER.info("Fetching a random cat fact");
+        String randomFact = catFactFetcherService.getRandomFact();
+        LOGGER.info("Successfully fetched a new random fact, result - {}", randomFact);
+        return new CatFactDto(randomFact, randomFact.length());
+    }
+
+    @Override
+    public PostDto uploadPost(PostUploadRequestDto dto) {
+        CatFactDto catFactDto = dto.getCatFactDto();
+        catFactService.create(new CatFactCreationParams(
+                catFactDto.getFact(),
+                catFactDto.getLength()
+        ));
+        Post post = postService.uploadPost(dto);
+
+        CatFact fact = post.getFact();
+        return new PostDto(
+                post.getCreationDate(),
+                new CatFactDto(fact.getFact(), fact.getLength()),
+                post.getCreatedBy()
+        );
     }
 }

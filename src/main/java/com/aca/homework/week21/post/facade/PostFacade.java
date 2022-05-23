@@ -1,5 +1,8 @@
 package com.aca.homework.week21.post.facade;
 
+import com.aca.homework.week21.post.CatFactDto;
+import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
+
 import java.util.List;
 
 public interface PostFacade {
@@ -8,4 +11,8 @@ public interface PostFacade {
     List<PostDto> getAllPosts();
 
     void deletePostById(Long id);
+
+    CatFactDto fetchCatFact();
+
+    PostDto uploadPost(PostUploadRequestDto dto);
 }
