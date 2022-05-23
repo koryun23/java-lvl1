@@ -5,11 +5,11 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-public class CatFactWrapperServiceImpl implements CatFactWrapperService {
+public class CatFactFetcherServiceImpl implements CatFactFetcherService {
 
-    private CatFactService catFactService;
+    private final CatFactService catFactService;
 
-    public CatFactWrapperServiceImpl(CatFactService catFactService) {
+    public CatFactFetcherServiceImpl(CatFactService catFactService) {
         this.catFactService = catFactService;
     }
 
@@ -24,7 +24,7 @@ public class CatFactWrapperServiceImpl implements CatFactWrapperService {
             throw new RuntimeException(e);
         }
         CatFactDto factDto = response.body();
-        if(factDto == null) {
+        if (factDto == null) {
             throw new RuntimeException("Could not fetch a fact.");
         }
         return factDto.getFact();

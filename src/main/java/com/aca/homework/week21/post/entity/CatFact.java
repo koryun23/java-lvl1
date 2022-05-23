@@ -18,8 +18,7 @@ public class CatFact {
     @Column(name = "length", nullable = false)
     private Integer length;
 
-    public CatFact(Long id, String fact, Integer length) {
-        this.id = id;
+    public CatFact(String fact, Integer length) {
         this.fact = fact;
         this.length = length;
     }
