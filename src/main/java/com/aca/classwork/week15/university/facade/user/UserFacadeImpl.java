@@ -5,10 +5,12 @@ import com.aca.classwork.week15.university.dto.UserSignUpRequestDto;
 import com.aca.classwork.week15.university.entity.User;
 import com.aca.classwork.week15.university.service.core.CreateUserParams;
 import com.aca.classwork.week15.university.service.core.UserService;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Component
 public class UserFacadeImpl implements UserFacade {
 
     private final UserService userService;

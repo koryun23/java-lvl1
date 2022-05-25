@@ -13,6 +13,10 @@ import com.aca.classwork.week15.university.service.core.DiplomaService;
 import com.aca.classwork.week15.university.service.core.UserService;
 import com.aca.classwork.week15.university.service.impl.DiplomaServiceImpl;
 import com.aca.classwork.week15.university.service.impl.UserServiceImpl;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -21,13 +25,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @EnableJpaRepositories
-//@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+//@SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
+
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
 
         UserService userService = context.getBean(UserService.class);
