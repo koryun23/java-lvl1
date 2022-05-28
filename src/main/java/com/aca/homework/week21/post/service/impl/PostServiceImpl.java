@@ -1,6 +1,6 @@
 package com.aca.homework.week21.post.service.impl;
 
-import com.aca.homework.week21.post.CatFactFetcherService;
+import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.repository.PostRepository;
 import com.aca.homework.week21.post.service.core.PostCreationParams;

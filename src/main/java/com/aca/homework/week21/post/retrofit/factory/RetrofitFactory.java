@@ -1,4 +1,4 @@
-package com.aca.homework.week21.post;
+package com.aca.homework.week21.post.retrofit.factory;
 
 import okhttp3.OkHttpClient;
 import org.springframework.stereotype.Component;

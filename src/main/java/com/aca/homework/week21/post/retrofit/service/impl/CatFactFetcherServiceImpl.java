@@ -1,9 +1,13 @@
-package com.aca.homework.week21.post;
+package com.aca.homework.week21.post.retrofit.service.impl;
 
+import com.aca.homework.week21.post.dto.CatFactDto;
+import com.aca.homework.week21.post.retrofit.factory.CatFactServiceFactory;
+import com.aca.homework.week21.post.retrofit.factory.RetrofitFactory;
+import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
+import com.aca.homework.week21.post.retrofit.service.core.CatFactService;
 import org.springframework.stereotype.Component;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package com.aca.homework.week21.post.controller;
 
-import com.aca.homework.week21.post.facade.PostDto;
+import com.aca.homework.week21.post.dto.PostDto;
 import com.aca.homework.week21.post.facade.PostFacade;
 import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.springframework.web.bind.annotation.*;

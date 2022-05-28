@@ -1,5 +1,6 @@
-package com.aca.homework.week21.post;
+package com.aca.homework.week21.post.retrofit.factory;
 
+import com.aca.homework.week21.post.retrofit.service.core.CatFactService;
 import org.springframework.stereotype.Component;
 import retrofit2.Retrofit;
 

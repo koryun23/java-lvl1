@@ -1,5 +1,6 @@
 package com.aca.homework.week21.post.facade;
 
+import com.aca.homework.week21.post.dto.PostDto;
 import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;

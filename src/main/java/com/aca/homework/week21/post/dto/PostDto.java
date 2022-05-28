@@ -1,4 +1,4 @@
-package com.aca.homework.week21.post.facade;
+package com.aca.homework.week21.post.dto;
 
 import java.time.LocalDateTime;
 
