@@ -12,5 +12,5 @@ public interface PostService {
 
     void deletePostById(Long postId);
 
-    Post uploadPost(PostUploadRequestDto dto);
+    Post create(PostCreationParams params);
 }

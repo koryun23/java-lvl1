@@ -16,12 +16,8 @@ public class Post {
     @Column(name = "creation_date", nullable = false)
     private LocalDateTime creationDate;
 
-    @OneToOne
-    @JoinColumn(name = "content_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "POST_CONTENT_ID_CAT_FACT_ID"),
-            referencedColumnName = "id")
-    private CatFact fact;
+    @Column(name = "content", nullable = false)
+    private String fact;
 
     @Column(name = "created_by", nullable = false)
     private String createdBy;
@@ -29,7 +25,7 @@ public class Post {
     public Post(){
     }
 
-    public Post(LocalDateTime creationDate, CatFact fact, String createdBy) {
+    public Post(LocalDateTime creationDate, String fact, String createdBy) {
         this.creationDate = creationDate;
         this.fact = fact;
         this.createdBy = createdBy;
@@ -51,11 +47,11 @@ public class Post {
         this.creationDate = creationDate;
     }
 
-    public CatFact getFact() {
+    public String getFact() {
         return fact;
     }
 
-    public void setFact(CatFact fact) {
+    public void setFact(String fact) {
         this.fact = fact;
     }
 

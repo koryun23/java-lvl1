@@ -1,17 +1,15 @@
 package com.aca.homework.week21.post.facade;
 
-import com.aca.homework.week21.post.CatFactDto;
-
 import java.time.LocalDateTime;
 
 public class PostDto {
     private LocalDateTime creationDate;
-    private CatFactDto catFactDto;
+    private String catFactContent;
     private String createdBy;
 
-    public PostDto(LocalDateTime creationDate, CatFactDto catFactDto, String createdBy) {
+    public PostDto(LocalDateTime creationDate, String catFactContent, String createdBy) {
         this.creationDate = creationDate;
-        this.catFactDto = catFactDto;
+        this.catFactContent = catFactContent;
         this.createdBy = createdBy;
     }
 
@@ -23,12 +21,12 @@ public class PostDto {
         this.creationDate = creationDate;
     }
 
-    public CatFactDto getCatFactDto() {
-        return catFactDto;
+    public String getCatFactContent() {
+        return catFactContent;
     }
 
-    public void setCatFactDto(CatFactDto catFactDto) {
-        this.catFactDto = catFactDto;
+    public void setCatFactContent(String catFactContent) {
+        this.catFactContent = catFactContent;
     }
 
     public String getCreatedBy() {

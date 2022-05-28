@@ -1,17 +1,14 @@
 package com.aca.homework.week21.post.controller;
 
-import com.aca.homework.week21.post.CatFactDto;
-import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.facade.PostDto;
 import com.aca.homework.week21.post.facade.PostFacade;
 import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/post")
+@RequestMapping("/post")
 public class PostController {
     private final PostFacade postFacade;
 

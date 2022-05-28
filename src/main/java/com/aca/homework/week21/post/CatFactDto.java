@@ -11,6 +11,9 @@ public class CatFactDto {
         this.length = length;
     }
 
+    public CatFactDto() {
+    }
+
     public String getFact() {
         return fact;
     }
@@ -31,8 +34,8 @@ public class CatFactDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CatFactDto factDto = (CatFactDto) o;
-        return length == factDto.length && Objects.equals(fact, factDto.fact);
+        CatFactDto that = (CatFactDto) o;
+        return length == that.length && Objects.equals(fact, that.fact);
     }
 
     @Override
@@ -42,7 +45,7 @@ public class CatFactDto {
 
     @Override
     public String toString() {
-        return "FactDto{" +
+        return "CatFactDto{" +
                 "fact='" + fact + '\'' +
                 ", length=" + length +
                 '}';

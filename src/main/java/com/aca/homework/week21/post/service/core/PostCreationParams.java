@@ -2,10 +2,10 @@ package com.aca.homework.week21.post.service.core;
 
 import java.util.Objects;
 
-public class PostUploadRequestDto {
+public class PostCreationParams {
     private String createdBy;
 
-    public PostUploadRequestDto(String createdBy) {
+    public PostCreationParams(String createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -21,7 +21,7 @@ public class PostUploadRequestDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PostUploadRequestDto that = (PostUploadRequestDto) o;
+        PostCreationParams that = (PostCreationParams) o;
         return Objects.equals(createdBy, that.createdBy);
     }
 
@@ -32,7 +32,7 @@ public class PostUploadRequestDto {
 
     @Override
     public String toString() {
-        return "PostUploadRequestDto{" +
+        return "PostCreationParams{" +
                 "createdBy='" + createdBy + '\'' +
                 '}';
     }

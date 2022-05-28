@@ -1,10 +1,12 @@
 package com.aca.homework.week21.post;
 
+import org.springframework.stereotype.Component;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
 
+@Component
 public class CatFactFetcherServiceImpl implements CatFactFetcherService {
 
     private final CatFactService catFactService;

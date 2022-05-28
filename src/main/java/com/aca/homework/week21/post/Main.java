@@ -17,6 +17,6 @@ public class Main {
 //        );
 //        System.out.println(catFactWrapperService.getRandomFact());
         ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
-        context.getBean(PostFacade.class);
+        PostFacade postFacade = context.getBean(PostFacade.class);
     }
 }

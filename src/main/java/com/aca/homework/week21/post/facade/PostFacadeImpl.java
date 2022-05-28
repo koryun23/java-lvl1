@@ -1,11 +1,7 @@
 package com.aca.homework.week21.post.facade;
 
-import com.aca.homework.week21.post.CatFactDto;
-import com.aca.homework.week21.post.CatFactFetcherService;
-import com.aca.homework.week21.post.entity.CatFact;
 import com.aca.homework.week21.post.entity.Post;
-import com.aca.homework.week21.post.service.core.CatFactCreationParams;
-import com.aca.homework.week21.post.service.core.CatFactService;
+import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
 import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.slf4j.Logger;
@@ -19,32 +15,39 @@ import java.util.List;
 @Component
 public class PostFacadeImpl implements PostFacade {
 
-    private CatFactFetcherService catFactFetcherService;
-    private PostService postService;
-    private CatFactService catFactService;
     private static final Logger LOGGER = LoggerFactory.getLogger(PostFacadeImpl.class);
+    private final PostService postService;
+
+    public PostFacadeImpl(PostService postService) {
+        Assert.notNull(postService, "Post service should not be null");
+        this.postService = postService;
+    }
 
     @Override
     public PostDto getPostById(Long postId) {
-        Assert.notNull(postId, "the post id should not be null");
-        Post post = postService.getPostById(postId);
-        CatFact catFact = post.getFact();
-        return new PostDto(post.getCreationDate(), new CatFactDto(catFact.getFact(), catFact.getLength()), post.getCreatedBy());
+        Assert.notNull(postId, "post id should not be null");
+        Post postById = postService.getPostById(postId);
+        return new PostDto(
+                postById.getCreationDate(),
+                postById.getFact(),
+                postById.getCreatedBy()
+        ); // TODO: CREATE A MAPPER WHICH MAPS A POSTDTO FROM POST
     }
 
     @Override
     public List<PostDto> getAllPosts() {
-        List<Post> allPosts = postService.getAllPosts();
-        List<PostDto> allPostDtos = new LinkedList<>();
-        for(Post post : allPosts) {
-            CatFact catFact = post.getFact();
-            allPostDtos.add(new PostDto(
-                    post.getCreationDate(),
-                    new CatFactDto(catFact.getFact(), catFact.getLength()),
-                    post.getCreatedBy()
-            ));
+        LOGGER.info("Retrieving all post dtos");
+        List<PostDto> postDtos = new LinkedList<>();
+        List<Post> posts = postService.getAllPosts();
+        for (Post post : posts) {
+            postDtos.add(new PostDto(
+                            post.getCreationDate(),
+                            post.getFact(),
+                            post.getCreatedBy()
+                    )
+            );
         }
-        return allPostDtos;
+        return postDtos;
     }
 
     @Override
@@ -53,27 +56,16 @@ public class PostFacadeImpl implements PostFacade {
     }
 
     @Override
-    public CatFactDto fetchCatFact() {
-        LOGGER.info("Fetching a random cat fact");
-        String randomFact = catFactFetcherService.getRandomFact();
-        LOGGER.info("Successfully fetched a new random fact, result - {}", randomFact);
-        return new CatFactDto(randomFact, randomFact.length());
-    }
-
-    @Override
     public PostDto uploadPost(PostUploadRequestDto dto) {
-        CatFactDto catFactDto = dto.getCatFactDto();
-        catFactService.create(new CatFactCreationParams(
-                catFactDto.getFact(),
-                catFactDto.getLength()
-        ));
-        Post post = postService.uploadPost(dto);
-
-        CatFact fact = post.getFact();
-        return new PostDto(
+        Assert.notNull(dto, "Post upload request dto should not be null");
+        LOGGER.info("Uploading a new post according to the post upload request dto - {}", dto);
+        Post post = postService.create(new PostCreationParams(dto.getCreatedBy()));
+        PostDto postDto = new PostDto(
                 post.getCreationDate(),
-                new CatFactDto(fact.getFact(), fact.getLength()),
+                post.getFact(),
                 post.getCreatedBy()
         );
+        LOGGER.info("Successfully uploaded a new post according to the post upload request dto - {}, result - {}", dto, postDto);
+        return postDto;
     }
 }
