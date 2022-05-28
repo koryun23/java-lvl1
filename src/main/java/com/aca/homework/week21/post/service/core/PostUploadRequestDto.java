@@ -9,6 +9,9 @@ public class PostUploadRequestDto {
         this.createdBy = createdBy;
     }
 
+    public PostUploadRequestDto() {
+    }
+
     public String getCreatedBy() {
         return createdBy;
     }

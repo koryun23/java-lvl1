@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/post")
 public class PostController {
     private final PostFacade postFacade;
 
@@ -18,6 +17,7 @@ public class PostController {
 
     @PostMapping("/posts")
     public PostDto uploadNewPost(@RequestBody PostUploadRequestDto postUploadRequestDto){
+        System.out.println("UPLOAD A NEW POST ________________________________________________________________________________________");
         return postFacade.uploadPost(postUploadRequestDto);
     }
 

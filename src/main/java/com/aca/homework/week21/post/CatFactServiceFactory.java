@@ -1,7 +1,9 @@
 package com.aca.homework.week21.post;
 
+import org.springframework.stereotype.Component;
 import retrofit2.Retrofit;
 
+@Component
 public class CatFactServiceFactory {
     private static CatFactService catFactService;
 
