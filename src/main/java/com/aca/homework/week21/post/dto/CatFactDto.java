@@ -1,5 +1,7 @@
 package com.aca.homework.week21.post.dto;
 
+import org.springframework.util.Assert;
+
 import java.util.Objects;
 
 public class CatFactDto {
@@ -7,6 +9,8 @@ public class CatFactDto {
     private int length;
 
     public CatFactDto(String fact, int length) {
+        Assert.notNull(fact, "Cat fact should not be null");
+        Assert.hasText(fact, "Cat fact should not be empty");
         this.fact = fact;
         this.length = length;
     }

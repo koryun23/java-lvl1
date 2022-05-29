@@ -66,7 +66,7 @@ public class PostFacadeImpl implements PostFacade {
         Assert.notNull(dto, "Post upload request dto should not be null");
         LOGGER.info("Uploading a new post according to the post upload request dto - {}", dto);
         Post post = postService.create(new PostCreationParams(
-                LocalDateTime.now(),
+                postService.creationDate(),
                 catFactFetcherService.getRandomFact(),
                 dto.getCreatedBy())
         );

@@ -16,7 +16,7 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public PostDto uploadNewPost(@RequestBody PostUploadRequestDto postUploadRequestDto){
+    public PostDto uploadNewPost(@RequestBody PostUploadRequestDto postUploadRequestDto) {
         System.out.println("UPLOAD A NEW POST ________________________________________________________________________________________");
         return postFacade.uploadPost(postUploadRequestDto);
     }

@@ -63,4 +63,9 @@ public class PostServiceImpl implements PostService {
         LOGGER.info("Successfully saved a new post, result - {}", post);
         return post;
     }
+
+    @Override
+    public LocalDateTime creationDate() {
+        return LocalDateTime.now();
+    }
 }

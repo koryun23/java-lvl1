@@ -2,6 +2,7 @@ package com.aca.homework.week21.post.service.core;
 
 import com.aca.homework.week21.post.entity.Post;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PostService {
@@ -12,4 +13,6 @@ public interface PostService {
     void deletePostById(Long postId);
 
     Post create(PostCreationParams params);
+
+    LocalDateTime creationDate();
 }

@@ -1,5 +1,7 @@
 package com.aca.homework.week21.post.service.core;
 
+import org.springframework.util.Assert;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,6 +12,11 @@ public class PostCreationParams {
     private String fact;
 
     public PostCreationParams(LocalDateTime creationDate, String fact, String createdBy) {
+        Assert.notNull(creationDate, "Creation date should not be null");
+        Assert.notNull(fact, "Cat fact content should not be null");
+        Assert.hasText(fact, "Cat fact content should not be empty");
+        Assert.notNull(createdBy, "The string representing the author of the post should not be null");
+        Assert.hasText(createdBy, "The string representing the author of the post should not be empty");
         this.createdBy = createdBy;
         this.creationDate = creationDate;
         this.fact = fact;
@@ -43,7 +50,6 @@ public class PostCreationParams {
     public String toString() {
         return "PostCreationParams{" +
                 "createdBy='" + createdBy + '\'' +
-                ", creationDate=" + creationDate +
                 ", creationDate=" + creationDate +
                 ", fact=" + fact +
                 '}';
