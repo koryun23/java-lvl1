@@ -20,13 +20,10 @@ public class PostServiceImpl implements PostService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
     private final PostRepository postRepository;
-    private final CatFactFetcherService catFactFetcherService;
 
-    public PostServiceImpl(PostRepository postRepository, CatFactFetcherService catFactFetcherService) {
+    public PostServiceImpl(PostRepository postRepository) {
         Assert.notNull(postRepository, "Post repository should not be null");
-        Assert.notNull(catFactFetcherService, "Cat fact fetcher service should not be null");
         this.postRepository = postRepository;
-        this.catFactFetcherService = catFactFetcherService;
     }
 
     @Override
@@ -58,10 +55,9 @@ public class PostServiceImpl implements PostService {
     public Post create(PostCreationParams params) {
         Assert.notNull(params, "Post creation params should not be null");
         LOGGER.info("Creating a new post according to the creation params - {}", params);
-        String catFactContent = catFactFetcherService.getRandomFact();
         Post post = postRepository.save(new Post(
-                LocalDateTime.now(),
-                catFactContent,
+                params.getCreationDate(),
+                params.getFact(),
                 params.getCreatedBy()
         ));
         LOGGER.info("Successfully saved a new post, result - {}", post);
