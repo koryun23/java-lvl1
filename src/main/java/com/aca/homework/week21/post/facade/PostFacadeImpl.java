@@ -2,6 +2,7 @@ package com.aca.homework.week21.post.facade;
 
 import com.aca.homework.week21.post.dto.PostDto;
 import com.aca.homework.week21.post.entity.Post;
+import com.aca.homework.week21.post.mapper.PostDtoMapper;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
@@ -21,23 +22,22 @@ public class PostFacadeImpl implements PostFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostFacadeImpl.class);
     private final PostService postService;
     private final CatFactFetcherService catFactFetcherService;
+    private final PostDtoMapper postDtoMapper;
 
-    public PostFacadeImpl(PostService postService, CatFactFetcherService catFactFetcherService) {
+    public PostFacadeImpl(PostService postService, CatFactFetcherService catFactFetcherService, PostDtoMapper postDtoMapper) {
         Assert.notNull(postService, "Post service should not be null");
         Assert.notNull(catFactFetcherService, "Cat fact fetcher service should not be null");
+        Assert.notNull(postDtoMapper, "Post dto mapper should not be null");
         this.postService = postService;
         this.catFactFetcherService = catFactFetcherService;
+        this.postDtoMapper = postDtoMapper;
     }
 
     @Override
     public PostDto getPostById(Long postId) {
         Assert.notNull(postId, "post id should not be null");
         Post postById = postService.getPostById(postId);
-        return new PostDto(
-                postById.getCreationDate(),
-                postById.getFact(),
-                postById.getCreatedBy()
-        ); // TODO: CREATE A MAPPER WHICH MAPS A POSTDTO FROM POST
+        return postDtoMapper.apply(postById);
     }
 
     @Override
@@ -46,12 +46,7 @@ public class PostFacadeImpl implements PostFacade {
         List<PostDto> postDtos = new LinkedList<>();
         List<Post> posts = postService.getAllPosts();
         for (Post post : posts) {
-            postDtos.add(new PostDto(
-                            post.getCreationDate(),
-                            post.getFact(),
-                            post.getCreatedBy()
-                    )
-            );
+            postDtos.add(postDtoMapper.apply(post));
         }
         return postDtos;
     }
@@ -70,11 +65,7 @@ public class PostFacadeImpl implements PostFacade {
                 catFactFetcherService.getRandomFact(),
                 dto.getCreatedBy())
         );
-        PostDto postDto = new PostDto(
-                post.getCreationDate(),
-                post.getFact(),
-                post.getCreatedBy()
-        );
+        PostDto postDto = postDtoMapper.apply(post);
         LOGGER.info("Successfully uploaded a new post according to the post upload request dto - {}, result - {}", dto, postDto);
         return postDto;
     }

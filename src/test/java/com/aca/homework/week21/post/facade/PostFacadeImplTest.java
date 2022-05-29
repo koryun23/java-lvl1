@@ -2,6 +2,7 @@ package com.aca.homework.week21.post.facade;
 
 import com.aca.homework.week21.post.dto.PostDto;
 import com.aca.homework.week21.post.entity.Post;
+import com.aca.homework.week21.post.mapper.PostDtoMapper;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
@@ -30,13 +31,18 @@ class PostFacadeImplTest {
     @Mock
     private CatFactFetcherService catFactFetcherService;
 
+    @Mock
+    private PostDtoMapper postDtoMapper;
+
     @BeforeEach
     public void init() {
-        testSubject = new PostFacadeImpl(postService, catFactFetcherService);
+        testSubject = new PostFacadeImpl(postService, catFactFetcherService, postDtoMapper);
     }
 
     @Test
     public void testGetPostByIdWhenPostExists() {
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact", "creator"));
         Mockito.when(postService.getPostById(1L)).thenReturn(new Post(
                 LocalDateTime.MAX,
                 "random-fact",
@@ -48,11 +54,18 @@ class PostFacadeImplTest {
                 "creator"
         ));
         Mockito.verify(postService).getPostById(1L);
-        Mockito.verifyNoMoreInteractions(postService);
+        Mockito.verify(postDtoMapper).apply(new Post(LocalDateTime.MAX, "random-fact", "creator"));
+        Mockito.verifyNoMoreInteractions(postService, postDtoMapper);
     }
 
     @Test
     public void testGetAllPosts() {
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-1", "creator")))
+                        .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-1", "creator"));
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-2", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-2", "creator"));
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-3", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-3", "creator"));
         Mockito.when(postService.getAllPosts()).thenReturn(List.of(
                 new Post(LocalDateTime.MAX, "random-fact-1", "creator"),
                 new Post(LocalDateTime.MAX, "random-fact-2", "creator"),
@@ -64,25 +77,37 @@ class PostFacadeImplTest {
                 new PostDto(LocalDateTime.MAX, "random-fact-3", "creator")
         ));
         Mockito.verify(postService).getAllPosts();
-        Mockito.verifyNoMoreInteractions(postService);
+        Mockito.verify(postDtoMapper).apply(new Post(LocalDateTime.MAX, "random-fact-1", "creator"));
+        Mockito.verify(postDtoMapper).apply(new Post(LocalDateTime.MAX, "random-fact-2", "creator"));
+        Mockito.verify(postDtoMapper).apply(new Post(LocalDateTime.MAX, "random-fact-3", "creator"));
+        Mockito.verifyNoMoreInteractions(postService, postDtoMapper);
     }
 
     @Test
     public void testUploadPost() {
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact", "creator")))
+                        .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact", "creator"));
         Mockito.when(catFactFetcherService.getRandomFact()).thenReturn("random-fact");
         Mockito.when(postService.creationDate()).thenReturn(LocalDateTime.MAX);
         Mockito.when(postService.create(new PostCreationParams(LocalDateTime.MAX, "random-fact", "creator")))
                 .thenReturn(new Post(LocalDateTime.MAX, "random-fact", "creator"));
-        PostDto postDto = testSubject.uploadPost(new PostUploadRequestDto("creator"));
-        Mockito.when(postService.getAllPosts()).thenReturn(List.of(new Post(postDto.getCreationDate(), "random-fact", "creator")));
-        Assertions.assertThat(testSubject.getAllPosts()).isEqualTo(List.of(new PostDto(postDto.getCreationDate(), "random-fact", "creator")));
+        testSubject.uploadPost(new PostUploadRequestDto("creator"));
+        Mockito.when(postService.getAllPosts()).thenReturn(List.of(new Post(LocalDateTime.MAX, "random-fact", "creator")));
+        Assertions.assertThat(testSubject.getAllPosts()).isEqualTo(List.of(new PostDto(LocalDateTime.MAX, "random-fact", "creator")));
         Mockito.verify(postService).getAllPosts();
         Mockito.verify(postService).create(new PostCreationParams(LocalDateTime.MAX, "random-fact", "creator"));
-        Mockito.verifyNoMoreInteractions(postService);
+        Mockito.verify(postDtoMapper, Mockito.atLeast(2)).apply(new Post(LocalDateTime.MAX, "random-fact", "creator"));
+        Mockito.verifyNoMoreInteractions(postService, postDtoMapper);
     }
 
     @Test
     public void testDeletePostById() {
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-1", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-1", "creator"));
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-2", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-2", "creator"));
+        Mockito.when(postDtoMapper.apply(new Post(LocalDateTime.MAX, "random-fact-3", "creator")))
+                .thenReturn(new PostDto(LocalDateTime.MAX, "random-fact-3", "creator"));
         Mockito.when(postService.getAllPosts()).thenReturn(List.of(
                     new Post(LocalDateTime.MAX, "random-fact-1", "creator"),
                     new Post(LocalDateTime.MAX, "random-fact-2", "creator"),
@@ -95,7 +120,6 @@ class PostFacadeImplTest {
                         new PostDto(LocalDateTime.MAX, "random-fact-2", "creator"),
                         new PostDto(LocalDateTime.MAX, "random-fact-3", "creator")
                 )
-
         );
         testSubject.deletePostById(1L);
         Mockito.when(postService.getAllPosts()).thenReturn(List.of(
@@ -109,6 +133,11 @@ class PostFacadeImplTest {
                         new PostDto(LocalDateTime.MAX, "random-fact-3", "creator")
                 )
         );
-
+        Mockito.verify(postService, Mockito.atLeast(2)).getAllPosts();
+        Mockito.verify(postService).deletePostById(1L);
+        Mockito.verify(postDtoMapper).apply(new Post(LocalDateTime.MAX, "random-fact-1", "creator"));
+        Mockito.verify(postDtoMapper, Mockito.atLeast(2)).apply(new Post(LocalDateTime.MAX, "random-fact-2", "creator"));
+        Mockito.verify(postDtoMapper, Mockito.atLeast(2)).apply(new Post(LocalDateTime.MAX, "random-fact-3", "creator"));
+        Mockito.verifyNoMoreInteractions(postService, postDtoMapper);
     }
 }
