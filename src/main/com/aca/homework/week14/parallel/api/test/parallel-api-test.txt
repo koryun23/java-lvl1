@@ -1,0 +1,10 @@
+Create an ApiTestCallable Callable implementation that has the following parameters:
+String testDescription;
+String testName;
+Implement the callable in a way that in 2 seconds it returns a test result (randomly either fail or pass, testName and testDescription);
+Create 5000 ApiTestCallable objects and submit them to the cached thread pool executor.
+The testDescription should be "test description $number" (test description 1, test description 2, ....)
+The testName should be "test$number" (test1, test2, ....)
+Add the submitted future result in a shared map where the key is equal to testName and the value is the test result (test status, name, and description).
+Print the map content.
+Make sure that the map size is 5000. Write a unit test and assert the map size.
