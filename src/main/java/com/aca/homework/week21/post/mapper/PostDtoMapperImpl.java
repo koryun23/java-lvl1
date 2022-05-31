@@ -7,13 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostDtoMapperImpl implements PostDtoMapper{
 
-    private Post post;
-
-    public PostDtoMapperImpl(Post post) {
-        this.post = post;
-    }
-
-
     @Override
     public PostDto apply(Post post) {
         return new PostDto(
