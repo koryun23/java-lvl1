@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
     Post create(PostCreationParams params);
@@ -16,4 +17,6 @@ public interface PostService {
     void deletePostById(Long id);
 
     LocalDateTime creationDate();
+
+    Optional<Post> findPostById(Long id);
 }

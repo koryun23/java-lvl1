@@ -1,9 +1,6 @@
 package com.aca.homework.week21.post.controller;
 
-import com.aca.homework.week21.post.dto.PostDto;
-import com.aca.homework.week21.post.dto.PostListRetrievalDto;
-import com.aca.homework.week21.post.dto.UploadRequestDto;
-import com.aca.homework.week21.post.dto.UploadResponseDto;
+import com.aca.homework.week21.post.dto.*;
 import com.aca.homework.week21.post.facade.PostFacade;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,16 +20,16 @@ public class PostController {
 
     @GetMapping("/posts/bulk")
     public PostListRetrievalDto getPosts() {
-        return new PostListRetrievalDto(postFacade.getPosts());
+        return postFacade.getPosts();
     }
 
     @GetMapping("/posts/bulk/{id}")
-    public PostDto getPostById(@PathVariable Long id) {
+    public SinglePostRetrievalDto getPostById(@PathVariable Long id) {
         return postFacade.getPostById(id);
     }
 
     @DeleteMapping("/posts/bulk/{id}")
-    public void deletePostById(@PathVariable Long id) {
-        postFacade.deletePostById(id);
+    public PostDeletionResponseDto deletePostById(@PathVariable Long id) {
+        return postFacade.deletePostById(id);
     }
 }

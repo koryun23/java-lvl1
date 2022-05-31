@@ -1,8 +1,6 @@
 package com.aca.homework.week21.post.facade;
 
-import com.aca.homework.week21.post.dto.PostDto;
-import com.aca.homework.week21.post.dto.UploadRequestDto;
-import com.aca.homework.week21.post.dto.UploadResponseDto;
+import com.aca.homework.week21.post.dto.*;
 import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
@@ -10,6 +8,7 @@ import com.aca.homework.week21.post.service.core.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.*;
 
 @Component
@@ -54,6 +54,7 @@ public class PostFacadeImpl implements PostFacade {
             postDtoFutureList = executorService.invokeAll(postCallableList);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return new UploadResponseDto("Could not upload post");
         }
 
         for (Future<PostDto> postDtoFuture : postDtoFutureList) {
@@ -62,7 +63,7 @@ public class PostFacadeImpl implements PostFacade {
                 postDto = postDtoFuture.get();
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
-                throw new RuntimeException(e);
+                return new UploadResponseDto("Could not upload post");
             }
             postService.create(new PostCreationParams(
                     postDto.getCreationDate(),
@@ -78,7 +79,7 @@ public class PostFacadeImpl implements PostFacade {
     }
 
     @Override
-    public List<PostDto> getPosts() {
+    public PostListRetrievalDto getPosts() {
         List<PostDto> postDtoList = new LinkedList<>();
         List<Post> postList = postService.getAllPosts();
         for (Post post : postList) {
@@ -88,21 +89,35 @@ public class PostFacadeImpl implements PostFacade {
                     post.getCreatedBy()
             ));
         }
-        return postDtoList;
+        return new PostListRetrievalDto(postDtoList);
     }
 
     @Override
-    public PostDto getPostById(Long id) {
-        Post post = postService.getPostById(id);
-        return new PostDto(
+    public SinglePostRetrievalDto getPostById(Long id) {
+        Optional<Post> postOptional = postService.findPostById(id);
+        if(postOptional.isEmpty()) {
+            return new SinglePostRetrievalDto("Could not find a post with an id of " + id);
+        }
+        Post post = postOptional.get();
+        return new SinglePostRetrievalDto(new PostDto(
                 post.getCreationDate(),
                 post.getContent(),
                 post.getCreatedBy()
-        );
+        ));
     }
 
     @Override
-    public void deletePostById(Long id) {
-        postService.deletePostById(id);
+    public PostDeletionResponseDto deletePostById(Long id) {
+        try {
+            postService.deletePostById(id);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            PostDeletionResponseDto postDeletionResponseDto = new PostDeletionResponseDto(id, false, String.format("Post with an id of %d does not exist. ", id));
+            LOGGER.info("POST DELETION RESPONSE DTO - {}", postDeletionResponseDto);
+            return postDeletionResponseDto;
+        }
+        PostDeletionResponseDto postDeletionResponseDto = new PostDeletionResponseDto(id, true);
+        LOGGER.info("POST DELETION RESPONSE DTO - {}", postDeletionResponseDto);
+        return postDeletionResponseDto;
     }
 }

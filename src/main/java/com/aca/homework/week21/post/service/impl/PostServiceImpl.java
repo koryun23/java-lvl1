@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -67,5 +68,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public LocalDateTime creationDate() {
         return LocalDateTime.now();
+    }
+
+    @Override
+    public Optional<Post> findPostById(Long id) {
+        Assert.notNull(id, "Post id should not be null");
+        LOGGER.info("Retrieving an optional of a post having an id of {}", id);
+        Optional<Post> postOptional = postRepository.findById(id);
+        LOGGER.info("Successfully retrieved an optional of a post having an id of {}, result - {}", id, postOptional);
+        return postOptional;
     }
 }
