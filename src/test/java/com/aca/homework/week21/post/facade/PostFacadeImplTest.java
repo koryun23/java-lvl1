@@ -6,7 +6,7 @@ import com.aca.homework.week21.post.mapper.PostDtoMapper;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
-import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
+import com.aca.homework.week21.post.dto.PostUploadRequestDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class PostFacadeImplTest {

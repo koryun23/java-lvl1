@@ -4,6 +4,7 @@ import com.aca.homework.week21.post.entity.Post;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
     Post getPostById(Long postId);
@@ -15,4 +16,6 @@ public interface PostService {
     Post create(PostCreationParams params);
 
     LocalDateTime creationDate();
+
+    Optional<Post> findPostById(Long id);
 }

@@ -1,20 +1,20 @@
 package com.aca.homework.week21.post.facade;
 
-import com.aca.homework.week21.post.dto.PostDto;
+import com.aca.homework.week21.post.dto.*;
 import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.mapper.PostDtoMapper;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
 import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
-import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PostFacadeImpl implements PostFacade {
@@ -34,30 +34,39 @@ public class PostFacadeImpl implements PostFacade {
     }
 
     @Override
-    public PostDto getPostById(Long postId) {
+    public SinglePostRetrievalResponseDto getPostById(Long postId) {
         Assert.notNull(postId, "post id should not be null");
-        Post postById = postService.getPostById(postId);
-        return postDtoMapper.apply(postById);
+        Optional<Post> postOptional = postService.findPostById(postId);
+        if(postOptional.isEmpty()) {
+            return new SinglePostRetrievalResponseDto(List.of(String.format("Could not find a post having an id of %d", postId)));
+        }
+        return new SinglePostRetrievalResponseDto(postDtoMapper.apply(postOptional.get()));
     }
 
     @Override
-    public List<PostDto> getAllPosts() {
+    public PostListRetrievalResponseDto getAllPosts() {
         LOGGER.info("Retrieving all post dtos");
         List<PostDto> postDtos = new LinkedList<>();
         List<Post> posts = postService.getAllPosts();
         for (Post post : posts) {
             postDtos.add(postDtoMapper.apply(post));
         }
-        return postDtos;
+        return new PostListRetrievalResponseDto(postDtos);
     }
 
     @Override
-    public void deletePostById(Long id) {
-        postService.deletePostById(id);
+    public PostDeletionResponseDto deletePostById(Long id) {
+        try {
+            postService.deletePostById(id);
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+            return new PostDeletionResponseDto(id, false, List.of(String.format("Could not remove the post with an id of %d as it could not be found.", id)));
+        }
+        return new PostDeletionResponseDto(id, true);
     }
 
     @Override
-    public PostDto uploadPost(PostUploadRequestDto dto) {
+    public PostUploadResponseDto uploadPost(PostUploadRequestDto dto) {
         Assert.notNull(dto, "Post upload request dto should not be null");
         LOGGER.info("Uploading a new post according to the post upload request dto - {}", dto);
         Post post = postService.create(new PostCreationParams(
@@ -67,6 +76,6 @@ public class PostFacadeImpl implements PostFacade {
         );
         PostDto postDto = postDtoMapper.apply(post);
         LOGGER.info("Successfully uploaded a new post according to the post upload request dto - {}, result - {}", dto, postDto);
-        return postDto;
+        return new PostUploadResponseDto(postDto);
     }
 }

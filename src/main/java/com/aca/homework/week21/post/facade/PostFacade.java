@@ -1,16 +1,15 @@
 package com.aca.homework.week21.post.facade;
 
-import com.aca.homework.week21.post.dto.PostDto;
-import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
+import com.aca.homework.week21.post.dto.*;
 
 import java.util.List;
 
 public interface PostFacade {
-    PostDto getPostById(Long postId);
+    SinglePostRetrievalResponseDto getPostById(Long postId);
 
-    List<PostDto> getAllPosts();
+    PostListRetrievalResponseDto getAllPosts();
 
-    void deletePostById(Long id);
+    PostDeletionResponseDto deletePostById(Long id);
 
-    PostDto uploadPost(PostUploadRequestDto dto);
+    PostUploadResponseDto uploadPost(PostUploadRequestDto dto);
 }

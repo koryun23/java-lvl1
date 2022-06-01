@@ -1,4 +1,4 @@
-package com.aca.homework.week21.post.service.core;
+package com.aca.homework.week21.post.dto;
 
 import java.util.Objects;
 

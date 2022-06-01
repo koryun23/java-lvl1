@@ -1,8 +1,7 @@
 package com.aca.homework.week21.post.controller;
 
-import com.aca.homework.week21.post.dto.PostDto;
+import com.aca.homework.week21.post.dto.*;
 import com.aca.homework.week21.post.facade.PostFacade;
-import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,23 +15,22 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public PostDto uploadNewPost(@RequestBody PostUploadRequestDto postUploadRequestDto) {
-        System.out.println("UPLOAD A NEW POST ________________________________________________________________________________________");
+    public PostUploadResponseDto uploadNewPost(@RequestBody PostUploadRequestDto postUploadRequestDto) {
         return postFacade.uploadPost(postUploadRequestDto);
     }
 
     @GetMapping("/posts")
-    public List<PostDto> getAllPosts() {
+    public PostListRetrievalResponseDto getAllPosts() {
         return postFacade.getAllPosts();
     }
 
     @GetMapping("/posts/{id}")
-    public PostDto getPost(@PathVariable("id") Long id) {
+    public SinglePostRetrievalResponseDto getPost(@PathVariable("id") Long id) {
         return postFacade.getPostById(id);
     }
 
     @DeleteMapping("/posts/{id}")
-    public void deletePostWithId(@PathVariable("id") Long id) {
-        postFacade.deletePostById(id);
+    public PostDeletionResponseDto deletePostWithId(@PathVariable("id") Long id) {
+        return postFacade.deletePostById(id);
     }
 }

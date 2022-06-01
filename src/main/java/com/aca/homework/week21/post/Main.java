@@ -1,7 +1,5 @@
 package com.aca.homework.week21.post;
 
-import com.aca.homework.week21.post.facade.PostFacade;
-import com.aca.homework.week21.post.service.core.PostUploadRequestDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
