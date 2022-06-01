@@ -5,7 +5,6 @@ import com.aca.homework.week21.post.entity.Post;
 import com.aca.homework.week21.post.mapper.PostCreationParamsMapper;
 import com.aca.homework.week21.post.mapper.PostDtoMapper;
 import com.aca.homework.week21.post.retrofit.service.core.CatFactFetcherService;
-import com.aca.homework.week21.post.service.core.PostCreationParams;
 import com.aca.homework.week21.post.service.core.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,7 +50,7 @@ public class PostFacadeImpl implements PostFacade {
         List<Callable<PostDto>> postCallableList = new LinkedList<>();
 
         for (int i = 0; i < numberOfPosts; i++) {
-            postCallableList.add(new PostAdderCallable(uploadedPosts, catFactFetcherService, factPrefix, creator, LocalDateTime.now()));
+            postCallableList.add(new PostAdderCallable(uploadedPosts, catFactFetcherService, factPrefix, creator, postService.getCreationDate()));
         }
 
         List<Future<PostDto>> postDtoFutureList;

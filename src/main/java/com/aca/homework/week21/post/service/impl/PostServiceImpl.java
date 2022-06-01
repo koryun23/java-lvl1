@@ -78,4 +78,9 @@ public class PostServiceImpl implements PostService {
         LOGGER.info("Successfully retrieved an optional of a post having an id of {}, result - {}", id, postOptional);
         return postOptional;
     }
+
+    @Override
+    public LocalDateTime getCreationDate() {
+        return LocalDateTime.now();
+    }
 }

@@ -19,4 +19,6 @@ public interface PostService {
     LocalDateTime creationDate();
 
     Optional<Post> findPostById(Long id);
+
+    LocalDateTime getCreationDate();
 }
