@@ -46,27 +46,27 @@ public class OrganizationServiceImpl implements OrganizationService {
         Assert.notNull(id, "id should not be null");
         LOGGER.info("Retrieving an optional of an organization having id {}", id);
         Optional<Organization> optionalOrganization = organizationRepository.findById(id);
-        LOGGER.info("successfully retrieved an optional - {}", optionalOrganization);
+        LOGGER.info("Successfully retrieved an optional - {}", optionalOrganization);
         return optionalOrganization;
     }
 
     @Override
     public Organization getById(Long id) {
         Assert.notNull(id, "id should not be null");
-        LOGGER.info("retrieving an organization having id {}", id);
+        LOGGER.info("Retrieving an organization having id {}", id);
         Organization organization = organizationRepository.findById(id).orElseThrow(() -> new OrganizationNotFoundException(id));
-        LOGGER.info("successfully retrieved an organization - {}", organization);
+        LOGGER.info("Successfully retrieved an organization - {}", organization);
         return organization;
     }
 
     @Override
     public Organization getByName(String name) {
         Assert.notNull(name, "organization name should not be null");
-        LOGGER.info("retrieving an organization having name {}", name);
+        LOGGER.info("Retrieving an organization named '{}'", name);
         Organization organization = organizationRepository.findByName(name).orElseThrow(
                 () -> new OrganizationNotFoundException(name)
         );
-        LOGGER.info("successfully retrieved an organization - {}", organization);
+        LOGGER.info("Successfully retrieved an organization - {}", organization);
         return organization;
     }
 }

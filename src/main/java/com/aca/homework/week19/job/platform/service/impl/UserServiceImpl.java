@@ -102,11 +102,7 @@ public class UserServiceImpl implements UserService {
         List<UserOrganization> userOrganizations = userOrganizationRepository.findAllByOrganizationId(organizationId);
         List<User> users = new LinkedList<>();
         for (UserOrganization userOrganization : userOrganizations) {
-            users.add(userRepository.findByUsername(
-                            userOrganization.getUser().getUsername()
-                    ).orElseThrow(() -> new UserNotFoundException(
-                            userOrganization.getUser().getUsername()
-            )));
+            users.add(userOrganization.getUser());
         }
         LOGGER.info("The list of users working in the organization having id - {} is {}", organizationId, users);
         return Collections.unmodifiableList(users);

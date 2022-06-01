@@ -67,7 +67,7 @@ public class InvitationServiceImpl implements InvitationService {
             employees.add(userMapper.map(user));
         }
         User user = invitation.getUser();
-        UserDetailsDto userDto = new UserDetailsDto(user.getFirstName(), user.getSecondName(), user.getUsername());
+        UserDetailsDto userDto = userMapper.map(user);
         OrganizationDetailsDto organizationDto = new OrganizationDetailsDto(organization.getName(), employees);
         InvitationDetailsDto invitationDetailsDto = new InvitationDetailsDto(status, userDto, organization.getName());
         LOGGER.info("successfully marked invitation with id ({}) as {}, invitation details dto - {}", invitationId, status, invitationDetailsDto);
