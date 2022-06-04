@@ -50,4 +50,13 @@ public class ImageServiceImpl implements ImageService {
         LOGGER.info("Successfully retrieved all images - {} of post with id - {}", allByPost, id);
         return Collections.unmodifiableList(allByPost);
     }
+
+    @Override
+    public int imageCountInPost(Long postId) {
+        Assert.notNull(postId, "post id should not be null");
+        LOGGER.info("Calculating the image count in a post with an id of {}", postId);
+        int count = getAllByPostId(postId).size();
+        LOGGER.info("Calculated the image count in a post with an id of {}, result - {}", postId, count);
+        return count;
+    }
 }

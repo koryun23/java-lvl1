@@ -10,4 +10,6 @@ public interface ImageService {
     Image create(ImageCreationParams params);
 
     List<Image> getAllByPostId(Long id);
+
+    int imageCountInPost(Long postId);
 }

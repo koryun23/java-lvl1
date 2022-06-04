@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -81,10 +82,7 @@ public class PostFacadeImpl implements PostFacade {
                         dto.getUserId()
                 )
         );
-        List<ImageUploadResponseDto> imageUploadResponseDtos = new LinkedList<>();
-        for (ImageUploadRequestDto imageUploadRequestDto : imageUploadRequestDtos) {
-            imageUploadResponseDtos.add(this.uploadImage(imageUploadRequestDto));
-        }
+        List<ImageUploadResponseDto> imageUploadResponseDtos = this.uploadMultipleImages(imageUploadRequestDtos);
         PostCreationResponseDto postCreationResponseDto = new PostCreationResponseDto(
                 imageUploadResponseDtos,
                 post.getTitle(),
@@ -100,9 +98,10 @@ public class PostFacadeImpl implements PostFacade {
         Assert.notNull(dto, "image upload request dto should not be null");
         LOGGER.info("Uploading a new image according to image upload request dto - {}", dto);
 
-        if(dto.getImageCount() >= MAXIMUM_IMAGE_COUNT) {
+        if(imageService.imageCountInPost(dto.getPostId()) >= MAXIMUM_IMAGE_COUNT) {
             return new ImageUploadResponseDto(List.of(String.format("Cannot upload more than %d images.", MAXIMUM_IMAGE_COUNT)));
         }
+
         if (!postService.existsById(dto.getPostId())) {
             return new ImageUploadResponseDto(List.of(String.format("Post with id(%d) does not exist", dto.getPostId())));
         }
@@ -113,6 +112,26 @@ public class PostFacadeImpl implements PostFacade {
         );
         LOGGER.info("Successfully uploaded a new image - {}, response - {}", image, imageUploadResponseDto);
         return imageUploadResponseDto;
+    }
+
+    @Override
+    public List<ImageUploadResponseDto> uploadMultipleImages(List<ImageUploadRequestDto> imageUploadRequestDtos) {
+        Assert.notNull(imageUploadRequestDtos, "Multiple image upload request dto object should not be null");
+        LOGGER.info("Uploading multiple images according to image upload request dto list - {}", imageUploadRequestDtos);
+        List<ImageUploadResponseDto> imageUploadResponseDtos = new LinkedList<>();
+        for(ImageUploadRequestDto imageUploadRequestDto : imageUploadRequestDtos) {
+            Image image = imageService.create(new ImageCreationParams(
+                    imageUploadRequestDto.getBlobId(),
+                    imageUploadRequestDto.getPostId()
+            ));
+            ImageUploadResponseDto imageUploadResponseDto = new ImageUploadResponseDto(
+                    image.getBlobId(),
+                    image.getPost().getId()
+            );
+            imageUploadResponseDtos.add(imageUploadResponseDto);
+        }
+        LOGGER.info("Successfully uploaded multiple images according to image upload request dto list - {}, result - {}", imageUploadRequestDtos, imageUploadResponseDtos);
+        return imageUploadResponseDtos;
     }
 
     @Override

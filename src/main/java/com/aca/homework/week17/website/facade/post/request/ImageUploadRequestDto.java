@@ -6,15 +6,13 @@ public class ImageUploadRequestDto {
 
     private final String blobId;
     private final Long postId;
-    private int imageCount;
 
-    public ImageUploadRequestDto(String blobId, Long postId, int imageCount) {
+    public ImageUploadRequestDto(String blobId, Long postId) {
         Assert.notNull(blobId, "blob id should not be null");
         Assert.hasText(blobId, "blob id should not be empty");
         Assert.notNull(postId, "post id should not be null");
         this.blobId = blobId;
         this.postId = postId;
-        this.imageCount = imageCount;
     }
 
     public String getBlobId() {
@@ -23,10 +21,6 @@ public class ImageUploadRequestDto {
 
     public Long getPostId() {
         return postId;
-    }
-
-    public int getImageCount() {
-        return imageCount;
     }
 
     @Override
