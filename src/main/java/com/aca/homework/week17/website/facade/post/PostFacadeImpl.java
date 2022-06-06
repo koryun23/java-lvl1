@@ -66,6 +66,7 @@ public class PostFacadeImpl implements PostFacade {
     @Override
     public PostCreationResponseDto create(PostCreationRequestDto dto) {
         Assert.notNull(dto, "post creation request dto should not be null");
+        LOGGER.info("creating a new post according to post creation request dto - {}", dto);
         List<ImageUploadRequestDto> imageUploadRequestDtos = dto.getImageUploadRequestDtos();
         if (imageUploadRequestDtos.size() > MAXIMUM_IMAGE_COUNT) {
             return new PostCreationResponseDto(List.of(
@@ -74,7 +75,6 @@ public class PostFacadeImpl implements PostFacade {
                             MAXIMUM_IMAGE_COUNT, imageUploadRequestDtos.size()))
             );
         }
-        LOGGER.info("creating a new post according to post creation request dto - {}", dto);
         Post post = postService.create(
                 new PostCreationParams(
                         dto.getTitle(),
@@ -87,7 +87,7 @@ public class PostFacadeImpl implements PostFacade {
                 imageUploadResponseDtos,
                 post.getTitle(),
                 post.getDescription(),
-                LocalDateTime.now()
+                postService.postCreationDate()
         );
         LOGGER.info("successfully created a new post - {}, response - {}", post, postCreationResponseDto);
         return postCreationResponseDto;
@@ -114,8 +114,7 @@ public class PostFacadeImpl implements PostFacade {
         return imageUploadResponseDto;
     }
 
-    @Override
-    public List<ImageUploadResponseDto> uploadMultipleImages(List<ImageUploadRequestDto> imageUploadRequestDtos) {
+    private List<ImageUploadResponseDto> uploadMultipleImages(List<ImageUploadRequestDto> imageUploadRequestDtos) {
         Assert.notNull(imageUploadRequestDtos, "Multiple image upload request dto object should not be null");
         LOGGER.info("Uploading multiple images according to image upload request dto list - {}", imageUploadRequestDtos);
         List<ImageUploadResponseDto> imageUploadResponseDtos = new LinkedList<>();

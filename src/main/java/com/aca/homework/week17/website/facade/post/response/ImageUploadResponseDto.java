@@ -3,6 +3,7 @@ package com.aca.homework.week17.website.facade.post.response;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ImageUploadResponseDto {
     private String blobId;
@@ -37,5 +38,18 @@ public class ImageUploadResponseDto {
                 ", postId=" + postId +
                 ", errors=" + errors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ImageUploadResponseDto that = (ImageUploadResponseDto) o;
+        return Objects.equals(blobId, that.blobId) && Objects.equals(postId, that.postId) && Objects.equals(errors, that.errors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(blobId, postId, errors);
     }
 }

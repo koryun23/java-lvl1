@@ -4,6 +4,7 @@ import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 public class PostCreationResponseDto {
 
@@ -56,5 +57,18 @@ public class PostCreationResponseDto {
                 ", creationDate=" + creationDate +
                 ", errors=" + errors +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostCreationResponseDto that = (PostCreationResponseDto) o;
+        return Objects.equals(imageDtos, that.imageDtos) && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(creationDate, that.creationDate) && Objects.equals(errors, that.errors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(imageDtos, title, description, creationDate, errors);
     }
 }

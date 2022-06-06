@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -66,5 +67,10 @@ public class PostServiceImpl implements PostService {
         boolean result = postRepository.existsById(id);
         LOGGER.info("Checking id a user with id - {} exists, result - {}", id, result);
         return result;
+    }
+
+    @Override
+    public LocalDateTime postCreationDate() {
+        return LocalDateTime.now();
     }
 }

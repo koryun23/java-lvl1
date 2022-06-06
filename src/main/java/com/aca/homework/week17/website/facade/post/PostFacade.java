@@ -16,5 +16,5 @@ public interface PostFacade {
 
     PostsRetrievalResponseDto getAllUserPosts(PostsRetrievalRequestDto dto);
 
-    List<ImageUploadResponseDto> uploadMultipleImages(List<ImageUploadRequestDto> imageUploadRequestDtos);
+    //List<ImageUploadResponseDto> uploadMultipleImages(List<ImageUploadRequestDto> imageUploadRequestDtos);
 }
