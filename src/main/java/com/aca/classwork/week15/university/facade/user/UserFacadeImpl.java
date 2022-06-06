@@ -7,6 +7,7 @@ import com.aca.classwork.week15.university.service.core.CreateUserParams;
 import com.aca.classwork.week15.university.service.core.UserService;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -36,5 +37,10 @@ public class UserFacadeImpl implements UserFacade {
                 dto.getSecondName(),
                 LocalDateTime.now()
         );
+    }
+
+    @PostConstruct
+    public void test() {
+        System.out.println();
     }
 }

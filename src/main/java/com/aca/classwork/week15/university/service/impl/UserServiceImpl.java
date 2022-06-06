@@ -1,6 +1,8 @@
 package com.aca.classwork.week15.university.service.impl;
 
 import com.aca.classwork.week15.university.entity.User;
+import com.aca.classwork.week15.university.entity.UserRole;
+import com.aca.classwork.week15.university.entity.UserRoleType;
 import com.aca.classwork.week15.university.repository.UserRepository;
 import com.aca.classwork.week15.university.service.core.CreateUserParams;
 import com.aca.classwork.week15.university.service.core.UserService;
@@ -8,9 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.transaction.Transactional;
+import javax.annotation.PostConstruct;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
         String encodedPassword = passwordEncoder.encode(params.getPassword());
         User user = new User(params.getUsername(), encodedPassword, params.getFirstName(), params.getSecondName(), params.getCreatedAt());
+        user.setUserRoles(List.of(new UserRole(user, UserRoleType.STUDENT)));
+
         User savedUser = userRepository.save(user);
         LOGGER.info("Successfully created a user for the provided params - {}, saved user - {}", params, savedUser);
         return savedUser;
@@ -47,6 +55,7 @@ public class UserServiceImpl implements UserService {
                 .orElse(false);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getByUsername(String username) {
         Assert.hasText(username, "Username should not be null or empty");
@@ -62,6 +71,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<User> findByUsername(String username) {
         Assert.hasText(username, "Username should not be null or empty");
@@ -89,5 +99,10 @@ public class UserServiceImpl implements UserService {
                 user);
 
         return user;
+    }
+
+    @PostConstruct
+    public void test() {
+        System.out.println("test");
     }
 }

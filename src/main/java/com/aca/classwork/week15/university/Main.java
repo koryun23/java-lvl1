@@ -66,5 +66,8 @@ public class Main {
         universityFacade.graduate(new UserGraduationRequestDto("John_Daniels"));
         universityFacade.graduate(new UserGraduationRequestDto(armenResponse.getUsername()));
         System.out.println(universityFacade.graduate(new UserGraduationRequestDto("abc")));
+
+        User user = userService.getByUsername("username");
+        System.out.println("The user is: " + user);
     }
 }
