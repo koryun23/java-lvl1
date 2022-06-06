@@ -153,20 +153,27 @@ class InvitationServiceImplTest {
     }
 
     @Test
-    public void testMarkAs() { // TODO: FIX THIS TEST
+    public void testMarkAs() {
+        User user = new User("John", "Williams", "john11");
+        user.setId(1L);
+
+        Organization organization = new Organization("Amazon");
+        organization.setId(1L);
+
         Mockito.when(invitationRepository.findById(1L)).thenReturn(Optional.of(new Invitation(
-                new User("John", "Williams", "john11"),
-                new Organization("Amazon"),
+                user,
+                organization,
                 InvitationStatusType.OPEN
         )));
-        Mockito.when(userService.getAllByOrganizationId(1L)).thenReturn(List.of(new User("John", "Williams", "john11")));
-        Mockito.when(userMapper.map(new User("John", "Williams", "john11")))
+        Mockito.when(userService.getAllByOrganizationId(1L)).thenReturn(List.of(user));
+        Mockito.when(userMapper.map(user))
                 .thenReturn(new UserDetailsDto("John", "Williams", "john11"));
         testSubject.markAs(1L, InvitationStatusType.ACCEPTED);
         Assertions.assertThat(testSubject.getById(1L).getStatus()).isEqualTo(InvitationStatusType.ACCEPTED);
-        Mockito.verify(invitationRepository).findById(1L);
+        Mockito.verify(invitationRepository, Mockito.atLeast(2)).findById(1L);
         Mockito.verify(userService).getAllByOrganizationId(1L);
-        Mockito.verify(userMapper).map(new User("John", "Williams", "john11"));
+        Mockito.verify(userMapper, Mockito.atLeast(2)).map(user);
+        Mockito.verify(invitationRepository).save(new Invitation(user, organization, InvitationStatusType.ACCEPTED));
         Mockito.verifyNoMoreInteractions(invitationRepository, userService, organizationService, userMapper);
     }
 
