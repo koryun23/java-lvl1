@@ -1,0 +1,39 @@
+Create a City class that has the following fields:
+
+@JsonProeprty("name")
+private String name
+
+@JsonProeprty("latitude")
+private String latitude
+
+@JsonProeprty("longitude")
+private String longitude
+
+Create a CityProcessor functional interface that has void process() method.
+
+Create a SequentialCityProcessor class that adds 20_000_000 city objects in
+a LinkedList (use UUID.randomUUID().toString as a name, and random.randomDouble() for lattitude and longitude),
+prints the objects creation elapsed time, then one by one creates JSON from City objects (assume that all fields are annotated with JsonPropery annotation)
+and adds them in a new LinkedList. Print the objects JSON creation elapsed time.
+
+The user should see the following outputs:
+
+Starting city objects creation
+xxxx milliseconds required to create 20_000_000 (//this should be the cityList.size()) objects
+Starting json creation
+yyyy milliseconds required to create 20_000_000 (//this should be the jsonList.size()) json strings
+
+
+Create a ParralelCityProcessor class that adds 20_000_000 city objects in a safe
+copyonwritearraylist (use UUID.randomUUID().toString as a name, and random.randomDouble() for latitude and longitude),
+prints the objects creation ellapsed time, then one by one creates JSON from City objects (assume that all fields
+are annotated with JsonPropery annotation) and adds them in a copyonwritearraylist. Print the objects json creation
+elapsed time. Use an ExecutorService#submit() to add objects to the list, wait until all objects have been created then
+again using ExecutorService#submit() create JSON strings.
+
+The user should see the following outputs:
+
+Starting city objects creation
+xxxx milliseconds required to create 20_000_000 (//this should be the cityList.size()) objects
+Starting json creation
+yyyy milliseconds required to create 20_000_000 (//this should be the jsonList.size()) json strings
